@@ -5,7 +5,6 @@ const Hero = () => {
   return (
     <section className="bg-gradient-to-r from-green-50 via-white to-green-100">
       <div className="container mx-auto flex flex-col items-center px-6 py-20 text-center lg:flex-row lg:justify-between lg:text-left">
-        {/* Left Content */}
         <div className="max-w-xl">
           <span className="rounded-full bg-green-100 px-4 py-1 text-sm font-semibold text-green-700">
             🌿 Sustainable Fashion Marketplace
