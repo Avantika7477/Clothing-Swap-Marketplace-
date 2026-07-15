@@ -1,43 +1,34 @@
 import MainLayout from "../../layouts/MainLayout";
-import Hero from "../../components/layout/Hero";
 
+import MarketplaceHeader from "./MarketplaceHeader";
 import SearchBar from "./SearchBar";
-import CategoryGrid from "./CategoryGrid";
 import FilterSidebar from "./FilterSidebar";
+import CategoryGrid from "./CategoryGrid";
 import ItemGrid from "./ItemGrid";
+import EmptyState from "./EmptyState";
 import Pagination from "./Pagination";
 
 const Marketplace = () => {
   return (
     <MainLayout>
-      {/* Hero Section */}
-      <Hero />
+      <MarketplaceHeader />
 
-      {/* Search Section */}
-      <section className="container mx-auto px-4 py-8">
+      <section className="max-w-7xl mx-auto px-6 py-10">
         <SearchBar />
-      </section>
 
-      {/* Categories */}
-      <section className="container mx-auto px-4 py-8">
         <CategoryGrid />
-      </section>
 
-      {/* Marketplace */}
-      <section className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
-          {/* Filters */}
-          <aside>
-            <FilterSidebar />
-          </aside>
+        <div className="grid lg:grid-cols-4 gap-8 mt-8">
+          <FilterSidebar />
 
-          {/* Items */}
-          <main className="lg:col-span-3">
+          <div className="lg:col-span-3">
             <ItemGrid />
 
             <Pagination />
-          </main>
+          </div>
         </div>
+
+        <EmptyState />
       </section>
     </MainLayout>
   );
