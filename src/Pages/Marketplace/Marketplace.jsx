@@ -1,35 +1,35 @@
 import MainLayout from "../../layouts/MainLayout";
-
-import MarketplaceHeader from "./MarketplaceHeader";
 import SearchBar from "./SearchBar";
 import FilterSidebar from "./FilterSidebar";
 import CategoryGrid from "./CategoryGrid";
 import ItemGrid from "./ItemGrid";
-import EmptyState from "./EmptyState";
 import Pagination from "./Pagination";
 
 const Marketplace = () => {
   return (
     <MainLayout>
-      <MarketplaceHeader />
+      <div className="max-w-7xl mx-auto px-6 py-10">
 
-      <section className="max-w-7xl mx-auto px-6 py-10">
-        <SearchBar />
+        <div className="mb-8">
+          <SearchBar />
+        </div>
 
         <CategoryGrid />
 
-        <div className="grid lg:grid-cols-4 gap-8 mt-8">
-          <FilterSidebar />
+        <div className="grid lg:grid-cols-4 gap-8 mt-10">
+
+          <aside>
+            <FilterSidebar />
+          </aside>
 
           <div className="lg:col-span-3">
             <ItemGrid />
-
             <Pagination />
           </div>
+
         </div>
 
-        <EmptyState />
-      </section>
+      </div>
     </MainLayout>
   );
 };

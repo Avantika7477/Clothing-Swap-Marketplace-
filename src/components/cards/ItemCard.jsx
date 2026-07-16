@@ -1,72 +1,52 @@
-import { FiMapPin } from "react-icons/fi";
-import Button from "../common/Button";
+import { Link } from "react-router-dom";
 
-const ItemCard = ({
-  image,
-  title,
-  brand,
-  size,
-  condition,
-  location,
-  swapValue,
-  onSwap,
-}) => {
+const ItemCard = ({ item }) => {
   return (
-    <div className="overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-      {/* Image */}
-
-      <div className="h-72 overflow-hidden">
-        <img
-          src={image}
-          alt={title}
-          className="h-full w-full object-cover transition duration-300 hover:scale-110"
-        />
-      </div>
-
-      {/* Content */}
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+      <img
+        src={item.image}
+        alt={item.title}
+        className="w-full h-64 object-cover"
+      />
 
       <div className="p-5">
-        {/* Title */}
+        <h3 className="text-xl font-bold text-gray-900">
+          {item.title}
+        </h3>
 
-        <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
-
-        {/* Brand */}
-
-        <p className="mt-1 text-sm text-gray-500">Brand: {brand}</p>
-
-        {/* Size */}
-
-        <p className="mt-2">
-          <span className="font-medium">Size:</span> {size}
+        <p className="text-gray-500 mt-1">
+          {item.brand}
         </p>
 
-        {/* Condition */}
+        <div className="grid grid-cols-2 gap-3 mt-5 text-sm">
+          <div>
+            <span className="font-semibold">Size:</span>{" "}
+            {item.size}
+          </div>
 
-        <span className="mt-3 inline-block rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-700">
-          {condition}
-        </span>
+          <div>
+            <span className="font-semibold">Condition:</span>{" "}
+            {item.condition}
+          </div>
 
-        {/* Swap Value */}
+          <div>
+            <span className="font-semibold">Location:</span>{" "}
+            {item.location}
+          </div>
 
-        <p className="mt-4 text-green-700 font-semibold">
-          Swap Value : {swapValue} Points
-        </p>
-
-        {/* Location */}
-
-        <div className="mt-3 flex items-center gap-2 text-gray-500">
-          <FiMapPin />
-
-          <span>{location}</span>
+          <div>
+            <span className="font-semibold text-green-600">
+              {item.value} Points
+            </span>
+          </div>
         </div>
 
-        {/* Button */}
-
-        <div className="mt-5">
-          <Button fullWidth onClick={onSwap}>
-            Request Swap
-          </Button>
-        </div>
+        <Link
+          to={`/item/${item.id}`}
+          className="block text-center mt-6 bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl transition"
+        >
+          View Details
+        </Link>
       </div>
     </div>
   );
