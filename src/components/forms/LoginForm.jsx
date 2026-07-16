@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import TextInput from "./TextInput";
 import PasswordInput from "./PasswordInput";
 import FormError from "./FormError";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -46,11 +48,12 @@ const LoginForm = () => {
 
     setErrors({});
 
-    console.log("Login Data:", formData);
+    // Temporary Login
+    localStorage.setItem("token", "dummy-token");
 
-    // TODO:
-    // API Login
-    // Navigate to Dashboard
+    console.log("Login Successful");
+
+    navigate("/dashboard");
   };
 
   return (
