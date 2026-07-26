@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 import { HiBell } from "react-icons/hi";
+import { useAuth } from "../../../context/AuthContext";
 
 const DashboardHeader = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { user } = useAuth();
 
   const today = new Date().toLocaleDateString("en-IN", {
     weekday: "long",
@@ -15,17 +17,17 @@ const DashboardHeader = () => {
       <div>
         <h1 className="text-4xl font-bold text-gray-900">
           Welcome Back,
-          <span className="text-green-600"> {user?.fullName || "User"} 👋</span>
+          <span className="text-moss-800"> {user?.fullName || "User"}</span>
         </h1>
-
         <p className="text-gray-500 mt-2">{today}</p>
       </div>
 
-      <button className="relative bg-white shadow-md rounded-full p-4 hover:shadow-lg transition">
+      <Link
+        to="/swaps"
+        className="relative bg-white shadow-md rounded-full p-4 hover:shadow-lg transition"
+      >
         <HiBell className="text-2xl text-gray-700" />
-
-        <span className="absolute top-2 right-2 w-3 h-3 bg-red-500 rounded-full"></span>
-      </button>
+      </Link>
     </div>
   );
 };

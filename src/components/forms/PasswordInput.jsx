@@ -13,7 +13,7 @@ const PasswordInput = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={name} className="text-sm font-medium text-gray-700">
+      <label htmlFor={name} className="text-sm font-medium text-ink/70">
         {label}
       </label>
 
@@ -25,17 +25,18 @@ const PasswordInput = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className={`w-full rounded-lg border px-4 py-3 pr-12 outline-none transition ${
+          className={`w-full rounded-xl border px-4 py-3 pr-12 outline-none transition ${
             error
-              ? "border-red-500 focus:ring-2 focus:ring-red-300"
-              : "border-gray-300 focus:ring-2 focus:ring-green-500"
+              ? "border-red-500 focus:ring-2 focus:ring-red-200"
+              : "border-moss-800/20 focus:border-moss-700 focus:ring-2 focus:ring-moss-100"
           }`}
         />
 
         <button
           type="button"
-          className="absolute right-4 top-1/2 -translate-y-1/2"
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-ink/45"
           onClick={() => setShowPassword(!showPassword)}
+          aria-label={showPassword ? "Hide password" : "Show password"}
         >
           {showPassword ? <FiEyeOff /> : <FiEye />}
         </button>

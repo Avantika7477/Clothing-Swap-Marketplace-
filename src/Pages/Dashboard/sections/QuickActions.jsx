@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { HiPlus, HiShoppingBag, HiUser, HiCog } from "react-icons/hi";
+import { HiPlus, HiShoppingBag, HiSwitchHorizontal, HiChatAlt2 } from "react-icons/hi";
 
 const QuickActions = () => {
   const actions = [
@@ -7,7 +7,7 @@ const QuickActions = () => {
       title: "Add New Item",
       icon: <HiPlus className="text-2xl" />,
       link: "/add-item",
-      color: "bg-green-600 hover:bg-green-700",
+      color: "bg-moss-800 hover:bg-moss-700",
     },
     {
       title: "Marketplace",
@@ -16,15 +16,15 @@ const QuickActions = () => {
       color: "bg-blue-600 hover:bg-blue-700",
     },
     {
-      title: "My Profile",
-      icon: <HiUser className="text-2xl" />,
-      link: "/profile",
+      title: "My Swaps",
+      icon: <HiSwitchHorizontal className="text-2xl" />,
+      link: "/swaps",
       color: "bg-purple-600 hover:bg-purple-700",
     },
     {
-      title: "Settings",
-      icon: <HiCog className="text-2xl" />,
-      link: "/settings",
+      title: "Messages",
+      icon: <HiChatAlt2 className="text-2xl" />,
+      link: "/chat",
       color: "bg-gray-700 hover:bg-gray-800",
     },
   ];
@@ -41,7 +41,6 @@ const QuickActions = () => {
             className={`${action.color} text-white rounded-xl p-5 flex flex-col items-center justify-center gap-3 transition duration-300 hover:scale-105`}
           >
             {action.icon}
-
             <span className="font-medium text-center">{action.title}</span>
           </Link>
         ))}

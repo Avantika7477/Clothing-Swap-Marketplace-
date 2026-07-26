@@ -46,7 +46,7 @@ const ChangePasswordCard = () => {
           name={name}
           value={value}
           onChange={handleChange}
-          className="w-full border rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="w-full border rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-moss-700"
         />
 
         <button
@@ -63,7 +63,7 @@ const ChangePasswordCard = () => {
   return (
     <div className="bg-white rounded-2xl shadow-md p-8 mt-8">
       <div className="flex items-center gap-3 mb-6">
-        <HiLockClosed className="text-3xl text-green-600" />
+        <HiLockClosed className="text-3xl text-moss-800" />
 
         <h2 className="text-2xl font-bold">Change Password</h2>
       </div>
@@ -95,7 +95,7 @@ const ChangePasswordCard = () => {
 
         <button
           type="submit"
-          className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg transition"
+          className="bg-moss-800 hover:bg-moss-700 text-white px-8 py-3 rounded-lg transition"
         >
           Update Password
         </button>

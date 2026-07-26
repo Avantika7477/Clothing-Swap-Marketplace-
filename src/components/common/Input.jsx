@@ -16,7 +16,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-green-600"
+        className="border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-moss-800"
       />
     </div>
   );

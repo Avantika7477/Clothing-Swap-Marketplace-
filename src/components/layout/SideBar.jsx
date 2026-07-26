@@ -9,8 +9,9 @@ const Sidebar = () => {
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/profile">Profile</Link>
         <Link to="/add-item">Add Item</Link>
-        <Link to="/swap">Swaps</Link>
+        <Link to="/swaps">Swaps</Link>
         <Link to="/chat">Chat</Link>
+        <Link to="/marketplace">Marketplace</Link>
       </nav>
     </aside>
   );

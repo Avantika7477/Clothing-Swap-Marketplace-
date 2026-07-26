@@ -1,34 +1,46 @@
-import clothingData from "../../../assets/data/clothingData";
+import { useState } from "react";
+import { getImageUrl } from "../../../services/api";
 
-const ImageGallery = () => {
-  const item = clothingData[0];
+const ImageGallery = ({ listing }) => {
+  const images =
+    listing?.images?.length > 0
+      ? listing.images
+      : [listing?.image].filter(Boolean);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeImage = getImageUrl(images[activeIndex] || images[0]);
 
   return (
     <div className="space-y-4">
-      {/* Main Image */}
       <div className="rounded-2xl overflow-hidden bg-gray-100">
         <img
-          src={item.image}
-          alt={item.title}
+          src={activeImage}
+          alt={listing?.title}
           className="w-full h-[500px] object-cover"
         />
       </div>
 
-      {/* Thumbnail Images */}
-      <div className="grid grid-cols-4 gap-3">
-        {[1, 2, 3, 4].map((img) => (
-          <div
-            key={img}
-            className="rounded-xl overflow-hidden border hover:border-green-500 cursor-pointer"
-          >
-            <img
-              src={item.image}
-              alt={item.title}
-              className="w-full h-24 object-cover"
-            />
-          </div>
-        ))}
-      </div>
+      {images.length > 1 && (
+        <div className="grid grid-cols-4 gap-3">
+          {images.slice(0, 4).map((img, index) => (
+            <button
+              key={`${img}-${index}`}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              className={`rounded-xl overflow-hidden border ${
+                activeIndex === index
+                  ? "border-green-500 ring-2 ring-moss-100"
+                  : "hover:border-green-500"
+              }`}
+            >
+              <img
+                src={getImageUrl(img)}
+                alt={`${listing?.title} ${index + 1}`}
+                className="w-full h-24 object-cover"
+              />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

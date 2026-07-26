@@ -10,8 +10,8 @@ import RecentSwaps from "./sections/RecentSwaps";
 const Dashboard = () => {
   return (
     <MainLayout>
-      <section className="bg-gray-50 min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+      <section className="min-h-screen">
+        <div className="mx-auto max-w-7xl px-6 py-12">
           <DashboardHeader />
 
           <div className="grid lg:grid-cols-3 gap-8">

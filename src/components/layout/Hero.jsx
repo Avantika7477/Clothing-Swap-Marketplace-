@@ -6,14 +6,14 @@ const Hero = () => {
     <section className="bg-gradient-to-r from-green-50 via-white to-green-100">
       <div className="container mx-auto flex flex-col items-center px-6 py-20 text-center lg:flex-row lg:justify-between lg:text-left">
         <div className="max-w-xl">
-          <span className="rounded-full bg-green-100 px-4 py-1 text-sm font-semibold text-green-700">
+          <span className="rounded-full bg-moss-100 px-4 py-1 text-sm font-semibold text-moss-800">
             🌿 Sustainable Fashion Marketplace
           </span>
 
           <h1 className="mt-6 text-5xl font-extrabold leading-tight text-gray-800">
             Exchange Clothes,
             <br />
-            <span className="text-green-600">Not the Planet.</span>
+            <span className="text-moss-800">Not the Planet.</span>
           </h1>
 
           <p className="mt-6 text-lg leading-8 text-gray-600">

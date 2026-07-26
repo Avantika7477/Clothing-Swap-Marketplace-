@@ -1,23 +1,22 @@
-const CategoryCard = ({ title, image, items, onClick }) => {
+const CategoryCard = ({ title, image, onClick, active = false }) => {
   return (
-    <div
+    <button
+      type="button"
       onClick={onClick}
-      className="cursor-pointer overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+      className={`group relative aspect-[3/4] w-full overflow-hidden rounded-2xl text-left ${
+        active ? "ring-2 ring-moss-700 ring-offset-2" : ""
+      }`}
     >
-      <div className="h-44 overflow-hidden">
-        <img
-          src={image}
-          alt={title}
-          className="h-full w-full object-cover transition duration-300 hover:scale-110"
-        />
-      </div>
-
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-
-        <p className="mt-1 text-sm text-gray-500">{items} Items</p>
-      </div>
-    </div>
+      <img
+        src={image}
+        alt={title}
+        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-moss-950/75 via-transparent to-transparent" />
+      <span className="absolute bottom-3 left-3 font-display text-lg text-white">
+        {title}
+      </span>
+    </button>
   );
 };
 

@@ -32,7 +32,7 @@ const ForgotPassword = () => {
     <MainLayout>
       <section className="min-h-[80vh] flex items-center justify-center bg-gray-50 px-4 py-12">
         <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-center text-green-600">
+          <h1 className="text-3xl font-bold text-center text-moss-800">
             Forgot Password
           </h1>
 
@@ -54,17 +54,17 @@ const ForgotPassword = () => {
               <FormError message={error} />
             </div>
 
-            {success && <p className="text-green-600 text-sm">{success}</p>}
+            {success && <p className="text-moss-800 text-sm">{success}</p>}
 
             <button
               type="submit"
-              className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition"
+              className="w-full bg-moss-800 text-white py-3 rounded-lg hover:bg-moss-700 transition"
             >
               Send Reset Link
             </button>
 
             <p className="text-center text-sm">
-              <Link to="/login" className="text-green-600 hover:underline">
+              <Link to="/login" className="text-moss-800 hover:underline">
                 Back to Login
               </Link>
             </p>

@@ -1,14 +1,20 @@
-import clothingData from "../../assets/data/clothingData";
 import ItemCard from "../../components/cards/ItemCard";
+import EmptyState from "./EmptyState";
 
-const ItemGrid = () => {
+const ItemGrid = ({ listings = [] }) => {
+  if (!listings.length) {
+    return <EmptyState />;
+  }
+
   return (
     <section>
-      <h2 className="text-3xl font-bold text-gray-900 mb-8">Latest Listings</h2>
+      <h2 className="mb-8 font-display text-3xl font-medium text-ink">
+        Latest listings
+      </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {clothingData.map((item) => (
-          <ItemCard key={item.id} item={item} />
+      <div className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
+        {listings.map((item) => (
+          <ItemCard key={item._id || item.id} item={item} />
         ))}
       </div>
     </section>

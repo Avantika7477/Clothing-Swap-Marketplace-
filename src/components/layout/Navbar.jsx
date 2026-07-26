@@ -1,33 +1,45 @@
 import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
+import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated, isAdmin, user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Marketplace", path: "/marketplace" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    ...(isAuthenticated
+      ? [
+          { name: "Dashboard", path: "/dashboard" },
+          { name: "Swaps", path: "/swaps" },
+          { name: "Chat", path: "/chat" },
+        ]
+      : []),
+    ...(isAdmin ? [{ name: "Admin", path: "/admin" }] : []),
   ];
 
   const linkClasses = ({ isActive }) =>
     isActive
-      ? "text-green-600 font-semibold"
-      : "text-gray-700 hover:text-green-600 transition";
+      ? "text-moss-800 font-semibold"
+      : "text-ink/70 hover:text-moss-800 transition";
+
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false);
+    navigate("/");
+  };
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
-      <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-3xl">♻️</span>
-          <h1 className="text-2xl font-bold text-green-600">Kaddly Swap</h1>
+    <header className="sticky top-0 z-50 border-b border-moss-800/10 bg-[#f4f7f5]/90 backdrop-blur-md">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <Link to="/" className="font-display text-2xl font-medium text-moss-800">
+          Fashion Swap
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <NavLink key={link.name} to={link.path} className={linkClasses}>
               {link.name}
@@ -35,35 +47,59 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Desktop Buttons */}
-        <div className="hidden md:flex gap-3">
-          <Link
-            to="/login"
-            className="px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-600 hover:text-white transition"
-          >
-            Login
-          </Link>
-
-          <Link
-            to="/register"
-            className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-          >
-            Register
-          </Link>
+        <div className="hidden items-center gap-3 md:flex">
+          {isAuthenticated ? (
+            <>
+              <Link
+                to="/add-item"
+                className="rounded-xl bg-moss-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-moss-700"
+              >
+                List item
+              </Link>
+              <Link
+                to="/profile"
+                className="text-sm font-medium text-ink/70 hover:text-moss-800"
+              >
+                {user?.fullName?.split(" ")[0] || "Profile"}
+              </Link>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="rounded-xl border border-moss-800/20 px-4 py-2 text-sm transition hover:bg-white"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="rounded-xl border border-moss-800/25 px-4 py-2 text-sm font-semibold text-moss-800 transition hover:bg-white"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="rounded-xl bg-moss-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-moss-700"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
 
-        {/* Mobile Toggle */}
         <button
-          className="md:hidden text-3xl"
+          type="button"
+          className="text-3xl text-moss-800 md:hidden"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
         >
           {isOpen ? <HiX /> : <HiMenu />}
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 px-6 py-4">
+        <div className="border-t border-moss-800/10 bg-[#f4f7f5] px-6 py-4 md:hidden">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <NavLink
@@ -77,22 +113,49 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="flex flex-col gap-3 mt-6">
-            <Link
-              to="/login"
-              onClick={() => setIsOpen(false)}
-              className="text-center border border-green-600 text-green-600 py-2 rounded-lg"
-            >
-              Login
-            </Link>
-
-            <Link
-              to="/register"
-              onClick={() => setIsOpen(false)}
-              className="text-center bg-green-600 text-white py-2 rounded-lg"
-            >
-              Register
-            </Link>
+          <div className="mt-6 flex flex-col gap-3">
+            {isAuthenticated ? (
+              <>
+                <Link
+                  to="/add-item"
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-xl bg-moss-800 py-2 text-center text-white"
+                >
+                  List item
+                </Link>
+                <Link
+                  to="/profile"
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-xl border py-2 text-center"
+                >
+                  Profile
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="rounded-xl border border-red-200 py-2 text-red-600"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-xl border border-moss-800/30 py-2 text-center text-moss-800"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-xl bg-moss-800 py-2 text-center text-white"
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

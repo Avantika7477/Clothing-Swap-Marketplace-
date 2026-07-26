@@ -4,8 +4,8 @@ const ProfileHeader = () => {
   return (
     <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col md:flex-row justify-between items-center gap-6">
       <div className="flex items-center gap-5">
-        <div className="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center">
-          <HiUserCircle className="text-6xl text-green-600" />
+        <div className="w-24 h-24 rounded-full bg-moss-100 flex items-center justify-center">
+          <HiUserCircle className="text-6xl text-moss-800" />
         </div>
 
         <div>
@@ -17,7 +17,7 @@ const ProfileHeader = () => {
         </div>
       </div>
 
-      <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition">
+      <button className="bg-moss-800 hover:bg-moss-700 text-white px-6 py-3 rounded-lg transition">
         Upload Photo
       </button>
     </div>

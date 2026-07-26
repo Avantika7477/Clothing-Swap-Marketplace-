@@ -10,7 +10,7 @@ const SearchBar = () => {
           className="flex-1 p-5 outline-none"
         />
 
-        <button className="bg-green-600 p-5 text-white">
+        <button className="bg-moss-800 p-5 text-white">
           <FaSearch />
         </button>
       </div>

@@ -44,7 +44,7 @@ const EditProfileForm = () => {
             name="fullName"
             value={formData.fullName}
             onChange={handleChange}
-            className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700"
           />
         </div>
 
@@ -56,7 +56,7 @@ const EditProfileForm = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700"
           />
         </div>
 
@@ -69,7 +69,7 @@ const EditProfileForm = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700"
             />
           </div>
 
@@ -81,7 +81,7 @@ const EditProfileForm = () => {
               name="location"
               value={formData.location}
               onChange={handleChange}
-              className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700"
             />
           </div>
         </div>
@@ -95,13 +95,13 @@ const EditProfileForm = () => {
             value={formData.bio}
             onChange={handleChange}
             placeholder="Tell others something about yourself..."
-            className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
+            className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700 resize-none"
           />
         </div>
 
         <button
           type="submit"
-          className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg transition"
+          className="bg-moss-800 hover:bg-moss-700 text-white px-8 py-3 rounded-lg transition"
         >
           Save Changes
         </button>

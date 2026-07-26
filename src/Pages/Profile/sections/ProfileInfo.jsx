@@ -19,7 +19,7 @@ const ProfileInfo = () => {
       <div className="space-y-5">
 
         <div className="flex items-center gap-4">
-          <HiUser className="text-green-600 text-2xl" />
+          <HiUser className="text-moss-800 text-2xl" />
           <div>
             <p className="text-sm text-gray-500">Full Name</p>
             <h3 className="font-semibold">
@@ -29,7 +29,7 @@ const ProfileInfo = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <HiMail className="text-green-600 text-2xl" />
+          <HiMail className="text-moss-800 text-2xl" />
           <div>
             <p className="text-sm text-gray-500">Email</p>
             <h3 className="font-semibold">
@@ -39,7 +39,7 @@ const ProfileInfo = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <HiLocationMarker className="text-green-600 text-2xl" />
+          <HiLocationMarker className="text-moss-800 text-2xl" />
           <div>
             <p className="text-sm text-gray-500">Location</p>
             <h3 className="font-semibold">
@@ -49,7 +49,7 @@ const ProfileInfo = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <HiPhone className="text-green-600 text-2xl" />
+          <HiPhone className="text-moss-800 text-2xl" />
           <div>
             <p className="text-sm text-gray-500">Phone</p>
             <h3 className="font-semibold">

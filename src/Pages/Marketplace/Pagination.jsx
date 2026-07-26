@@ -1,32 +1,29 @@
-import Button from "../../components/common/Button";
+const Pagination = ({ page = 1, totalPages = 1, onPageChange }) => {
+  if (totalPages <= 1) return null;
 
-const Pagination = () => {
   return (
-    <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 sm:flex-row">
-      {/* Previous Button */}
-      <Button variant="secondary">← Previous</Button>
+    <div className="mt-10 flex items-center justify-center gap-3">
+      <button
+        type="button"
+        disabled={page <= 1}
+        onClick={() => onPageChange?.(page - 1)}
+        className="rounded-xl border border-moss-800/20 px-4 py-2 text-sm disabled:opacity-40 hover:bg-white"
+      >
+        Previous
+      </button>
 
-      {/* Page Numbers */}
-      <div className="flex items-center gap-2">
-        <button className="h-10 w-10 rounded-lg bg-green-600 text-white">
-          1
-        </button>
+      <span className="text-sm text-ink/60">
+        Page {page} of {totalPages}
+      </span>
 
-        <button className="h-10 w-10 rounded-lg border border-gray-300 hover:bg-gray-100">
-          2
-        </button>
-
-        <button className="h-10 w-10 rounded-lg border border-gray-300 hover:bg-gray-100">
-          3
-        </button>
-
-        <button className="h-10 w-10 rounded-lg border border-gray-300 hover:bg-gray-100">
-          4
-        </button>
-      </div>
-
-      {/* Next Button */}
-      <Button variant="secondary">Next →</Button>
+      <button
+        type="button"
+        disabled={page >= totalPages}
+        onClick={() => onPageChange?.(page + 1)}
+        className="rounded-xl border border-moss-800/20 px-4 py-2 text-sm disabled:opacity-40 hover:bg-white"
+      >
+        Next
+      </button>
     </div>
   );
 };

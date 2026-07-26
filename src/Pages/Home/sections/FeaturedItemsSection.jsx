@@ -1,16 +1,64 @@
-import clothingData from "../../../assets/data/clothingData";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import ItemCard from "../../../components/cards/ItemCard";
+import { getListings } from "../../../services/clothingApi";
 
 const FeaturedItemsSection = () => {
-  return (
-    <section className="max-w-7xl mx-auto px-6 py-20">
-      <h2 className="text-4xl font-bold mb-10">Featured Clothing</h2>
+  const [listings, setListings] = useState([]);
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {clothingData.slice(0, 6).map((item) => (
-          <ItemCard key={item.id} item={item} />
-        ))}
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const { data } = await getListings({ limit: 6, page: 1 });
+        setListings(data.listings || []);
+      } catch {
+        setListings([]);
+      }
+    };
+    load();
+  }, []);
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-8 pb-20">
+      <div className="mb-10 flex items-end justify-between gap-4">
+        <div>
+          <h2 className="font-display text-3xl font-medium text-ink md:text-4xl">
+            Fresh on the rack
+          </h2>
+          <p className="mt-2 text-ink/60">Recently listed pieces ready to swap.</p>
+        </div>
+        <Link
+          to="/marketplace"
+          className="hidden text-sm font-semibold text-moss-800 hover:underline sm:inline"
+        >
+          View marketplace
+        </Link>
       </div>
+
+      {listings.length === 0 ? (
+        <p className="text-ink/60">
+          No listings yet. Be the first to{" "}
+          <Link to="/add-item" className="font-semibold text-moss-800 hover:underline">
+            list an item
+          </Link>
+          .
+        </p>
+      ) : (
+        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+          {listings.map((item, index) => (
+            <motion.div
+              key={item._id}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: index * 0.05, duration: 0.4 }}
+            >
+              <ItemCard item={item} />
+            </motion.div>
+          ))}
+        </div>
+      )}
     </section>
   );
 };

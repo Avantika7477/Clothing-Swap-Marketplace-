@@ -34,7 +34,7 @@ const ProfilePictureUpload = () => {
 
           <button
             onClick={() => inputRef.current.click()}
-            className="absolute bottom-2 right-2 bg-green-600 hover:bg-green-700 text-white p-3 rounded-full transition"
+            className="absolute bottom-2 right-2 bg-moss-800 hover:bg-moss-700 text-white p-3 rounded-full transition"
           >
             <HiCamera className="text-xl" />
           </button>

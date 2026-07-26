@@ -1,54 +1,44 @@
 import { Link } from "react-router-dom";
+import { getImageUrl } from "../../services/api";
 
 const ItemCard = ({ item }) => {
+  const id = item._id || item.id;
+  const image = getImageUrl(item.images?.[0] || item.image);
+  const value = item.estimatedValue ?? item.value ?? 0;
+
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
-      <img
-        src={item.image}
-        alt={item.title}
-        className="w-full h-64 object-cover"
-      />
+    <article className="group overflow-hidden rounded-2xl border border-moss-800/10 bg-white/80 transition hover:border-moss-800/25">
+      <Link to={`/item/${id}`} className="block overflow-hidden">
+        <img
+          src={image}
+          alt={item.title}
+          className="h-64 w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+        />
+      </Link>
 
       <div className="p-5">
-        <h3 className="text-xl font-bold text-gray-900">
-          {item.title}
-        </h3>
-
-        <p className="text-gray-500 mt-1">
-          {item.brand}
-        </p>
-
-        <div className="grid grid-cols-2 gap-3 mt-5 text-sm">
+        <div className="flex items-start justify-between gap-3">
           <div>
-            <span className="font-semibold">Size:</span>{" "}
-            {item.size}
+            <h3 className="font-display text-xl font-medium text-ink">{item.title}</h3>
+            <p className="mt-1 text-sm text-ink/55">{item.brand}</p>
           </div>
+          <p className="shrink-0 text-sm font-semibold text-moss-800">{value} pts</p>
+        </div>
 
-          <div>
-            <span className="font-semibold">Condition:</span>{" "}
-            {item.condition}
-          </div>
-
-          <div>
-            <span className="font-semibold">Location:</span>{" "}
-            {item.location}
-          </div>
-
-          <div>
-            <span className="font-semibold text-green-600">
-              {item.value} Points
-            </span>
-          </div>
+        <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink/60">
+          <span>{item.size}</span>
+          <span>{item.condition}</span>
+          <span>{item.location}</span>
         </div>
 
         <Link
-          to={`/item/${item.id}`}
-          className="block text-center mt-6 bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl transition"
+          to={`/item/${id}`}
+          className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-moss-800 py-3 text-sm font-semibold text-white transition hover:bg-moss-700"
         >
-          View Details
+          View details
         </Link>
       </div>
-    </div>
+    </article>
   );
 };
 
