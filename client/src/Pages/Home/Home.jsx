@@ -10,10 +10,12 @@ const Home = () => {
   return (
     <MainLayout>
       <HeroSection />
-      <CategoriesSection />
-      <FeaturedItemsSection />
-      <HowItWorksSection />
-      <CTASection />
+      <div className="space-y-8 py-8 md:space-y-12 md:py-12">
+        <CategoriesSection />
+        <FeaturedItemsSection />
+        <HowItWorksSection />
+        <CTASection />
+      </div>
     </MainLayout>
   );
 };

@@ -8,21 +8,21 @@ const Button = ({
   onClick,
 }) => {
   const baseStyle =
-    "rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2";
+    "btn-premium font-medium focus:outline-none focus:ring-2 focus:ring-moss-100";
 
   const sizes = {
-    sm: "px-3 py-2 text-sm",
-    md: "px-5 py-3 text-base",
-    lg: "px-7 py-4 text-lg",
+    sm: "px-3.5 py-2.5 text-sm",
+    md: "px-5 py-3 text-sm",
+    lg: "px-6 py-3.5 text-base",
   };
 
   const variants = {
-    primary: "bg-moss-800 text-white hover:bg-moss-700 focus:ring-green-300",
+    primary: "btn-premium-primary",
 
-    secondary:
-      "border border-moss-800 text-moss-800 hover:bg-moss-800 hover:text-white focus:ring-green-300",
+    secondary: "btn-premium-secondary",
 
-    danger: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-300",
+    danger:
+      "bg-red-500 text-white border border-red-500 shadow-sm hover:bg-red-600 focus:ring-red-200 rounded-2xl",
   };
 
   return (
@@ -35,7 +35,7 @@ const Button = ({
         ${sizes[size]}
         ${variants[variant]}
         ${fullWidth ? "w-full" : ""}
-        ${disabled ? "opacity-50 cursor-not-allowed hover:bg-inherit" : ""}
+        ${disabled ? "cursor-not-allowed opacity-50 hover:translate-y-0" : ""}
       `}
     >
       {children}

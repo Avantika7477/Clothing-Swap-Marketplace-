@@ -6,7 +6,7 @@ const HERO_IMAGE =
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-[88vh] overflow-hidden text-white">
+    <section className="relative min-h-[80vh] overflow-hidden text-white">
       <motion.div
         className="absolute inset-0"
         initial={{ scale: 1.08 }}
@@ -20,25 +20,25 @@ const HeroSection = () => {
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-moss-950/90 via-moss-900/75 to-moss-800/35" />
-      <div className="absolute inset-0 bg-gradient-to-t from-moss-950/50 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-moss-950/88 via-moss-900/68 to-moss-800/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-moss-950/42 via-transparent to-transparent" />
 
-      <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-end px-6 pb-16 pt-28 md:justify-center md:pb-24">
+      <div className="relative z-10 mx-auto flex min-h-[80vh] max-w-7xl flex-col justify-end px-6 pb-14 pt-24 md:justify-center md:pb-20">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="max-w-2xl"
         >
-          <p className="font-display text-4xl font-medium tracking-tight text-lichen sm:text-5xl md:text-6xl">
+          <p className="font-display text-3xl font-medium tracking-tight text-lichen sm:text-4xl md:text-5xl">
             Fashion Swap
           </p>
 
-          <h1 className="mt-4 font-display text-3xl font-medium leading-tight sm:text-4xl md:text-5xl">
+          <h1 className="mt-4 font-display text-[2rem] font-medium leading-tight sm:text-[2.4rem] md:text-[3rem]">
             Swap clothes. Keep the planet wearing less waste.
           </h1>
 
-          <p className="mt-5 max-w-xl text-base text-white/80 sm:text-lg">
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/80 sm:text-base">
             List what you no longer wear, match by value and location, and
             exchange directly — no checkout, no new production.
           </p>

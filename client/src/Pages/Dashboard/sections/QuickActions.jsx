@@ -30,18 +30,18 @@ const QuickActions = () => {
   ];
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-6 mb-8">
-      <h2 className="text-2xl font-bold mb-6">Quick Actions</h2>
+    <div className="premium-surface rounded-3xl p-6 mb-8">
+      <h2 className="font-display text-2xl font-medium mb-6">Quick Actions</h2>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {actions.map((action) => (
           <Link
             key={action.title}
             to={action.link}
-            className={`${action.color} text-white rounded-xl p-5 flex flex-col items-center justify-center gap-3 transition duration-300 hover:scale-105`}
+            className={`${action.color} text-white rounded-2xl p-5 flex flex-col items-center justify-center gap-3 transition duration-300 hover:-translate-y-0.5 shadow-sm`}
           >
             {action.icon}
-            <span className="font-medium text-center">{action.title}</span>
+            <span className="font-semibold text-center text-sm">{action.title}</span>
           </Link>
         ))}
       </div>

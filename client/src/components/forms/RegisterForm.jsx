@@ -129,7 +129,7 @@ const RegisterForm = () => {
       <button
         type="submit"
         disabled={submitting}
-        className="w-full rounded-xl bg-moss-800 py-3 text-white transition hover:bg-moss-700 disabled:opacity-60"
+        className="btn-premium btn-premium-primary w-full py-3 disabled:opacity-60"
       >
         {submitting ? "Creating account..." : "Create Account"}
       </button>

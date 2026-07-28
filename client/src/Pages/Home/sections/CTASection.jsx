@@ -2,38 +2,34 @@ import { Link } from "react-router-dom";
 
 const CTASection = () => {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-      <div className="relative overflow-hidden rounded-3xl bg-moss-800 px-8 py-16 text-white sm:px-10 md:px-14 md:py-20">
-        <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-lichen/20 blur-2xl" />
-        <div className="absolute -bottom-20 left-10 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
+    <section className="mx-auto max-w-7xl px-6 py-4 md:py-6">
+      <div className="relative overflow-hidden border border-moss-800/10 bg-gradient-to-br from-white via-[#f3f5f2] to-moss-100 px-8 py-10 sm:px-10 md:px-14 md:py-12">
+        <div className="absolute -right-12 top-0 h-40 w-40 rounded-full bg-moss-100/70 blur-3xl" />
+        <div className="absolute -bottom-16 left-12 h-32 w-32 rounded-full bg-white/80 blur-2xl" />
 
-        <div className="relative flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-lichen">
+        <div className="relative grid gap-8 md:grid-cols-[1.4fr_0.8fr] md:items-end">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-moss-800/85">
               Start swapping
             </p>
-            <h2 className="mt-4 font-display text-3xl font-medium leading-tight md:text-5xl">
+            <h2 className="mt-3 font-display text-2xl font-medium leading-tight text-ink md:text-[2.75rem]">
               Your closet has a second chapter.
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-white/75 md:text-lg">
-              Join Fashion Swap and turn unused clothes into someone else’s next
-              favorite piece — no payments, just fair exchanges.
-            </p>
-            <p className="mt-4 text-sm text-white/55">
-              Free to join · Location matching · Negotiation chat
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink/85 md:text-base">
+              Swap unused clothes with people near you.
             </p>
           </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
+          <div className="flex flex-col gap-3 md:items-start md:justify-end">
             <Link
               to="/register"
-              className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-center font-semibold text-moss-900 transition hover:bg-lichen"
+              className="inline-flex min-w-[220px] items-center justify-center rounded-xl bg-moss-800 px-6 py-3.5 text-center font-semibold text-white transition hover:bg-moss-700"
             >
               Create your account
             </Link>
             <Link
               to="/marketplace"
-              className="inline-flex items-center justify-center rounded-xl border border-white/40 px-6 py-3.5 text-center font-semibold text-white transition hover:bg-white/10"
+              className="inline-flex items-center justify-center text-sm font-semibold text-moss-800 transition hover:underline"
             >
               Browse marketplace
             </Link>

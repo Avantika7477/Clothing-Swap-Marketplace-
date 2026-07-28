@@ -33,9 +33,9 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-moss-800/10 bg-[#f4f7f5]/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-moss-800/10 bg-[#f7f5f1]/88 backdrop-blur-md">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link to="/" className="font-display text-2xl font-medium text-moss-800">
+        <Link to="/" className="font-display text-xl font-medium text-moss-800 md:text-2xl">
           Fashion Swap
         </Link>
 

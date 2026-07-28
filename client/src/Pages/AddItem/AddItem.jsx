@@ -372,7 +372,7 @@ const AddItem = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="flex-1 bg-moss-800 hover:bg-moss-700 disabled:opacity-60 disabled:cursor-not-allowed text-white py-3 rounded-xl font-semibold transition"
+                className="btn-premium btn-premium-primary flex-1 py-3 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {submitting ? "Publishing..." : "Publish Listing"}
               </button>
@@ -380,7 +380,7 @@ const AddItem = () => {
               <button
                 type="button"
                 onClick={() => navigate("/marketplace")}
-                className="px-6 py-3 border rounded-xl hover:bg-gray-100 transition"
+                className="btn-premium btn-premium-secondary px-6 py-3"
               >
                 Cancel
               </button>

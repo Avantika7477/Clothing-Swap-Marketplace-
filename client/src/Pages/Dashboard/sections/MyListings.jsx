@@ -41,10 +41,10 @@ const MyListings = () => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-6 mb-8">
+    <div className="premium-surface rounded-3xl p-6 mb-8">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">My Listings</h2>
-        <Link to="/add-item" className="text-moss-800 font-semibold hover:underline">
+        <h2 className="font-display text-2xl font-medium">My Listings</h2>
+        <Link to="/add-item" className="text-moss-800 text-sm font-semibold hover:underline">
           Add Item
         </Link>
       </div>
@@ -63,7 +63,7 @@ const MyListings = () => {
           {listings.map((item) => (
             <div
               key={item._id}
-              className="flex flex-col md:flex-row items-center gap-5 border rounded-xl p-4 hover:shadow-lg transition"
+              className="flex flex-col md:flex-row items-center gap-5 border border-moss-800/10 bg-white/75 rounded-2xl p-4 hover:shadow-md transition"
             >
               <img
                 src={getImageUrl(item.images?.[0])}
@@ -73,7 +73,7 @@ const MyListings = () => {
 
               <div className="flex-1">
                 <h3 className="text-xl font-semibold">{item.title}</h3>
-                <p className="text-gray-500 mt-1">{item.category}</p>
+                <p className="text-ink/55 mt-1">{item.category}</p>
                 <span className="inline-block mt-3 bg-moss-100 text-moss-800 px-3 py-1 rounded-full text-sm capitalize">
                   {item.status}
                 </span>
@@ -82,7 +82,7 @@ const MyListings = () => {
               <div className="flex gap-3">
                 <Link
                   to={`/item/${item._id}`}
-                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
+                  className="btn-premium btn-premium-secondary flex items-center gap-2 px-4 py-2"
                 >
                   <HiOutlinePencil />
                   View
@@ -92,7 +92,7 @@ const MyListings = () => {
                   type="button"
                   disabled={busyId === item._id}
                   onClick={() => handleDelete(item._id)}
-                  className="flex items-center gap-2 bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white px-4 py-2 rounded-lg transition"
+                  className="btn-premium flex items-center gap-2 rounded-2xl border border-red-500 bg-red-500 px-4 py-2 text-white transition hover:bg-red-600 disabled:opacity-50"
                 >
                   <HiOutlineTrash />
                   Delete

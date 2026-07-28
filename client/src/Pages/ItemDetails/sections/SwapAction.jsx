@@ -44,14 +44,14 @@ const SwapAction = ({ listing }) => {
           type="button"
           onClick={handleRequestSwap}
           disabled={isOwnItem || !available}
-          className="w-full rounded-xl bg-moss-800 py-3 font-semibold text-white transition hover:bg-moss-700 disabled:cursor-not-allowed disabled:opacity-50"
+          className="btn-premium btn-premium-primary w-full py-3 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isOwnItem ? "Your Listing" : "Request Swap"}
         </button>
 
         <Link
           to="/marketplace"
-          className="block text-center w-full border py-3 rounded-xl hover:bg-gray-100 transition"
+          className="btn-premium btn-premium-secondary w-full py-3 text-center"
         >
           Back to Marketplace
         </Link>

@@ -308,7 +308,7 @@ const SwapRequest = () => {
               <button
                 type="submit"
                 disabled={submitting || !offeredItemId}
-                className="flex-1 bg-moss-800 hover:bg-moss-700 disabled:opacity-60 disabled:cursor-not-allowed text-white py-3 rounded-xl font-semibold transition"
+                className="btn-premium btn-premium-primary flex-1 py-3 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {submitting ? "Sending Request..." : "Send Swap Request"}
               </button>
@@ -316,7 +316,7 @@ const SwapRequest = () => {
               <button
                 type="button"
                 onClick={() => navigate(-1)}
-                className="px-6 py-3 border rounded-xl hover:bg-gray-100 transition"
+                className="btn-premium btn-premium-secondary px-6 py-3"
               >
                 Cancel
               </button>

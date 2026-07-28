@@ -15,10 +15,10 @@ const FilterSidebar = ({
   resetFilters,
 }) => {
   const fieldClass =
-    "w-full rounded-xl border border-moss-800/15 bg-white px-3 py-2.5 text-sm outline-none focus:border-moss-700";
+    "w-full rounded-2xl border border-moss-800/12 bg-white/85 px-3.5 py-2.5 text-sm outline-none shadow-sm transition focus:border-moss-700 focus:ring-2 focus:ring-moss-100";
 
   return (
-    <aside className="surface sticky top-24 rounded-2xl p-6">
+    <aside className="premium-surface sticky top-24 rounded-3xl p-6">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="font-display text-xl font-medium">Filters</h2>
         <button
@@ -31,7 +31,7 @@ const FilterSidebar = ({
       </div>
 
       <div className="space-y-5">
-        <div className="rounded-xl border border-moss-800/15 bg-moss-50 p-4">
+        <div className="rounded-2xl border border-moss-800/12 bg-moss-50/90 p-4">
           <label className="flex cursor-pointer items-start gap-3">
             <input
               type="checkbox"

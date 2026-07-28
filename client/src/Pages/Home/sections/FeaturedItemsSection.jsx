@@ -20,13 +20,13 @@ const FeaturedItemsSection = () => {
   }, []);
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-8 pb-20">
+    <section className="mx-auto max-w-7xl px-6 py-4 md:py-6">
       <div className="mb-10 flex items-end justify-between gap-4">
         <div>
           <h2 className="font-display text-3xl font-medium text-ink md:text-4xl">
             Fresh on the rack
           </h2>
-          <p className="mt-2 text-ink/60">Recently listed pieces ready to swap.</p>
+          <p className="mt-2 text-ink/80">Recently listed pieces ready to swap.</p>
         </div>
         <Link
           to="/marketplace"
@@ -37,7 +37,7 @@ const FeaturedItemsSection = () => {
       </div>
 
       {listings.length === 0 ? (
-        <p className="text-ink/60">
+        <p className="text-ink/80">
           No listings yet. Be the first to{" "}
           <Link to="/add-item" className="font-semibold text-moss-800 hover:underline">
             list an item

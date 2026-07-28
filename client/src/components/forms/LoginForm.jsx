@@ -90,7 +90,7 @@ const LoginForm = () => {
       <button
         type="submit"
         disabled={submitting}
-        className="w-full rounded-xl bg-moss-800 py-3 text-white transition hover:bg-moss-700 disabled:opacity-60"
+        className="btn-premium btn-premium-primary w-full py-3 disabled:opacity-60"
       >
         {submitting ? "Logging in..." : "Login"}
       </button>
@@ -105,7 +105,7 @@ const LoginForm = () => {
         </Link>
       </p>
 
-      <div className="text-xs text-gray-500 bg-gray-50 rounded-lg p-3 space-y-1">
+      <div className="rounded-2xl border border-moss-800/10 bg-white/70 p-3 text-xs text-ink/60 shadow-sm space-y-1">
         <p>Demo user: rahul@swap.com / password123</p>
         <p>Demo admin: admin@swap.com / admin123</p>
       </div>
