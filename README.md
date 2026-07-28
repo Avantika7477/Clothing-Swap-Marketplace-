@@ -13,7 +13,7 @@ Clothing Exchange & Swap Marketplace — swap wearable clothes without buying ne
 
 ## Project structure
 
-```
+```text
 client/   React + Vite + Tailwind
 server/   Node + Express + MongoDB
 PRD.md    Product Requirements Document
@@ -48,7 +48,7 @@ App: `http://localhost:5173`
 ### Env files
 
 **server/.env**
-```
+```env
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/clothing-swap
 JWT_SECRET=your_secret
@@ -56,7 +56,7 @@ CLIENT_URL=http://localhost:5173
 ```
 
 **client/.env**
-```
+```env
 VITE_API_URL=http://localhost:5000/api
 ```
 
@@ -85,5 +85,5 @@ VITE_API_URL=http://localhost:5000/api
 
 ## Docs
 
-- [PRD.md](./PRD.md) — full product requirements  
+- [PRD.md](./PRD.md) — full product requirements
 - [DEPLOY.md](./DEPLOY.md) — live deployment steps (Render + Vercel + Atlas)
