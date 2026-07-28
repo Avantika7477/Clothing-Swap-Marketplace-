@@ -269,7 +269,8 @@ const seed = async () => {
       bio: "Marketplace administrator",
     });
 
-    const users = await User.insertMany(sampleUsers);
+    // Use create() so password hashing middleware runs (insertMany skips it)
+    const users = await User.create(sampleUsers);
     const userMap = Object.fromEntries(users.map((u) => [u.email, u]));
 
     const listings = await Listing.insertMany(
