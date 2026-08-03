@@ -19,7 +19,12 @@ const allowedOrigins = [
   process.env.CLIENT_URL,
   "http://localhost:5173",
   "http://127.0.0.1:5173",
+  "http://localhost:5174",
+  "http://127.0.0.1:5174",
 ].filter(Boolean);
+
+const isLocalDevOrigin = (origin) =>
+  /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
 
 app.use(
   cors({
@@ -27,6 +32,7 @@ app.use(
       if (
         !origin ||
         allowedOrigins.includes(origin) ||
+        isLocalDevOrigin(origin) ||
         /\.vercel\.app$/.test(origin)
       ) {
         return callback(null, true);

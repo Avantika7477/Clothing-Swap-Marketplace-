@@ -13,9 +13,15 @@ await connectDB();
 
 const server = http.createServer(app);
 
+const clientOrigins = [
+  process.env.CLIENT_URL,
+  "http://localhost:5173",
+  "http://localhost:5174",
+].filter(Boolean);
+
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: clientOrigins,
     methods: ["GET", "POST"],
   },
 });
