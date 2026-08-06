@@ -22,37 +22,36 @@ const categories = [
 
 const CategoriesSection = () => {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-20">
-      <div className="mb-10 max-w-xl">
-        <h2 className="font-display text-3xl font-medium text-ink md:text-4xl">
-          Browse by wardrobe
-        </h2>
-        <p className="mt-3 text-ink/60">
+    <section className="page-shell section-space">
+      <div className="mb-9 max-w-lg">
+        <p className="section-kicker">Browse</p>
+        <h2 className="section-title mt-3">Browse by wardrobe</h2>
+        <p className="section-copy mt-3">
           Find pieces near you and start a fair swap in a few taps.
         </p>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
         {categories.map((category, index) => (
           <motion.div
             key={category.title}
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: index * 0.08, duration: 0.45 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ delay: index * 0.07, duration: 0.45 }}
           >
             <Link
-              to={`/marketplace`}
+              to="/marketplace"
               state={{ category: category.title }}
-              className="group relative block aspect-[4/5] overflow-hidden rounded-2xl"
+              className="group relative block aspect-[4/5] overflow-hidden"
             >
               <img
                 src={category.image}
                 alt={category.title}
-                className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-moss-950/80 via-moss-950/10 to-transparent" />
-              <h3 className="absolute bottom-5 left-5 font-display text-2xl text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-moss-950/78 via-moss-950/10 to-transparent" />
+              <h3 className="absolute bottom-5 left-5 font-display text-[1.55rem] font-medium text-white">
                 {category.title}
               </h3>
             </Link>

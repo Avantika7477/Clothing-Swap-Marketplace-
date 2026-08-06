@@ -12,8 +12,11 @@ const categories = [
 const CategoryGrid = ({ selectedCategory, onSelectCategory }) => {
   return (
     <section className="py-2">
-      <div className="mb-6">
-        <h2 className="font-display text-2xl font-medium text-ink">Quick categories</h2>
+      <div className="mb-5">
+        <p className="section-kicker">Browse</p>
+        <h2 className="mt-2 font-display text-xl font-medium text-ink">
+          Quick categories
+        </h2>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">

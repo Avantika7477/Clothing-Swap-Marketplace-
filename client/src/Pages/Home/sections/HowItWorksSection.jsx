@@ -1,13 +1,15 @@
+import { motion } from "framer-motion";
+
 const steps = [
   {
     step: "01",
     title: "List your item",
-    description: "Add photos, size, and condition.",
+    description: "Add clear photos, size, brand, and condition.",
   },
   {
     step: "02",
     title: "Find a match",
-    description: "Browse nearby pieces and send a request.",
+    description: "Browse nearby pieces and send a swap request.",
   },
   {
     step: "03",
@@ -18,38 +20,38 @@ const steps = [
 
 const HowItWorksSection = () => {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-4 md:py-6">
+    <section className="page-shell section-space">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="max-w-xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-moss-800/80">
-            How it works
-          </p>
-          <h2 className="mt-3 font-display text-2xl font-medium text-ink md:text-[2rem]">
-            Simple, calm, and fair.
-          </h2>
+          <p className="section-kicker">How it works</p>
+          <h2 className="section-title mt-3">Three calm steps to swap.</h2>
         </div>
-        <p className="max-w-md text-sm leading-relaxed text-ink/80 md:text-base">
-          A 3-step flow designed for easy clothing swaps, not complicated resale.
+        <p className="section-copy max-w-md md:text-right">
+          Built for clothing exchange — not complicated resale.
         </p>
       </div>
 
-      <div className="mt-10 grid gap-5 md:grid-cols-3 md:gap-6">
-          {steps.map((item) => (
-            <div
-              key={item.step}
-              className="surface rounded-3xl p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-            >
-              <p className="text-xs font-semibold tracking-[0.2em] text-moss-800/75">
-                {item.step}
-              </p>
-              <h3 className="mt-4 font-display text-xl font-medium text-ink md:text-2xl">
-                {item.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-ink/85">
-                {item.description}
-              </p>
-            </div>
-          ))}
+      <div className="mt-12 grid gap-10 border-t border-moss-800/12 pt-10 md:grid-cols-3 md:gap-8">
+        {steps.map((item, index) => (
+          <motion.div
+            key={item.step}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ delay: index * 0.08, duration: 0.4 }}
+            className="relative"
+          >
+            <p className="font-display text-4xl font-medium text-moss-800/20 md:text-5xl">
+              {item.step}
+            </p>
+            <h3 className="mt-3 font-display text-xl font-medium text-ink md:text-[1.35rem]">
+              {item.title}
+            </h3>
+            <p className="mt-2.5 text-sm leading-relaxed text-ink/65">
+              {item.description}
+            </p>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

@@ -13,48 +13,50 @@ const ProfileCard = () => {
     : "—";
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-6">
+    <div className="border border-moss-800/12 bg-white/75 p-6">
       <div className="flex flex-col items-center text-center">
         {user?.avatar ? (
           <img
             src={getImageUrl(user.avatar)}
             alt={user.fullName}
-            className="w-24 h-24 rounded-full object-cover border mb-4"
+            className="mb-4 h-24 w-24 rounded-full border border-moss-800/10 object-cover"
           />
         ) : (
-          <div className="w-24 h-24 rounded-full bg-moss-100 flex items-center justify-center mb-4">
+          <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-moss-50">
             <HiOutlineUserCircle className="text-7xl text-moss-800" />
           </div>
         )}
 
-        <h2 className="text-2xl font-bold text-gray-800">
+        <h2 className="font-display text-2xl font-medium text-ink">
           {user?.fullName || "Guest User"}
         </h2>
 
-        <p className="text-gray-500 mt-1">{user?.email || "guest@email.com"}</p>
+        <p className="mt-1 text-sm text-ink/55">
+          {user?.email || "guest@email.com"}
+        </p>
 
-        <div className="mt-5 space-y-2 w-full text-left">
-          <div className="flex justify-between">
-            <span className="text-gray-500">Member Since</span>
-            <span className="font-medium">{memberSince}</span>
+        <div className="mt-5 w-full space-y-2.5 text-left text-sm">
+          <div className="flex justify-between gap-3 border-b border-moss-800/8 pb-2">
+            <span className="text-ink/50">Member since</span>
+            <span className="font-medium text-ink">{memberSince}</span>
           </div>
 
-          <div className="flex justify-between">
-            <span className="text-gray-500">Location</span>
-            <span className="font-medium">
+          <div className="flex justify-between gap-3 border-b border-moss-800/8 pb-2">
+            <span className="text-ink/50">Location</span>
+            <span className="font-medium text-ink">
               {user?.location || user?.city || "Not set"}
             </span>
           </div>
 
-          <div className="flex justify-between">
-            <span className="text-gray-500">Swaps</span>
-            <span className="font-medium">{user?.swapCount ?? 0}</span>
+          <div className="flex justify-between gap-3">
+            <span className="text-ink/50">Swaps</span>
+            <span className="font-medium text-ink">{user?.swapCount ?? 0}</span>
           </div>
         </div>
 
         <Link
           to="/profile"
-          className="mt-6 w-full flex items-center justify-center gap-2 bg-moss-800 hover:bg-moss-700 text-white py-3 rounded-xl transition"
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-moss-800 py-3 text-sm font-semibold text-white transition hover:bg-moss-700"
         >
           <HiOutlinePencilAlt />
           Edit Profile

@@ -20,24 +20,25 @@ const FeaturedItemsSection = () => {
   }, []);
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-4 md:py-6">
-      <div className="mb-10 flex items-end justify-between gap-4">
-        <div>
-          <h2 className="font-display text-3xl font-medium text-ink md:text-4xl">
-            Fresh on the rack
-          </h2>
-          <p className="mt-2 text-ink/80">Recently listed pieces ready to swap.</p>
+    <section className="page-shell section-space">
+      <div className="mb-9 flex items-end justify-between gap-4">
+        <div className="max-w-lg">
+          <p className="section-kicker">New arrivals</p>
+          <h2 className="section-title mt-3">Fresh on the rack</h2>
+          <p className="section-copy mt-3">
+            Recently listed pieces ready to swap.
+          </p>
         </div>
         <Link
           to="/marketplace"
-          className="hidden text-sm font-semibold text-moss-800 hover:underline sm:inline"
+          className="hidden text-sm font-semibold text-moss-800 transition hover:text-moss-700 sm:inline"
         >
-          View marketplace
+          View marketplace →
         </Link>
       </div>
 
       {listings.length === 0 ? (
-        <p className="text-ink/80">
+        <p className="section-copy">
           No listings yet. Be the first to{" "}
           <Link to="/add-item" className="font-semibold text-moss-800 hover:underline">
             list an item
@@ -45,11 +46,11 @@ const FeaturedItemsSection = () => {
           .
         </p>
       ) : (
-        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {listings.map((item, index) => (
             <motion.div
               key={item._id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: index * 0.05, duration: 0.4 }}

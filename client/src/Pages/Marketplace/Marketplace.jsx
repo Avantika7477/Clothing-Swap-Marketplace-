@@ -164,10 +164,11 @@ const Marketplace = () => {
     <MainLayout>
       <div className="mx-auto max-w-7xl px-6 py-10">
         <div className="mb-8 max-w-2xl">
-          <h1 className="font-display text-4xl font-medium text-ink">
-            Marketplace
+          <p className="section-kicker">Marketplace</p>
+          <h1 className="section-title mt-3 text-4xl md:text-[2.6rem]">
+            Find your next piece
           </h1>
-          <p className="mt-2 text-ink/60">
+          <p className="section-copy mt-3">
             Browse wearable clothes and send swap requests that feel fair.
           </p>
         </div>
@@ -177,7 +178,7 @@ const Marketplace = () => {
         </div>
 
         {nearbyOnly && nearbyLabel && (
-          <div className="mb-6 rounded-2xl border border-moss-800/15 bg-moss-50 px-4 py-3 text-sm text-moss-800">
+          <div className="mb-6 border border-moss-800/12 bg-moss-50 px-4 py-3 text-sm text-moss-800">
             Showing nearby swap opportunities around{" "}
             <span className="font-semibold">{nearbyLabel}</span>.
             {!isAuthenticated && (

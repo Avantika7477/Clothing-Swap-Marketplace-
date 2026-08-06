@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <MainLayout>
       <HeroSection />
-      <div className="space-y-8 py-8 md:space-y-12 md:py-12">
+      <div className="pb-6 md:pb-10">
         <CategoriesSection />
         <FeaturedItemsSection />
         <HowItWorksSection />

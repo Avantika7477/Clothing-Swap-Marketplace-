@@ -14,13 +14,10 @@ const FilterSidebar = ({
   nearbyDisabled,
   resetFilters,
 }) => {
-  const fieldClass =
-    "w-full rounded-2xl border border-moss-800/12 bg-white/85 px-3.5 py-2.5 text-sm outline-none shadow-sm transition focus:border-moss-700 focus:ring-2 focus:ring-moss-100";
-
   return (
-    <aside className="premium-surface sticky top-24 rounded-3xl p-6">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="font-display text-xl font-medium">Filters</h2>
+    <aside className="sticky top-24 border border-moss-800/12 bg-white/75 p-5">
+      <div className="mb-5 flex items-center justify-between">
+        <h2 className="font-display text-xl font-medium text-ink">Filters</h2>
         <button
           type="button"
           onClick={resetFilters}
@@ -30,8 +27,8 @@ const FilterSidebar = ({
         </button>
       </div>
 
-      <div className="space-y-5">
-        <div className="rounded-2xl border border-moss-800/12 bg-moss-50/90 p-4">
+      <div className="space-y-4">
+        <div className="border border-moss-800/10 bg-moss-50/70 p-3.5">
           <label className="flex cursor-pointer items-start gap-3">
             <input
               type="checkbox"
@@ -44,7 +41,7 @@ const FilterSidebar = ({
               <span className="block text-sm font-semibold text-ink">
                 Nearby swaps only
               </span>
-              <span className="mt-1 block text-xs text-ink/55">
+              <span className="mt-1 block text-xs leading-relaxed text-ink/55">
                 {nearbyDisabled
                   ? "Login and set your location in Profile to use this."
                   : "Match listings near your profile location."}
@@ -53,83 +50,72 @@ const FilterSidebar = ({
           </label>
         </div>
 
-        <div>
-          <label className="mb-2 block text-sm font-medium text-ink/70">Category</label>
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className={fieldClass}
-          >
-            <option>All</option>
-            <option>Jackets</option>
-            <option>Hoodies</option>
-            <option>Shirts</option>
-            <option>Dresses</option>
-            <option>Shoes</option>
-            <option>T-Shirts</option>
-            <option>Jeans</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm font-medium text-ink/70">Size</label>
-          <select
-            value={selectedSize}
-            onChange={(e) => setSelectedSize(e.target.value)}
-            className={fieldClass}
-          >
-            <option>All</option>
-            <option>S</option>
-            <option>M</option>
-            <option>L</option>
-            <option>XL</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm font-medium text-ink/70">Condition</label>
-          <select
-            value={selectedCondition}
-            onChange={(e) => setSelectedCondition(e.target.value)}
-            className={fieldClass}
-          >
-            <option>All</option>
-            <option>Excellent</option>
-            <option>Good</option>
-            <option>Like New</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm font-medium text-ink/70">Location</label>
-          <select
-            value={selectedLocation}
-            disabled={nearbyOnly}
-            onChange={(e) => setSelectedLocation(e.target.value)}
-            className={`${fieldClass} disabled:opacity-50`}
-          >
-            <option>All</option>
-            <option>Mohali</option>
-            <option>Chandigarh</option>
-            <option>Delhi</option>
-            <option>Jaipur</option>
-            <option>Mumbai</option>
-            <option>Pune</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm font-medium text-ink/70">Availability</label>
-          <select
-            value={selectedAvailability}
-            onChange={(e) => setSelectedAvailability(e.target.value)}
-            className={fieldClass}
-          >
-            <option>All</option>
-            <option>Available</option>
-            <option>Unavailable</option>
-          </select>
-        </div>
+        {[
+          {
+            label: "Category",
+            value: selectedCategory,
+            onChange: setSelectedCategory,
+            options: [
+              "All",
+              "Jackets",
+              "Hoodies",
+              "Shirts",
+              "Dresses",
+              "Shoes",
+              "T-Shirts",
+              "Jeans",
+            ],
+          },
+          {
+            label: "Size",
+            value: selectedSize,
+            onChange: setSelectedSize,
+            options: ["All", "S", "M", "L", "XL"],
+          },
+          {
+            label: "Condition",
+            value: selectedCondition,
+            onChange: setSelectedCondition,
+            options: ["All", "Excellent", "Good", "Like New"],
+          },
+          {
+            label: "Location",
+            value: selectedLocation,
+            onChange: setSelectedLocation,
+            options: [
+              "All",
+              "Mohali",
+              "Chandigarh",
+              "Delhi",
+              "Jaipur",
+              "Mumbai",
+              "Pune",
+            ],
+            disabled: nearbyOnly,
+          },
+          {
+            label: "Availability",
+            value: selectedAvailability,
+            onChange: setSelectedAvailability,
+            options: ["All", "Available", "Unavailable"],
+          },
+        ].map((field) => (
+          <div key={field.label}>
+            <label className="mb-1.5 block text-sm font-medium text-ink/65">
+              {field.label}
+            </label>
+            <select
+              value={field.value}
+              disabled={field.disabled}
+              onChange={(e) => field.onChange(e.target.value)}
+              className="field-input disabled:opacity-50"
+            >
+              {field.options.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+        ))}
       </div>
     </aside>
   );

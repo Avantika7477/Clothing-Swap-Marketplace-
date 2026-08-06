@@ -95,7 +95,7 @@ const LoginForm = () => {
         {submitting ? "Logging in..." : "Login"}
       </button>
 
-      <p className="text-center text-sm text-gray-600">
+      <p className="text-center text-sm text-ink/60">
         Don't have an account?{" "}
         <Link
           to="/register"
@@ -105,7 +105,7 @@ const LoginForm = () => {
         </Link>
       </p>
 
-      <div className="rounded-2xl border border-moss-800/10 bg-white/70 p-3 text-xs text-ink/60 shadow-sm space-y-1">
+      <div className="border border-moss-800/10 bg-moss-50/80 p-3 text-xs leading-relaxed text-ink/60 space-y-1">
         <p>Demo user: rahul@swap.com / password123</p>
         <p>Demo admin: admin@swap.com / admin123</p>
       </div>

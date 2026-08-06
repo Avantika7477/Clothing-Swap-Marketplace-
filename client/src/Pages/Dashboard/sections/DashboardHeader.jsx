@@ -13,20 +13,22 @@ const DashboardHeader = () => {
   });
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
+    <div className="mb-10 flex flex-col items-start justify-between gap-5 md:flex-row md:items-center">
       <div>
-        <h1 className="text-4xl font-bold text-gray-900">
-          Welcome Back,
-          <span className="text-moss-800"> {user?.fullName || "User"}</span>
+        <p className="section-kicker">Dashboard</p>
+        <h1 className="mt-2 font-display text-3xl font-medium text-ink md:text-4xl">
+          Welcome back,{" "}
+          <span className="text-moss-800">{user?.fullName || "User"}</span>
         </h1>
-        <p className="text-gray-500 mt-2">{today}</p>
+        <p className="mt-2 text-sm text-ink/55">{today}</p>
       </div>
 
       <Link
         to="/swaps"
-        className="relative bg-white shadow-md rounded-full p-4 hover:shadow-lg transition"
+        className="inline-flex items-center justify-center border border-moss-800/12 bg-white/75 p-3 text-moss-800 transition hover:bg-white"
+        aria-label="Open swaps"
       >
-        <HiBell className="text-2xl text-gray-700" />
+        <HiBell className="text-xl" />
       </Link>
     </div>
   );

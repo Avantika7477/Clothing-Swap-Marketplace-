@@ -22,10 +22,10 @@ const TextInput = ({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        className={`w-full rounded-2xl border bg-white/90 px-4 py-3 outline-none shadow-sm transition ${
+        className={`field-input ${
           error
             ? "border-red-500 focus:ring-2 focus:ring-red-200"
-            : "border-moss-800/12 focus:border-moss-700 focus:ring-2 focus:ring-moss-100"
+            : ""
         }`}
       />
 

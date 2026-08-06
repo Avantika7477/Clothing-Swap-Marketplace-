@@ -47,49 +47,43 @@ const StatsCards = () => {
       id: 1,
       title: "My Listings",
       value: stats.listings,
-      icon: <HiOutlineCollection className="text-3xl text-moss-800" />,
-      bg: "bg-moss-100",
+      icon: <HiOutlineCollection className="text-2xl text-moss-800" />,
     },
     {
       id: 2,
       title: "Completed Swaps",
       value: stats.completed,
-      icon: <HiOutlineRefresh className="text-3xl text-blue-600" />,
-      bg: "bg-blue-100",
+      icon: <HiOutlineRefresh className="text-2xl text-moss-700" />,
     },
     {
       id: 3,
       title: "Pending Requests",
       value: stats.pending,
-      icon: <HiOutlineClock className="text-3xl text-yellow-600" />,
-      bg: "bg-yellow-100",
+      icon: <HiOutlineClock className="text-2xl text-moss-700" />,
     },
     {
       id: 4,
       title: "Active Chats",
       value: stats.chats,
-      icon: <HiOutlineChatAlt2 className="text-3xl text-purple-600" />,
-      bg: "bg-purple-100",
+      icon: <HiOutlineChatAlt2 className="text-2xl text-moss-700" />,
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+    <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
       {cards.map((stat) => (
         <div
           key={stat.id}
-          className="premium-surface rounded-3xl p-6 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+          className="border border-moss-800/12 bg-white/75 p-5 transition hover:border-moss-800/20 hover:bg-white/90"
         >
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-ink/55 text-sm">{stat.title}</p>
-              <h2 className="font-display text-3xl font-medium mt-2 text-ink">
+              <p className="text-sm text-ink/55">{stat.title}</p>
+              <h2 className="mt-1.5 font-display text-3xl font-medium text-ink">
                 {stat.value}
               </h2>
             </div>
-            <div
-              className={`${stat.bg} w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm`}
-            >
+            <div className="flex h-11 w-11 items-center justify-center border border-moss-800/10 bg-moss-50">
               {stat.icon}
             </div>
           </div>
