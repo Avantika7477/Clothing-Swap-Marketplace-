@@ -7,7 +7,7 @@ const AuthLayout = ({ children, title = "Welcome", subtitle }) => {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 70% 50% at 10% 0%, rgba(184,205,194,0.45), transparent 55%), radial-gradient(ellipse 50% 40% at 100% 100%, rgba(42,84,70,0.12), transparent 50%), linear-gradient(180deg, #eef1ee, #e4e9e5)",
+            "radial-gradient(ellipse 70% 50% at 10% 0%, rgba(217,210,200,0.45), transparent 55%), radial-gradient(ellipse 50% 40% at 100% 100%, rgba(31,31,31,0.06), transparent 50%), linear-gradient(180deg, #f6f4f1, #eceae5)",
         }}
       />
 

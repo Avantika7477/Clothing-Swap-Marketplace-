@@ -20,8 +20,8 @@ const HeroSection = () => {
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-moss-950/90 via-moss-900/62 to-moss-800/25" />
-      <div className="absolute inset-0 bg-gradient-to-t from-moss-950/50 via-transparent to-moss-950/15" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/88 via-black/55 to-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20" />
 
       <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-end px-6 pb-16 pt-28 md:justify-center md:pb-24">
         <motion.div
@@ -51,7 +51,7 @@ const HeroSection = () => {
           >
             <Link
               to="/marketplace"
-              className="btn-primary bg-white text-moss-900 hover:bg-lichen"
+              className="btn-primary bg-white text-ink hover:bg-lichen"
             >
               Browse swaps
             </Link>

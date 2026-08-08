@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
 @theme {
+  /* Atelier fashion palette — charcoal, stone, warm bone */
   --font-display: "Fraunces", Georgia, serif;
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --color-moss-950: #152e27;
-  --color-moss-900: #1c3d34;
-  --color-moss-800: #2a5446;
-  --color-moss-700: #3a6b58;
-  --color-moss-600: #4f8570;
-  --color-moss-100: #d7e4de;
-  --color-moss-50: #eef3f0;
-  --color-ink: #1a2420;
-  --color-stone-wash: #eef1ee;
-  --color-lichen: #b8cdc2;
-  --color-linen: #e8ebe7;
+  --color-moss-950: #0c0c0c;
+  --color-moss-900: #161616;
+  --color-moss-800: #1f1f1f;
+  --color-moss-700: #333333;
+  --color-moss-600: #525252;
+  --color-moss-100: #ebe8e3;
+  --color-moss-50: #f6f4f1;
+  --color-ink: #121212;
+  --color-stone-wash: #f3f2ef;
+  --color-lichen: #d9d2c8;
+  --color-linen: #f1efeb;
+  --color-camel: #9a8470;
 }
 
 * {
@@ -32,9 +34,9 @@ body {
   min-height: 100vh;
   background-color: var(--color-linen);
   background-image:
-    radial-gradient(ellipse 80% 50% at 0% 0%, rgba(184, 205, 194, 0.35), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 100% 10%, rgba(215, 228, 222, 0.45), transparent 50%),
-    linear-gradient(180deg, #eef1ee 0%, #e8ebe7 48%, #e4e9e5 100%);
+    radial-gradient(ellipse 70% 45% at 0% 0%, rgba(217, 210, 200, 0.4), transparent 55%),
+    radial-gradient(ellipse 55% 40% at 100% 8%, rgba(235, 232, 227, 0.55), transparent 50%),
+    linear-gradient(180deg, #f6f4f1 0%, #f1efeb 50%, #eceae5 100%);
   background-attachment: fixed;
 }
 
@@ -48,7 +50,7 @@ h3,
 
 ::selection {
   background: var(--color-moss-100);
-  color: var(--color-moss-900);
+  color: var(--color-ink);
 }
 
 .page-shell {
@@ -74,22 +76,22 @@ h3,
 .section-kicker {
   font-size: 0.7rem;
   font-weight: 650;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--color-moss-800) 78%, transparent);
+  color: color-mix(in srgb, var(--color-camel) 88%, var(--color-ink));
 }
 
 .section-title {
   font-family: var(--font-display);
   font-weight: 500;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   color: var(--color-ink);
   font-size: clamp(1.7rem, 2.4vw, 2.35rem);
   line-height: 1.15;
 }
 
 .section-copy {
-  color: color-mix(in srgb, var(--color-ink) 68%, transparent);
+  color: color-mix(in srgb, var(--color-ink) 62%, transparent);
   font-size: 0.95rem;
   line-height: 1.65;
 }
@@ -101,9 +103,10 @@ h3,
   background: var(--color-moss-800);
   color: white;
   padding: 0.85rem 1.45rem;
-  border-radius: 0.65rem;
+  border-radius: 0.4rem;
   font-weight: 600;
-  border: 1px solid color-mix(in srgb, var(--color-moss-950) 12%, transparent);
+  letter-spacing: 0.01em;
+  border: 1px solid color-mix(in srgb, var(--color-moss-950) 20%, transparent);
   transition:
     background 0.2s ease,
     transform 0.2s ease;
@@ -121,21 +124,21 @@ h3,
   border: 1.5px solid rgba(255, 255, 255, 0.55);
   color: white;
   padding: 0.85rem 1.45rem;
-  border-radius: 0.65rem;
+  border-radius: 0.4rem;
   font-weight: 600;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .btn-ghost:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 0.9);
 }
 
 .btn-premium {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.65rem;
+  border-radius: 0.4rem;
   padding: 0.85rem 1.35rem;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -153,7 +156,7 @@ h3,
 .btn-premium-primary {
   background: var(--color-moss-800);
   color: white;
-  border: 1px solid color-mix(in srgb, var(--color-moss-950) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-moss-950) 18%, transparent);
 }
 
 .btn-premium-primary:hover {
@@ -161,9 +164,9 @@ h3,
 }
 
 .btn-premium-secondary {
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.8);
   color: var(--color-moss-800);
-  border: 1px solid color-mix(in srgb, var(--color-moss-800) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-moss-800) 16%, transparent);
 }
 
 .btn-premium-secondary:hover {
@@ -172,20 +175,20 @@ h3,
 }
 
 .premium-surface {
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid color-mix(in srgb, var(--color-moss-800) 12%, transparent);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
 }
 
 .surface {
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid color-mix(in srgb, var(--color-moss-800) 10%, transparent);
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
 }
 
 .field-input {
   width: 100%;
-  border-radius: 0.65rem;
-  border: 1px solid color-mix(in srgb, var(--color-moss-800) 14%, transparent);
-  background: rgba(255, 255, 255, 0.88);
+  border-radius: 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+  background: rgba(255, 255, 255, 0.92);
   padding: 0.7rem 0.9rem;
   font-size: 0.925rem;
   outline: none;
@@ -193,6 +196,6 @@ h3,
 }
 
 .field-input:focus {
-  border-color: color-mix(in srgb, var(--color-moss-700) 55%, transparent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-moss-100) 80%, transparent);
+  border-color: color-mix(in srgb, var(--color-ink) 42%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-moss-100) 90%, transparent);
 }

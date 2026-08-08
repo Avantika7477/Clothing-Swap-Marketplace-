@@ -15,7 +15,7 @@ const CTASection = () => {
           className="pointer-events-none absolute inset-0 opacity-[0.14]"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 18% 20%, #b8cdc2 0, transparent 42%), radial-gradient(circle at 88% 80%, #4f8570 0, transparent 36%)",
+              "radial-gradient(circle at 18% 20%, #d9d2c8 0, transparent 42%), radial-gradient(circle at 88% 80%, #525252 0, transparent 36%)",
           }}
         />
 

@@ -33,7 +33,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-moss-800/10 bg-[#eef1ee]/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-moss-800/10 bg-[#f6f4f1]/92 backdrop-blur-md">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5">
         <Link
           to="/"
@@ -102,7 +102,7 @@ const Navbar = () => {
       </nav>
 
       {isOpen && (
-        <div className="border-t border-moss-800/10 bg-[#e8ebe7] px-6 py-5 md:hidden">
+        <div className="border-t border-moss-800/10 bg-[#f1efeb] px-6 py-5 md:hidden">
           <div className="flex flex-col gap-3.5">
             {navLinks.map((link) => (
               <NavLink
