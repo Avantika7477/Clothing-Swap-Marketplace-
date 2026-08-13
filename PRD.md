@@ -238,11 +238,10 @@ Name, contact details, location, swap history/count, role
 
 ---
 
-## 16. Demo Accounts (after seeding)
+## 16. Demo Account (after seeding)
 
 | Role | Email | Password |
 |---|---|---|
-| User | `rahul@swap.com` | `password123` |
 | Admin | `admin@swap.com` | `admin123` |
 
 ---

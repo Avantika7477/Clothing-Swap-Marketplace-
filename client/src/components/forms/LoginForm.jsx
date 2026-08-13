@@ -105,9 +105,8 @@ const LoginForm = () => {
         </Link>
       </p>
 
-      <div className="border border-moss-800/10 bg-moss-50/80 p-3 text-xs leading-relaxed text-ink/60 space-y-1">
-        <p>Demo user: rahul@swap.com / password123</p>
-        <p>Demo admin: admin@swap.com / admin123</p>
+      <div className="border border-moss-800/10 bg-moss-50/80 p-3 text-xs leading-relaxed text-ink/60">
+        <p>Admin: admin@swap.com / admin123</p>
       </div>
     </form>
   );

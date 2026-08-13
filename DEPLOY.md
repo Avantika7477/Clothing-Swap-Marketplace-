@@ -66,7 +66,6 @@ Final evaluation requires a **live deployed link**. Use this checklist.
 1. In Render, set `CLIENT_URL` = your Vercel URL  
 2. Redeploy API  
 3. Open the Vercel site and login with:
-   - User: `rahul@swap.com` / `password123`
    - Admin: `admin@swap.com` / `admin123`
 
 ---

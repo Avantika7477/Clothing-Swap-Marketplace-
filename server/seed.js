@@ -292,7 +292,7 @@ const seed = async () => {
 
     console.log("Seed complete");
     console.log(`Admin: admin@swap.com / admin123`);
-    console.log(`Users: ${users.length} (password: password123)`);
+    console.log(`Users: ${users.length}`);
     console.log(`Listings: ${listings.length}`);
     console.log(`Admin id: ${admin._id}`);
     process.exit(0);
