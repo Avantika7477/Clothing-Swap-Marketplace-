@@ -84,5 +84,6 @@ VITE_API_URL=http://localhost:5000/api
 
 ## Docs
 
+- [PROJECT_REPORT.md](./PROJECT_REPORT.md) — professional project report
 - [PRD.md](./PRD.md) — full product requirements
 - [DEPLOY.md](./DEPLOY.md) — live deployment steps (Render + Vercel + Atlas)
