@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { HiArrowLeft, HiPaperAirplane } from "react-icons/hi";
+import { HiArrowLeft, HiPaperAirplane, HiDotsVertical } from "react-icons/hi";
 import MainLayout from "../../layouts/MainLayout";
 import Loader from "../../components/common/Loader";
 import { useAuth } from "../../context/AuthContext";
@@ -12,6 +12,26 @@ const POLL_INTERVAL = 5000;
 
 const formatTime = (date) =>
   new Date(date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+const formatListTime = (date) => {
+  if (!date) return "";
+  const d = new Date(date);
+  const now = new Date();
+  const sameDay =
+    d.getDate() === now.getDate() &&
+    d.getMonth() === now.getMonth() &&
+    d.getFullYear() === now.getFullYear();
+  if (sameDay) return formatTime(d);
+  return d.toLocaleDateString([], { day: "numeric", month: "short" });
+};
+
+const initials = (name = "") =>
+  name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase())
+    .join("") || "?";
 
 const Chat = () => {
   const { swapId } = useParams();
@@ -26,6 +46,7 @@ const Chat = () => {
   const [text, setText] = useState("");
   const [sending, setSending] = useState(false);
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   const loadConversations = useCallback(async () => {
     try {
@@ -40,26 +61,21 @@ const Chat = () => {
     }
   }, []);
 
-  const loadMessages = useCallback(
-    async (id, { silent = false } = {}) => {
-      if (!id) return;
-      try {
-        if (!silent) setMessagesLoading(true);
-        setError("");
-        const { data } = await getMessages(id);
-        setMessages(data.messages || []);
-      } catch (err) {
-        if (!silent) {
-          setError(
-            err.response?.data?.message || "Failed to load messages."
-          );
-        }
-      } finally {
-        if (!silent) setMessagesLoading(false);
+  const loadMessages = useCallback(async (id, { silent = false } = {}) => {
+    if (!id) return;
+    try {
+      if (!silent) setMessagesLoading(true);
+      setError("");
+      const { data } = await getMessages(id);
+      setMessages(data.messages || []);
+    } catch (err) {
+      if (!silent) {
+        setError(err.response?.data?.message || "Failed to load messages.");
       }
-    },
-    []
-  );
+    } finally {
+      if (!silent) setMessagesLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     loadConversations();
@@ -95,6 +111,7 @@ const Chat = () => {
       setText("");
       await loadMessages(swapId, { silent: true });
       loadConversations();
+      inputRef.current?.focus();
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to send message.");
     } finally {
@@ -105,52 +122,96 @@ const Chat = () => {
   const getCounterparty = (swap) =>
     swap.requester?._id === user?._id ? swap.owner : swap.requester;
 
+  const showChatPane = Boolean(swapId);
+  const counterparty = activeConversation
+    ? getCounterparty(activeConversation.swap)
+    : null;
+
   return (
     <MainLayout>
-      <section className="bg-gray-50 min-h-screen">
-        <div className="max-w-6xl mx-auto px-6 py-10">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Messages</h1>
+      <section className="sm:mx-auto sm:max-w-6xl sm:px-4 sm:py-4 md:py-6">
+        <div className="mx-auto flex h-[calc(100dvh-5.5rem)] max-w-6xl overflow-hidden bg-[#efeae2] shadow-[0_2px_12px_rgba(0,0,0,0.08)] sm:h-[calc(100dvh-7.5rem)] sm:rounded-2xl sm:border sm:border-moss-800/10">
+          {/* Conversation list */}
+          <aside
+            className={`flex w-full flex-col border-r border-black/5 bg-[#f0f2f5] md:w-[38%] md:max-w-md ${
+              showChatPane ? "hidden md:flex" : "flex"
+            }`}
+          >
+            <div className="flex items-center justify-between bg-moss-800 px-4 py-3.5 text-white">
+              <div className="min-w-0">
+                <h1 className="font-display text-lg font-bold tracking-tight">
+                  Chats
+                </h1>
+                <p className="truncate text-xs text-white/65">
+                  Swap conversations
+                </p>
+              </div>
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 text-sm font-bold">
+                {initials(user?.fullName)}
+              </div>
+            </div>
 
-          <div className="grid md:grid-cols-3 gap-6 bg-white rounded-2xl shadow-md overflow-hidden min-h-[70vh]">
-            {/* Conversation list */}
-            <div className="border-r border-gray-100 md:col-span-1 max-h-[75vh] overflow-y-auto">
+            <div className="flex-1 overflow-y-auto">
               {conversationsLoading ? (
-                <Loader />
+                <div className="py-16">
+                  <Loader />
+                </div>
               ) : conversations.length === 0 ? (
-                <div className="p-6 text-center text-gray-500">
+                <div className="px-6 py-16 text-center text-sm text-ink/50">
                   No conversations yet.
+                  <br />
+                  <Link
+                    to="/swaps"
+                    className="mt-2 inline-block font-semibold text-moss-800 hover:underline"
+                  >
+                    Check your swaps
+                  </Link>
                 </div>
               ) : (
                 conversations.map(({ swap, lastMessage, unreadCount }) => {
-                  const counterparty = getCounterparty(swap);
+                  const person = getCounterparty(swap);
                   const isActive = swap._id === swapId;
 
                   return (
                     <button
                       key={swap._id}
+                      type="button"
                       onClick={() => navigate(`/chat/${swap._id}`)}
-                      className={`w-full text-left flex items-center gap-3 px-5 py-4 border-b border-gray-50 transition ${
-                        isActive ? "bg-moss-50" : "hover:bg-gray-50"
+                      className={`flex w-full items-center gap-3 border-b border-black/5 px-3.5 py-3 text-left transition ${
+                        isActive ? "bg-[#e7e9eb]" : "hover:bg-[#e9edef]"
                       }`}
                     >
-                      <img
-                        src={getImageUrl(swap.requestedItem?.images?.[0])}
-                        alt={swap.requestedItem?.title}
-                        className="w-12 h-12 rounded-full object-cover border"
-                      />
-                      <div className="flex-1 min-w-0">
-                        <div className="flex justify-between items-center">
-                          <p className="font-semibold text-gray-900 truncate">
-                            {counterparty?.fullName || "Unknown"}
+                      <div className="relative shrink-0">
+                        <img
+                          src={getImageUrl(swap.requestedItem?.images?.[0])}
+                          alt=""
+                          className="h-12 w-12 rounded-full object-cover"
+                        />
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-baseline justify-between gap-2">
+                          <p className="truncate font-semibold text-ink">
+                            {person?.fullName || "Unknown"}
                           </p>
-                          {unreadCount > 0 && (
-                            <span className="bg-moss-800 text-white text-xs rounded-full px-2 py-0.5">
+                          <span className="shrink-0 text-[11px] text-ink/45">
+                            {formatListTime(
+                              lastMessage?.createdAt || swap.updatedAt
+                            )}
+                          </span>
+                        </div>
+                        <div className="mt-0.5 flex items-center justify-between gap-2">
+                          <p className="truncate text-sm text-ink/55">
+                            {lastMessage?.content || "No messages yet"}
+                          </p>
+                          {unreadCount > 0 ? (
+                            <span className="flex h-5 min-w-5 shrink-0 items-center justify-center rounded-full bg-moss-700 px-1.5 text-[11px] font-bold text-white">
                               {unreadCount}
                             </span>
-                          )}
+                          ) : null}
                         </div>
-                        <p className="text-sm text-gray-500 truncate">
-                          {lastMessage?.content || "No messages yet"}
+                        <p className="mt-0.5 truncate text-[11px] text-ink/40">
+                          {swap.requestedItem?.title}
                         </p>
                       </div>
                     </button>
@@ -158,53 +219,91 @@ const Chat = () => {
                 })
               )}
             </div>
+          </aside>
 
-            {/* Message thread */}
-            <div className="md:col-span-2 flex flex-col max-h-[75vh]">
-              {!swapId ? (
-                <div className="flex-1 flex items-center justify-center text-gray-400">
-                  Select a conversation to start chatting.
+          {/* Message thread */}
+          <div
+            className={`relative flex min-w-0 flex-1 flex-col ${
+              showChatPane ? "flex" : "hidden md:flex"
+            }`}
+          >
+            {!swapId ? (
+              <div className="flex flex-1 flex-col items-center justify-center bg-[#f0f2f5] px-6 text-center">
+                <div className="clay-sm max-w-sm p-8">
+                  <p className="font-display text-xl font-bold text-ink">
+                    Fashion Swap Chat
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink/55">
+                    Select a conversation from the left to message about a swap.
+                  </p>
                 </div>
-              ) : messagesLoading ? (
+              </div>
+            ) : messagesLoading ? (
+              <div className="flex flex-1 items-center justify-center bg-[#efeae2]">
                 <Loader />
-              ) : error ? (
-                <div className="p-6 text-red-600">{error}</div>
-              ) : (
-                <>
-                  <div className="flex items-center justify-between px-6 py-4 border-b">
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={() => navigate("/chat")}
-                        className="md:hidden text-gray-500"
-                      >
-                        <HiArrowLeft />
-                      </button>
-                      <div>
-                        <p className="font-semibold text-gray-900">
-                          {activeConversation
-                            ? getCounterparty(activeConversation.swap)?.fullName
-                            : "Conversation"}
-                        </p>
-                        <p className="text-xs text-gray-400">
-                          Re: {activeConversation?.swap?.requestedItem?.title}
-                        </p>
-                      </div>
-                    </div>
-                    <Link
-                      to="/swaps"
-                      className="text-sm text-moss-800 hover:underline"
-                    >
-                      View Swap
-                    </Link>
+              </div>
+            ) : error ? (
+              <div className="flex flex-1 items-center justify-center bg-[#efeae2] px-6 text-red-600">
+                {error}
+              </div>
+            ) : (
+              <>
+                {/* WhatsApp-style header */}
+                <header className="flex items-center gap-2 bg-moss-800 px-2 py-2 text-white sm:px-3">
+                  <button
+                    type="button"
+                    onClick={() => navigate("/chat")}
+                    className="flex h-10 w-10 items-center justify-center rounded-full text-xl hover:bg-white/10 md:hidden"
+                    aria-label="Back to chats"
+                  >
+                    <HiArrowLeft />
+                  </button>
+
+                  <img
+                    src={getImageUrl(
+                      activeConversation?.swap?.requestedItem?.images?.[0]
+                    )}
+                    alt=""
+                    className="h-10 w-10 shrink-0 rounded-full object-cover"
+                  />
+
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate font-semibold leading-tight">
+                      {counterparty?.fullName || "Conversation"}
+                    </p>
+                    <p className="truncate text-xs text-white/65">
+                      Re: {activeConversation?.swap?.requestedItem?.title || "Swap"}
+                    </p>
                   </div>
 
-                  <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
-                    {messages.length === 0 ? (
-                      <p className="text-center text-gray-400 mt-10">
-                        No messages yet. Say hello!
-                      </p>
-                    ) : (
-                      messages.map((msg) => {
+                  <Link
+                    to="/swaps"
+                    className="hidden rounded-full px-3 py-2 text-xs font-semibold text-white/85 hover:bg-white/10 sm:inline"
+                  >
+                    View swap
+                  </Link>
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full text-white/70 sm:hidden">
+                    <HiDotsVertical />
+                  </span>
+                </header>
+
+                {/* Chat wallpaper + bubbles */}
+                <div
+                  className="flex-1 overflow-y-auto px-3 py-3 sm:px-6 sm:py-4"
+                  style={{
+                    backgroundColor: "#efeae2",
+                    backgroundImage:
+                      "radial-gradient(rgba(0,0,0,0.035) 0.8px, transparent 0.8px)",
+                    backgroundSize: "14px 14px",
+                  }}
+                >
+                  {messages.length === 0 ? (
+                    <div className="mx-auto mt-8 max-w-xs rounded-lg bg-[#ffeec2]/90 px-4 py-3 text-center text-xs leading-relaxed text-ink/70 shadow-sm">
+                      No messages yet. Say hello and start discussing your swap.
+                    </div>
+                  ) : (
+                    <div className="mx-auto flex max-w-3xl flex-col gap-1.5">
+                      {messages.map((msg) => {
                         const isMine = msg.sender?._id === user?._id;
                         return (
                           <div
@@ -212,57 +311,56 @@ const Chat = () => {
                             className={`flex ${isMine ? "justify-end" : "justify-start"}`}
                           >
                             <div
-                              className={`max-w-[70%] rounded-2xl px-4 py-3 ${
+                              className={`relative max-w-[85%] rounded-lg px-3 py-1.5 shadow-sm sm:max-w-[70%] ${
                                 isMine
-                                  ? "bg-moss-800 text-white"
-                                  : "bg-gray-100 text-gray-800"
+                                  ? "rounded-tr-none bg-[#d9fdd3] text-ink"
+                                  : "rounded-tl-none bg-white text-ink"
                               }`}
                             >
                               {!isMine && (
-                                <p className="text-xs font-semibold mb-1 opacity-80">
+                                <p className="mb-0.5 text-[11px] font-semibold text-moss-700">
                                   {msg.sender?.fullName}
                                 </p>
                               )}
-                              <p className="whitespace-pre-wrap break-words">
+                              <p className="whitespace-pre-wrap break-words text-[15px] leading-snug">
                                 {msg.content}
                               </p>
-                              <p
-                                className={`text-[10px] mt-1 text-right ${
-                                  isMine ? "text-green-100" : "text-gray-400"
-                                }`}
-                              >
+                              <p className="mt-0.5 text-right text-[10px] leading-none text-ink/45">
                                 {formatTime(msg.createdAt)}
                               </p>
                             </div>
                           </div>
                         );
-                      })
-                    )}
-                    <div ref={messagesEndRef} />
-                  </div>
+                      })}
+                      <div ref={messagesEndRef} />
+                    </div>
+                  )}
+                </div>
 
-                  <form
-                    onSubmit={handleSend}
-                    className="flex items-center gap-3 px-6 py-4 border-t"
+                {/* Composer */}
+                <form
+                  onSubmit={handleSend}
+                  className="flex items-end gap-2 bg-[#f0f2f5] px-2 py-2 sm:px-3 sm:py-2.5"
+                >
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    placeholder="Type a message"
+                    className="min-h-12 min-w-0 flex-1 rounded-[1.5rem] border-0 bg-white px-4 py-3 text-[15px] text-ink shadow-sm outline-none placeholder:text-ink/40"
+                  />
+                  <button
+                    type="submit"
+                    disabled={sending || !text.trim()}
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-moss-800 text-white transition hover:bg-moss-700 disabled:opacity-45"
+                    aria-label="Send message"
                   >
-                    <input
-                      type="text"
-                      value={text}
-                      onChange={(e) => setText(e.target.value)}
-                      placeholder="Type a message..."
-                      className="flex-1 border rounded-full px-5 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700"
-                    />
-                    <button
-                      type="submit"
-                      disabled={sending || !text.trim()}
-                      className="bg-moss-800 hover:bg-moss-700 disabled:opacity-50 text-white p-3 rounded-full transition"
-                    >
-                      <HiPaperAirplane className="rotate-90" />
-                    </button>
-                  </form>
-                </>
-              )}
-            </div>
+                    <HiPaperAirplane className="rotate-90 text-lg" />
+                  </button>
+                </form>
+              </>
+            )}
           </div>
         </div>
       </section>

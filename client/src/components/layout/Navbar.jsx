@@ -55,20 +55,20 @@ const Navbar = () => {
             <>
               <Link
                 to="/add-item"
-                className="btn-premium btn-premium-primary px-3.5 py-2 text-sm"
+                className="btn-premium btn-premium-primary min-h-11 px-5 py-2.5 text-sm"
               >
                 List item
               </Link>
               <Link
                 to="/profile"
-                className="px-2 text-sm font-semibold text-ink/65 hover:text-moss-800"
+                className="max-w-[8rem] truncate px-2 text-sm font-semibold text-ink/65 hover:text-moss-800"
               >
                 {user?.fullName?.split(" ")[0] || "Profile"}
               </Link>
               <button
                 type="button"
                 onClick={handleLogout}
-                className="btn-premium btn-premium-secondary px-3.5 py-2 text-sm"
+                className="btn-premium btn-premium-secondary min-h-11 px-5 py-2.5 text-sm"
               >
                 Logout
               </button>
@@ -77,13 +77,13 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="btn-premium btn-premium-secondary px-3.5 py-2 text-sm"
+                className="btn-premium btn-premium-secondary min-h-11 px-5 py-2.5 text-sm"
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="btn-premium btn-premium-primary px-3.5 py-2 text-sm"
+                className="btn-premium btn-premium-primary min-h-11 px-5 py-2.5 text-sm"
               >
                 Register
               </Link>
@@ -122,14 +122,14 @@ const Navbar = () => {
                 <Link
                   to="/add-item"
                   onClick={() => setIsOpen(false)}
-                  className="btn-premium btn-premium-primary py-2.5 text-center text-sm"
+                  className="btn-premium btn-premium-primary min-h-12 py-3 text-center text-base"
                 >
                   List item
                 </Link>
                 <Link
                   to="/profile"
                   onClick={() => setIsOpen(false)}
-                  className="btn-premium btn-premium-secondary py-2.5 text-center text-sm"
+                  className="btn-premium btn-premium-secondary min-h-12 py-3 text-center text-base"
                 >
                   Profile
                 </Link>
@@ -146,14 +146,14 @@ const Navbar = () => {
                 <Link
                   to="/login"
                   onClick={() => setIsOpen(false)}
-                  className="btn-premium btn-premium-secondary py-2.5 text-center text-sm"
+                  className="btn-premium btn-premium-secondary min-h-12 py-3 text-center text-base"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
                   onClick={() => setIsOpen(false)}
-                  className="btn-premium btn-premium-primary py-2.5 text-center text-sm"
+                  className="btn-premium btn-premium-primary min-h-12 py-3 text-center text-base"
                 >
                   Register
                 </Link>
