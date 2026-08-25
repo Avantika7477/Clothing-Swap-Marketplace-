@@ -31,7 +31,7 @@ const CategoriesSection = () => {
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
         {categories.map((category, index) => (
           <motion.div
             key={category.title}
@@ -43,15 +43,15 @@ const CategoriesSection = () => {
             <Link
               to="/marketplace"
               state={{ category: category.title }}
-              className="group relative block aspect-[4/5] overflow-hidden"
+              className="clay group relative block aspect-[4/5] overflow-hidden transition duration-300 hover:-translate-y-1"
             >
               <img
                 src={category.image}
                 alt={category.title}
                 className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-moss-950/78 via-moss-950/10 to-transparent" />
-              <h3 className="absolute bottom-5 left-5 font-display text-[1.55rem] font-medium text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-moss-950/75 via-moss-950/10 to-transparent" />
+              <h3 className="absolute bottom-5 left-5 font-display text-[1.55rem] font-bold text-white">
                 {category.title}
               </h3>
             </Link>

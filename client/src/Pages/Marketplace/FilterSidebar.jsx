@@ -15,9 +15,9 @@ const FilterSidebar = ({
   resetFilters,
 }) => {
   return (
-    <aside className="sticky top-24 border border-moss-800/12 bg-white/75 p-5">
+    <aside className="clay sticky top-24 p-5">
       <div className="mb-5 flex items-center justify-between">
-        <h2 className="font-display text-xl font-medium text-ink">Filters</h2>
+        <h2 className="font-display text-xl font-bold text-ink">Filters</h2>
         <button
           type="button"
           onClick={resetFilters}
@@ -28,7 +28,7 @@ const FilterSidebar = ({
       </div>
 
       <div className="space-y-4">
-        <div className="border border-moss-800/10 bg-moss-50/70 p-3.5">
+        <div className="clay-inset p-3.5">
           <label className="flex cursor-pointer items-start gap-3">
             <input
               type="checkbox"

@@ -16,7 +16,7 @@ const DashboardHeader = () => {
     <div className="mb-10 flex flex-col items-start justify-between gap-5 md:flex-row md:items-center">
       <div>
         <p className="section-kicker">Dashboard</p>
-        <h1 className="mt-2 font-display text-3xl font-medium text-ink md:text-4xl">
+        <h1 className="mt-2 font-display text-3xl font-bold text-ink md:text-4xl">
           Welcome back,{" "}
           <span className="text-moss-800">{user?.fullName || "User"}</span>
         </h1>
@@ -25,7 +25,7 @@ const DashboardHeader = () => {
 
       <Link
         to="/swaps"
-        className="inline-flex items-center justify-center border border-moss-800/12 bg-white/75 p-3 text-moss-800 transition hover:bg-white"
+        className="clay-sm inline-flex items-center justify-center p-3 text-moss-800 transition hover:-translate-y-0.5"
         aria-label="Open swaps"
       >
         <HiBell className="text-xl" />

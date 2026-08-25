@@ -178,7 +178,7 @@ const Marketplace = () => {
         </div>
 
         {nearbyOnly && nearbyLabel && (
-          <div className="mb-6 border border-moss-800/12 bg-moss-50 px-4 py-3 text-sm text-moss-800">
+          <div className="clay-inset mb-6 px-4 py-3 text-sm text-moss-800">
             Showing nearby swap opportunities around{" "}
             <span className="font-semibold">{nearbyLabel}</span>.
             {!isAuthenticated && (

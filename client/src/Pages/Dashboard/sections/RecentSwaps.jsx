@@ -44,9 +44,9 @@ const RecentSwaps = () => {
   };
 
   return (
-    <div className="premium-surface rounded-3xl p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="font-display text-2xl font-medium">Recent Swap Requests</h2>
+    <div className="clay p-6">
+      <div className="mb-6 flex items-center justify-between">
+        <h2 className="font-display text-2xl font-bold">Recent Swap Requests</h2>
         <Link to="/swaps" className="text-moss-800 hover:underline font-medium">
           View All
         </Link>

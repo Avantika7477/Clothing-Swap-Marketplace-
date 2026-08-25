@@ -23,8 +23,8 @@ const Navbar = () => {
 
   const linkClasses = ({ isActive }) =>
     isActive
-      ? "text-moss-900 font-semibold"
-      : "text-ink/60 hover:text-moss-800 transition";
+      ? "text-moss-800 font-bold"
+      : "text-ink/55 hover:text-moss-800 transition";
 
   const handleLogout = () => {
     logout();
@@ -33,11 +33,11 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-moss-800/10 bg-[#f6f4f1]/92 backdrop-blur-md">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5">
+    <header className="sticky top-0 z-50 px-4 pt-3">
+      <nav className="clay-sm mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-6">
         <Link
           to="/"
-          className="font-display text-[1.35rem] font-medium tracking-tight text-moss-900 md:text-[1.55rem]"
+          className="font-display text-[1.35rem] font-bold tracking-tight text-moss-900 md:text-[1.55rem]"
         >
           Fashion Swap
         </Link>
@@ -55,20 +55,20 @@ const Navbar = () => {
             <>
               <Link
                 to="/add-item"
-                className="rounded-lg bg-moss-800 px-3.5 py-2 text-sm font-semibold text-white transition hover:bg-moss-700"
+                className="btn-premium btn-premium-primary px-3.5 py-2 text-sm"
               >
                 List item
               </Link>
               <Link
                 to="/profile"
-                className="px-2 text-sm font-medium text-ink/65 hover:text-moss-800"
+                className="px-2 text-sm font-semibold text-ink/65 hover:text-moss-800"
               >
                 {user?.fullName?.split(" ")[0] || "Profile"}
               </Link>
               <button
                 type="button"
                 onClick={handleLogout}
-                className="rounded-lg border border-moss-800/18 px-3.5 py-2 text-sm text-ink/75 transition hover:bg-white/70"
+                className="btn-premium btn-premium-secondary px-3.5 py-2 text-sm"
               >
                 Logout
               </button>
@@ -77,13 +77,13 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="rounded-lg px-3.5 py-2 text-sm font-semibold text-moss-800 transition hover:bg-white/60"
+                className="btn-premium btn-premium-secondary px-3.5 py-2 text-sm"
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="rounded-lg bg-moss-800 px-3.5 py-2 text-sm font-semibold text-white transition hover:bg-moss-700"
+                className="btn-premium btn-premium-primary px-3.5 py-2 text-sm"
               >
                 Register
               </Link>
@@ -93,7 +93,7 @@ const Navbar = () => {
 
         <button
           type="button"
-          className="text-2xl text-moss-800 md:hidden"
+          className="clay-sm flex h-10 w-10 items-center justify-center text-xl text-moss-800 md:hidden"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -102,7 +102,7 @@ const Navbar = () => {
       </nav>
 
       {isOpen && (
-        <div className="border-t border-moss-800/10 bg-[#f1efeb] px-6 py-5 md:hidden">
+        <div className="clay mx-4 mt-2 max-w-7xl px-6 py-5 md:hidden xl:mx-auto">
           <div className="flex flex-col gap-3.5">
             {navLinks.map((link) => (
               <NavLink
@@ -122,21 +122,21 @@ const Navbar = () => {
                 <Link
                   to="/add-item"
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg bg-moss-800 py-2.5 text-center text-sm font-semibold text-white"
+                  className="btn-premium btn-premium-primary py-2.5 text-center text-sm"
                 >
                   List item
                 </Link>
                 <Link
                   to="/profile"
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg border border-moss-800/15 py-2.5 text-center text-sm"
+                  className="btn-premium btn-premium-secondary py-2.5 text-center text-sm"
                 >
                   Profile
                 </Link>
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="rounded-lg border border-red-200/80 py-2.5 text-sm text-red-600"
+                  className="rounded-[1.25rem] border-2 border-red-200/80 bg-red-50 py-2.5 text-sm font-semibold text-red-600"
                 >
                   Logout
                 </button>
@@ -146,14 +146,14 @@ const Navbar = () => {
                 <Link
                   to="/login"
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg border border-moss-800/20 py-2.5 text-center text-sm font-semibold text-moss-800"
+                  className="btn-premium btn-premium-secondary py-2.5 text-center text-sm"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg bg-moss-800 py-2.5 text-center text-sm font-semibold text-white"
+                  className="btn-premium btn-premium-primary py-2.5 text-center text-sm"
                 >
                   Register
                 </Link>

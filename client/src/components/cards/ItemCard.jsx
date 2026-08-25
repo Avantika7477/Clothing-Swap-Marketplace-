@@ -7,8 +7,8 @@ const ItemCard = ({ item }) => {
   const value = item.estimatedValue ?? item.value ?? 0;
 
   return (
-    <article className="group overflow-hidden border border-moss-800/10 bg-white/70 transition hover:border-moss-800/22 hover:bg-white/90">
-      <Link to={`/item/${id}`} className="block overflow-hidden">
+    <article className="clay group overflow-hidden transition duration-300 hover:-translate-y-1">
+      <Link to={`/item/${id}`} className="block overflow-hidden rounded-t-[1.55rem]">
         <img
           src={image}
           alt={item.title}
@@ -19,12 +19,12 @@ const ItemCard = ({ item }) => {
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <h3 className="truncate font-display text-[1.2rem] font-medium text-ink">
+            <h3 className="truncate font-display text-[1.2rem] font-bold text-ink">
               {item.title}
             </h3>
             <p className="mt-1 text-sm text-ink/50">{item.brand}</p>
           </div>
-          <p className="shrink-0 text-sm font-semibold text-moss-800">
+          <p className="shrink-0 rounded-2xl bg-moss-50 px-2.5 py-1 text-sm font-bold text-moss-800 shadow-[inset_2px_2px_6px_rgba(163,177,198,0.25)]">
             {value} pts
           </p>
         </div>
@@ -39,7 +39,7 @@ const ItemCard = ({ item }) => {
 
         <Link
           to={`/item/${id}`}
-          className="mt-5 inline-flex w-full items-center justify-center rounded-lg border border-moss-800/15 bg-moss-800 py-2.5 text-sm font-semibold text-white transition hover:bg-moss-700"
+          className="btn-premium btn-premium-primary mt-5 inline-flex w-full py-2.5 text-sm"
         >
           View details
         </Link>

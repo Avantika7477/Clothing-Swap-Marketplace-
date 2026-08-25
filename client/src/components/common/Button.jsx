@@ -8,7 +8,7 @@ const Button = ({
   onClick,
 }) => {
   const baseStyle =
-    "btn-premium font-medium focus:outline-none focus:ring-2 focus:ring-moss-100";
+    "btn-premium font-semibold focus:outline-none focus:ring-2 focus:ring-moss-100";
 
   const sizes = {
     sm: "px-3.5 py-2.5 text-sm",
@@ -22,7 +22,7 @@ const Button = ({
     secondary: "btn-premium-secondary",
 
     danger:
-      "bg-red-500 text-white border border-red-500 shadow-sm hover:bg-red-600 focus:ring-red-200 rounded-2xl",
+      "rounded-[1.25rem] border-2 border-white/30 bg-gradient-to-br from-red-400 to-red-500 text-white shadow-[6px_6px_14px_rgba(220,80,80,0.35)] hover:from-red-500 hover:to-red-600 focus:ring-red-200",
   };
 
   return (

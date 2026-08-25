@@ -1,21 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  /* Atelier fashion palette — charcoal, stone, warm bone */
-  --font-display: "Fraunces", Georgia, serif;
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --color-moss-950: #0c0c0c;
-  --color-moss-900: #161616;
-  --color-moss-800: #1f1f1f;
-  --color-moss-700: #333333;
-  --color-moss-600: #525252;
-  --color-moss-100: #ebe8e3;
-  --color-moss-50: #f6f4f1;
-  --color-ink: #121212;
-  --color-stone-wash: #f3f2ef;
-  --color-lichen: #d9d2c8;
-  --color-linen: #f1efeb;
-  --color-camel: #9a8470;
+  /* Claymorphism palette — soft teal clay, cool mist, coral accent */
+  --font-display: "Quicksand", ui-rounded, system-ui, sans-serif;
+  --font-sans: "Nunito", ui-rounded, system-ui, sans-serif;
+  --color-moss-950: #1a2f2a;
+  --color-moss-900: #243d36;
+  --color-moss-800: #3d6b5e;
+  --color-moss-700: #4f8575;
+  --color-moss-600: #6a9e8e;
+  --color-moss-100: #d4e8e0;
+  --color-moss-50: #eaf4f0;
+  --color-ink: #2c3e3a;
+  --color-stone-wash: #e8eef2;
+  --color-lichen: #c5ddd4;
+  --color-linen: #dfe8f0;
+  --color-camel: #e07a5f;
+  --shadow-clay:
+    10px 10px 24px rgba(163, 177, 198, 0.45),
+    -10px -10px 24px rgba(255, 255, 255, 0.9);
+  --shadow-clay-sm:
+    6px 6px 14px rgba(163, 177, 198, 0.4),
+    -6px -6px 14px rgba(255, 255, 255, 0.85);
+  --shadow-clay-inset:
+    inset 4px 4px 10px rgba(163, 177, 198, 0.35),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.8);
 }
 
 * {
@@ -34,9 +43,10 @@ body {
   min-height: 100vh;
   background-color: var(--color-linen);
   background-image:
-    radial-gradient(ellipse 70% 45% at 0% 0%, rgba(217, 210, 200, 0.4), transparent 55%),
-    radial-gradient(ellipse 55% 40% at 100% 8%, rgba(235, 232, 227, 0.55), transparent 50%),
-    linear-gradient(180deg, #f6f4f1 0%, #f1efeb 50%, #eceae5 100%);
+    radial-gradient(ellipse 80% 50% at 0% -10%, rgba(197, 221, 212, 0.65), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 100% 0%, rgba(224, 122, 95, 0.12), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(163, 177, 198, 0.28), transparent 55%),
+    linear-gradient(165deg, #e8f0f6 0%, #dfe8f0 45%, #d5e3ec 100%);
   background-attachment: fixed;
 }
 
@@ -45,7 +55,8 @@ h2,
 h3,
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
+  font-weight: 600;
 }
 
 ::selection {
@@ -74,128 +85,144 @@ h3,
 }
 
 .section-kicker {
-  font-size: 0.7rem;
-  font-weight: 650;
-  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--color-camel) 88%, var(--color-ink));
+  color: var(--color-camel);
 }
 
 .section-title {
   font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   color: var(--color-ink);
   font-size: clamp(1.7rem, 2.4vw, 2.35rem);
   line-height: 1.15;
 }
 
 .section-copy {
-  color: color-mix(in srgb, var(--color-ink) 62%, transparent);
+  color: color-mix(in srgb, var(--color-ink) 58%, transparent);
   font-size: 0.95rem;
   line-height: 1.65;
 }
 
-.btn-primary {
+/* ——— Clay surfaces ——— */
+.clay,
+.premium-surface,
+.surface {
+  background: linear-gradient(145deg, #f7fafc 0%, #eef3f8 100%);
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 1.75rem;
+  box-shadow: var(--shadow-clay);
+}
+
+.clay-sm {
+  background: linear-gradient(145deg, #f8fafc 0%, #eef3f8 100%);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-clay-sm);
+}
+
+.clay-inset {
+  background: linear-gradient(145deg, #e8eef4 0%, #f2f6fa 100%);
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-clay-inset);
+}
+
+.clay-accent {
+  background: linear-gradient(145deg, #4f8575 0%, #3d6b5e 100%);
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  border-radius: 1.75rem;
+  box-shadow:
+    10px 10px 22px rgba(61, 107, 94, 0.35),
+    -8px -8px 18px rgba(255, 255, 255, 0.55);
+  color: white;
+}
+
+/* ——— Buttons ——— */
+.btn-primary,
+.btn-premium {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-moss-800);
-  color: white;
+  border-radius: 1.25rem;
   padding: 0.85rem 1.45rem;
-  border-radius: 0.4rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.01em;
-  border: 1px solid color-mix(in srgb, var(--color-moss-950) 20%, transparent);
   transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
-.btn-primary:hover {
-  background: var(--color-moss-700);
-  transform: translateY(-1px);
+.btn-primary:hover,
+.btn-premium:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary,
+.btn-premium-primary {
+  background: linear-gradient(145deg, #4f8575 0%, #3d6b5e 100%);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    6px 6px 14px rgba(61, 107, 94, 0.35),
+    -4px -4px 10px rgba(255, 255, 255, 0.5);
+}
+
+.btn-primary:hover,
+.btn-premium-primary:hover {
+  background: linear-gradient(145deg, #5a9483 0%, #468072 100%);
 }
 
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.55);
   color: white;
   padding: 0.85rem 1.45rem;
-  border-radius: 0.4rem;
-  font-weight: 600;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  border-radius: 1.25rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.12);
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.9);
-}
-
-.btn-premium {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.4rem;
-  padding: 0.85rem 1.35rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.btn-premium:hover {
-  transform: translateY(-1px);
-}
-
-.btn-premium-primary {
-  background: var(--color-moss-800);
-  color: white;
-  border: 1px solid color-mix(in srgb, var(--color-moss-950) 18%, transparent);
-}
-
-.btn-premium-primary:hover {
-  background: var(--color-moss-700);
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
 }
 
 .btn-premium-secondary {
-  background: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(145deg, #ffffff 0%, #eef3f8 100%);
   color: var(--color-moss-800);
-  border: 1px solid color-mix(in srgb, var(--color-moss-800) 16%, transparent);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: var(--shadow-clay-sm);
 }
 
 .btn-premium-secondary:hover {
-  background: white;
-  border-color: color-mix(in srgb, var(--color-moss-800) 28%, transparent);
+  background: linear-gradient(145deg, #ffffff 0%, #f5f8fb 100%);
 }
 
-.premium-surface {
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
-}
-
-.surface {
-  background: rgba(255, 255, 255, 0.62);
-  border: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
-}
-
+/* ——— Form fields ——— */
 .field-input {
   width: 100%;
-  border-radius: 0.4rem;
-  border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
-  background: rgba(255, 255, 255, 0.92);
-  padding: 0.7rem 0.9rem;
+  border-radius: 1.1rem;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background: linear-gradient(145deg, #e8eef4 0%, #f4f7fa 100%);
+  box-shadow: var(--shadow-clay-inset);
+  padding: 0.75rem 1rem;
   font-size: 0.925rem;
   outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .field-input:focus {
-  border-color: color-mix(in srgb, var(--color-ink) 42%, transparent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-moss-100) 90%, transparent);
+  border-color: color-mix(in srgb, var(--color-moss-600) 45%, white);
+  box-shadow:
+    var(--shadow-clay-inset),
+    0 0 0 3px color-mix(in srgb, var(--color-moss-100) 80%, transparent);
 }

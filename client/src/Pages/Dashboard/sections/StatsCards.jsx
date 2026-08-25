@@ -74,16 +74,16 @@ const StatsCards = () => {
       {cards.map((stat) => (
         <div
           key={stat.id}
-          className="border border-moss-800/12 bg-white/75 p-5 transition hover:border-moss-800/20 hover:bg-white/90"
+          className="clay p-5 transition duration-300 hover:-translate-y-1"
         >
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-sm text-ink/55">{stat.title}</p>
-              <h2 className="mt-1.5 font-display text-3xl font-medium text-ink">
+              <h2 className="mt-1.5 font-display text-3xl font-bold text-ink">
                 {stat.value}
               </h2>
             </div>
-            <div className="flex h-11 w-11 items-center justify-center border border-moss-800/10 bg-moss-50">
+            <div className="clay-sm flex h-11 w-11 items-center justify-center rounded-2xl">
               {stat.icon}
             </div>
           </div>

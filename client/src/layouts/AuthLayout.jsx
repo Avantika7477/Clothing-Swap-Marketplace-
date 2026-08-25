@@ -7,20 +7,20 @@ const AuthLayout = ({ children, title = "Welcome", subtitle }) => {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 70% 50% at 10% 0%, rgba(217,210,200,0.45), transparent 55%), radial-gradient(ellipse 50% 40% at 100% 100%, rgba(31,31,31,0.06), transparent 50%), linear-gradient(180deg, #f6f4f1, #eceae5)",
+            "radial-gradient(ellipse 70% 50% at 10% 0%, rgba(197,221,212,0.55), transparent 55%), radial-gradient(ellipse 50% 40% at 100% 100%, rgba(224,122,95,0.12), transparent 50%), linear-gradient(165deg, #e8f0f6, #d5e3ec)",
         }}
       />
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-lg flex-col justify-center px-6 py-12">
         <Link
           to="/"
-          className="mb-8 font-display text-2xl font-medium tracking-tight text-moss-900"
+          className="mb-8 font-display text-2xl font-bold tracking-tight text-moss-900"
         >
           Fashion Swap
         </Link>
 
-        <div className="border border-moss-800/12 bg-white/80 p-7 sm:p-8">
-          <h1 className="font-display text-2xl font-medium text-ink sm:text-[1.7rem]">
+        <div className="clay p-7 sm:p-8">
+          <h1 className="font-display text-2xl font-bold text-ink sm:text-[1.7rem]">
             {title}
           </h1>
           {subtitle ? (

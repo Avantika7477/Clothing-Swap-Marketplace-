@@ -41,9 +41,9 @@ const MyListings = () => {
   };
 
   return (
-    <div className="premium-surface rounded-3xl p-6 mb-8">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="font-display text-2xl font-medium">My Listings</h2>
+    <div className="clay mb-8 p-6">
+      <div className="mb-6 flex items-center justify-between">
+        <h2 className="font-display text-2xl font-bold">My Listings</h2>
         <Link to="/add-item" className="text-moss-800 text-sm font-semibold hover:underline">
           Add Item
         </Link>
@@ -63,18 +63,18 @@ const MyListings = () => {
           {listings.map((item) => (
             <div
               key={item._id}
-              className="flex flex-col md:flex-row items-center gap-5 border border-moss-800/10 bg-white/75 rounded-2xl p-4 hover:shadow-md transition"
+              className="clay-sm flex flex-col items-center gap-5 p-4 transition hover:-translate-y-0.5 md:flex-row"
             >
               <img
                 src={getImageUrl(item.images?.[0])}
                 alt={item.title}
-                className="w-28 h-28 rounded-lg object-cover"
+                className="h-28 w-28 rounded-2xl object-cover"
               />
 
               <div className="flex-1">
-                <h3 className="text-xl font-semibold">{item.title}</h3>
-                <p className="text-ink/55 mt-1">{item.category}</p>
-                <span className="inline-block mt-3 bg-moss-100 text-moss-800 px-3 py-1 rounded-full text-sm capitalize">
+                <h3 className="text-xl font-bold">{item.title}</h3>
+                <p className="mt-1 text-ink/55">{item.category}</p>
+                <span className="mt-3 inline-block rounded-2xl bg-moss-100 px-3 py-1 text-sm capitalize text-moss-800 shadow-[inset_2px_2px_6px_rgba(163,177,198,0.25)]">
                   {item.status}
                 </span>
               </div>
