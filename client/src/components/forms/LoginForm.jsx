@@ -104,10 +104,6 @@ const LoginForm = () => {
           Register
         </Link>
       </p>
-
-      <div className="clay-inset p-3 text-xs leading-relaxed text-ink/60">
-        <p>Admin: admin@swap.com / admin123</p>
-      </div>
     </form>
   );
 };
