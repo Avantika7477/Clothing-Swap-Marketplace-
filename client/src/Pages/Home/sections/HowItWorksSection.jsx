@@ -21,8 +21,8 @@ const steps = [
 const HowItWorksSection = () => {
   return (
     <section className="page-shell section-space">
-      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <div className="max-w-xl">
+      <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-end md:justify-between">
+        <div className="max-w-xl min-w-0">
           <p className="section-kicker">How it works</p>
           <h2 className="section-title mt-3">Three calm steps to swap.</h2>
         </div>
@@ -31,7 +31,7 @@ const HowItWorksSection = () => {
         </p>
       </div>
 
-      <div className="mt-12 grid gap-5 md:grid-cols-3 md:gap-6">
+      <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:gap-5 md:mt-12 md:grid-cols-3 md:gap-6">
         {steps.map((item, index) => (
           <motion.div
             key={item.step}
@@ -39,15 +39,15 @@ const HowItWorksSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ delay: index * 0.08, duration: 0.4 }}
-            className="clay p-6 transition duration-300 hover:-translate-y-1"
+            className="clay flex min-w-0 flex-col p-5 sm:p-6"
           >
-            <p className="font-display text-4xl font-bold text-moss-800/25 md:text-5xl">
+            <p className="font-display text-3xl font-bold text-moss-800/25 sm:text-4xl md:text-5xl">
               {item.step}
             </p>
-            <h3 className="mt-3 font-display text-xl font-bold text-ink md:text-[1.35rem]">
+            <h3 className="mt-3 font-display text-lg font-bold text-ink sm:text-xl md:text-[1.35rem]">
               {item.title}
             </h3>
-            <p className="mt-2.5 text-sm leading-relaxed text-ink/65">
+            <p className="mt-3 text-sm leading-relaxed text-ink/65">
               {item.description}
             </p>
           </motion.div>
