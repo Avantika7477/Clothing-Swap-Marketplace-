@@ -11,7 +11,7 @@ const AuthLayout = ({ children, title = "Welcome", subtitle }) => {
         }}
       />
 
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-lg flex-col justify-center px-6 py-12">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-lg flex-col justify-center px-4 py-10 sm:px-6 sm:py-12">
         <Link
           to="/"
           className="mb-8 font-display text-2xl font-bold tracking-tight text-moss-900"
@@ -19,12 +19,12 @@ const AuthLayout = ({ children, title = "Welcome", subtitle }) => {
           Fashion Swap
         </Link>
 
-        <div className="clay p-7 sm:p-8">
+        <div className="clay">
           <h1 className="font-display text-2xl font-bold text-ink sm:text-[1.7rem]">
             {title}
           </h1>
           {subtitle ? (
-            <p className="mt-2 text-sm leading-relaxed text-ink/60">{subtitle}</p>
+            <p className="mt-3 text-sm leading-relaxed text-ink/60">{subtitle}</p>
           ) : null}
           <div className="mt-6">{children}</div>
         </div>

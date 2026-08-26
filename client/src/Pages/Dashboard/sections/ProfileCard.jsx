@@ -13,13 +13,13 @@ const ProfileCard = () => {
     : "—";
 
   return (
-    <div className="clay p-6">
+    <div className="clay">
       <div className="flex flex-col items-center text-center">
         {user?.avatar ? (
           <img
             src={getImageUrl(user.avatar)}
             alt={user.fullName}
-            className="mb-4 h-24 w-24 rounded-full border-4 border-white object-cover shadow-[6px_6px_14px_rgba(163,177,198,0.4)]"
+            className="mb-4 h-24 w-24 rounded-full border-4 border-white object-cover shadow-md"
           />
         ) : (
           <div className="clay-sm mb-4 flex h-24 w-24 items-center justify-center rounded-full">
@@ -27,36 +27,34 @@ const ProfileCard = () => {
           </div>
         )}
 
-        <h2 className="font-display text-2xl font-bold text-ink">
+        <h2 className="max-w-full truncate font-display text-xl font-bold text-ink sm:text-2xl">
           {user?.fullName || "Guest User"}
         </h2>
 
-        <p className="mt-1 text-sm text-ink/55">
+        <p className="mt-2 max-w-full break-all text-sm text-ink/55">
           {user?.email || "guest@email.com"}
         </p>
 
-        <div className="mt-5 w-full space-y-2.5 text-left text-sm">
-          <div className="flex justify-between gap-3 border-b border-moss-800/8 pb-2">
-            <span className="text-ink/50">Member since</span>
-            <span className="font-semibold text-ink">{memberSince}</span>
+        <div className="mt-6 w-full text-left text-sm">
+          <div className="detail-row">
+            <span className="detail-label">Member since</span>
+            <span className="detail-value">{memberSince}</span>
           </div>
-
-          <div className="flex justify-between gap-3 border-b border-moss-800/8 pb-2">
-            <span className="text-ink/50">Location</span>
-            <span className="font-semibold text-ink">
+          <div className="detail-row">
+            <span className="detail-label">Location</span>
+            <span className="detail-value truncate">
               {user?.location || user?.city || "Not set"}
             </span>
           </div>
-
-          <div className="flex justify-between gap-3">
-            <span className="text-ink/50">Swaps</span>
-            <span className="font-semibold text-ink">{user?.swapCount ?? 0}</span>
+          <div className="detail-row">
+            <span className="detail-label">Swaps</span>
+            <span className="detail-value">{user?.swapCount ?? 0}</span>
           </div>
         </div>
 
         <Link
           to="/profile"
-          className="btn-premium btn-premium-primary mt-6 flex w-full items-center justify-center gap-2 py-3 text-sm"
+          className="btn-premium btn-premium-primary mt-6 flex min-h-12 w-full items-center justify-center gap-2 text-sm"
         >
           <HiOutlinePencilAlt />
           Edit Profile

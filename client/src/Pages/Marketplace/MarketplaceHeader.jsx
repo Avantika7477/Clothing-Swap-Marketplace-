@@ -1,7 +1,7 @@
 const MarketplaceHeader = () => {
   return (
     <section className="page-shell pt-4 sm:pt-6">
-      <div className="clay-accent px-5 py-10 sm:px-8 md:px-12 md:py-14">
+      <div className="clay-accent px-6 py-10 sm:px-8 sm:py-12 md:px-12 md:py-14">
         <p className="section-kicker text-white/60">Sustainable fashion</p>
 
         <h1 className="mt-3 font-display text-3xl font-bold leading-tight sm:text-4xl md:text-[2.75rem]">

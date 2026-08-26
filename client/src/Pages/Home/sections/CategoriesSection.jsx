@@ -43,7 +43,7 @@ const CategoriesSection = () => {
             <Link
               to="/marketplace"
               state={{ category: category.title }}
-              className="clay group relative block aspect-[4/5] overflow-hidden transition duration-300 hover:-translate-y-1"
+              className="clay clay-media group relative block aspect-[4/5] overflow-hidden transition duration-300 hover:-translate-y-1"
             >
               <img
                 src={category.image}
@@ -51,7 +51,7 @@ const CategoriesSection = () => {
                 className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-moss-950/75 via-moss-950/10 to-transparent" />
-              <h3 className="absolute bottom-5 left-5 font-display text-[1.55rem] font-bold text-white">
+              <h3 className="absolute bottom-5 left-5 right-5 font-display text-[1.35rem] font-bold text-white sm:text-[1.55rem]">
                 {category.title}
               </h3>
             </Link>

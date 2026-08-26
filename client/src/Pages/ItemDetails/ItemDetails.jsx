@@ -37,7 +37,7 @@ const ItemDetails = () => {
   if (loading) {
     return (
       <MainLayout>
-        <section className="min-h-screen flex items-center justify-center">
+        <section className="flex min-h-[60vh] items-center justify-center">
           <Loader />
         </section>
       </MainLayout>
@@ -47,11 +47,14 @@ const ItemDetails = () => {
   if (error || !listing) {
     return (
       <MainLayout>
-        <section className="max-w-3xl mx-auto px-6 py-16">
-          <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl px-4 py-3">
+        <section className="page-shell py-12 sm:py-16">
+          <div className="rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-red-600">
             {error || "Item not found."}
           </div>
-          <Link to="/marketplace" className="inline-block mt-6 text-moss-800 hover:underline">
+          <Link
+            to="/marketplace"
+            className="mt-6 inline-block font-semibold text-moss-800 hover:underline"
+          >
             Back to Marketplace
           </Link>
         </section>
@@ -61,8 +64,8 @@ const ItemDetails = () => {
 
   return (
     <MainLayout>
-      <section className="max-w-7xl mx-auto px-6 py-10">
-        <div className="mb-8 text-sm text-gray-500">
+      <section className="page-shell py-8 sm:py-10">
+        <div className="mb-6 text-sm text-ink/50 sm:mb-8">
           <Link to="/" className="hover:text-moss-800">
             Home
           </Link>
@@ -71,24 +74,24 @@ const ItemDetails = () => {
             Marketplace
           </Link>
           {" / "}
-          <span className="text-gray-800">{listing.title}</span>
+          <span className="break-words text-ink/80">{listing.title}</span>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-10">
+        <div className="grid gap-6 lg:grid-cols-2 lg:gap-10">
           <ImageGallery listing={listing} />
 
-          <div className="space-y-6">
+          <div className="space-y-5 sm:space-y-6">
             <ItemInformation listing={listing} />
             <SwapValueCard listing={listing} />
             <SwapAction listing={listing} />
           </div>
         </div>
 
-        <div className="mt-16">
+        <div className="mt-10 sm:mt-14">
           <OwnerInformation owner={listing.owner} />
         </div>
 
-        <div className="mt-16">
+        <div className="mt-10 sm:mt-14">
           <SimilarItems items={similar} />
         </div>
       </section>

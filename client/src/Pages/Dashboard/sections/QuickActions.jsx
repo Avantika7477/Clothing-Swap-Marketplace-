@@ -32,7 +32,7 @@ const QuickActions = () => {
   ];
 
   return (
-    <div className="clay mb-8 p-5">
+    <div className="clay mb-8">
       <h2 className="font-display text-xl font-bold text-ink">Quick actions</h2>
 
       <div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">

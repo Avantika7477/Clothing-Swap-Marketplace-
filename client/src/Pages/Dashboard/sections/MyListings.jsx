@@ -41,9 +41,9 @@ const MyListings = () => {
   };
 
   return (
-    <div className="clay mb-8 p-6">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="font-display text-2xl font-bold">My Listings</h2>
+    <div className="clay mb-8">
+      <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="font-display text-xl font-bold sm:text-2xl">My Listings</h2>
         <Link to="/add-item" className="text-moss-800 text-sm font-semibold hover:underline">
           Add Item
         </Link>

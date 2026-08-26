@@ -67,14 +67,21 @@ h3,
   margin-right: auto;
   max-width: 80rem;
   width: 100%;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.15rem;
+  padding-right: 1.15rem;
 }
 
 @media (min-width: 640px) {
   .page-shell {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-shell {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
@@ -127,12 +134,40 @@ h3,
   word-break: break-word;
 }
 
+/* Default breathing room for text cards — opt out with .clay-media */
+.clay:not(.clay-media),
+.premium-surface,
+.surface,
+.content-card {
+  padding: 1.35rem 1.35rem;
+}
+
 @media (min-width: 640px) {
   .clay,
   .premium-surface,
   .surface {
     border-radius: 1.5rem;
   }
+
+  .clay:not(.clay-media),
+  .premium-surface,
+  .surface,
+  .content-card {
+    padding: 1.65rem 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .clay:not(.clay-media),
+  .premium-surface,
+  .surface,
+  .content-card {
+    padding: 1.85rem 2rem;
+  }
+}
+
+.clay-media {
+  padding: 0 !important;
 }
 
 .clay-sm {
@@ -153,6 +188,14 @@ h3,
   max-width: 100%;
   overflow-wrap: anywhere;
   word-break: break-word;
+  padding: 1rem 1.15rem;
+}
+
+@media (min-width: 640px) {
+  .clay-inset {
+    border-radius: 1.25rem;
+    padding: 1.15rem 1.35rem;
+  }
 }
 
 .clay-accent {
@@ -171,6 +214,36 @@ h3,
   .clay-accent {
     border-radius: 1.5rem;
   }
+}
+
+/* Shared detail rows inside cards */
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(42, 51, 48, 0.08);
+}
+
+.detail-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.detail-row:first-child {
+  padding-top: 0;
+}
+
+.detail-label {
+  color: color-mix(in srgb, var(--color-ink) 55%, transparent);
+  flex-shrink: 0;
+}
+
+.detail-value {
+  font-weight: 600;
+  text-align: right;
+  min-width: 0;
 }
 
 .table-scroll {
@@ -295,7 +368,7 @@ h3,
   border: 1px solid rgba(42, 51, 48, 0.12);
   background: #f4f5f4;
   box-shadow: var(--shadow-clay-inset);
-  padding: 0.8rem 1rem;
+  padding: 0.9rem 1.1rem;
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;

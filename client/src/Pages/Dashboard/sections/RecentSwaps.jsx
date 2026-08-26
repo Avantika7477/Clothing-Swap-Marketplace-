@@ -44,9 +44,9 @@ const RecentSwaps = () => {
   };
 
   return (
-    <div className="clay p-6">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="font-display text-2xl font-bold">Recent Swap Requests</h2>
+    <div className="clay">
+      <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="font-display text-xl font-bold sm:text-2xl">Recent Swap Requests</h2>
         <Link to="/swaps" className="text-moss-800 hover:underline font-medium">
           View All
         </Link>
@@ -59,7 +59,7 @@ const RecentSwaps = () => {
           {swaps.map((swap) => (
             <div
               key={swap._id}
-              className="flex flex-col md:flex-row justify-between items-center border border-moss-800/10 bg-white/75 rounded-2xl p-4 hover:bg-white transition"
+              className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-moss-800/10 bg-white/80 p-4 transition hover:bg-white sm:p-5 md:flex-row"
             >
               <div>
                 <h3 className="font-semibold text-lg">

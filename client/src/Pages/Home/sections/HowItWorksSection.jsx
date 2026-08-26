@@ -39,7 +39,7 @@ const HowItWorksSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ delay: index * 0.08, duration: 0.4 }}
-            className="clay flex min-w-0 flex-col p-5 sm:p-6"
+            className="clay flex min-w-0 flex-col"
           >
             <p className="font-display text-3xl font-bold text-moss-800/25 sm:text-4xl md:text-5xl">
               {item.step}

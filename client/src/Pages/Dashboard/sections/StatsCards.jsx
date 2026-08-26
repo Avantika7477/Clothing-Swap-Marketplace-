@@ -74,7 +74,7 @@ const StatsCards = () => {
       {cards.map((stat) => (
         <div
           key={stat.id}
-          className="clay p-5 transition duration-300 hover:-translate-y-1"
+          className="clay p-5 transition duration-300 hover:-translate-y-1 sm:p-6"
         >
           <div className="flex items-center justify-between gap-4">
             <div>

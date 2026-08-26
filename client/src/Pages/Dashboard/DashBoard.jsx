@@ -11,10 +11,10 @@ const Dashboard = () => {
   return (
     <MainLayout>
       <section className="min-h-screen">
-        <div className="mx-auto max-w-7xl px-6 py-12">
+        <div className="page-shell py-8 sm:py-12">
           <DashboardHeader />
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
             <div>
               <ProfileCard />
             </div>

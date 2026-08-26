@@ -11,31 +11,31 @@ const ImageGallery = ({ listing }) => {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-2xl overflow-hidden bg-gray-100">
+      <div className="clay clay-media overflow-hidden bg-moss-50">
         <img
           src={activeImage}
           alt={listing?.title}
-          className="w-full h-[500px] object-cover"
+          className="h-72 w-full object-cover sm:h-96 md:h-[500px]"
         />
       </div>
 
       {images.length > 1 && (
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-4 gap-2 sm:gap-3">
           {images.slice(0, 4).map((img, index) => (
             <button
               key={`${img}-${index}`}
               type="button"
               onClick={() => setActiveIndex(index)}
-              className={`rounded-xl overflow-hidden border ${
+              className={`overflow-hidden rounded-xl border-2 ${
                 activeIndex === index
-                  ? "border-green-500 ring-2 ring-moss-100"
-                  : "hover:border-green-500"
+                  ? "border-moss-700"
+                  : "border-transparent hover:border-moss-600/40"
               }`}
             >
               <img
                 src={getImageUrl(img)}
                 alt={`${listing?.title} ${index + 1}`}
-                className="w-full h-24 object-cover"
+                className="h-16 w-full object-cover sm:h-24"
               />
             </button>
           ))}

@@ -3,32 +3,38 @@ import { getImageUrl } from "../../../services/api";
 const OwnerInformation = ({ owner }) => {
   if (!owner) {
     return (
-      <div className="bg-white shadow rounded-xl p-6 text-gray-500">
-        Owner information unavailable.
-      </div>
+      <div className="clay text-ink/55">Owner information unavailable.</div>
     );
   }
 
   return (
-    <div className="bg-white shadow rounded-2xl p-6 border">
-      <h2 className="text-2xl font-bold mb-6">Owner Information</h2>
+    <div className="clay">
+      <h2 className="font-display text-xl font-bold text-ink sm:text-2xl">
+        Owner Information
+      </h2>
 
-      <div className="flex flex-col sm:flex-row gap-6 items-start">
+      <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:gap-6">
         <img
           src={getImageUrl(owner.avatar)}
           alt={owner.fullName}
-          className="w-20 h-20 rounded-full object-cover border"
+          className="h-20 w-20 shrink-0 rounded-full border border-moss-800/10 object-cover"
         />
 
-        <div className="space-y-2">
-          <h3 className="text-xl font-semibold">{owner.fullName}</h3>
-          <p className="text-gray-500">
+        <div className="min-w-0 space-y-2">
+          <h3 className="font-display text-lg font-bold text-ink sm:text-xl">
+            {owner.fullName}
+          </h3>
+          <p className="text-ink/55">
             {owner.location || owner.city || "Location not set"}
           </p>
-          <p className="text-sm text-moss-800 font-medium">
+          <p className="text-sm font-medium text-moss-800">
             {owner.swapCount ?? 0} completed swaps
           </p>
-          {owner.bio && <p className="text-gray-600 max-w-2xl">{owner.bio}</p>}
+          {owner.bio ? (
+            <p className="max-w-2xl break-words leading-relaxed text-ink/65">
+              {owner.bio}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

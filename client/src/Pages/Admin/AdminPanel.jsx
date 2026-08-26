@@ -52,13 +52,13 @@ const StatusBadge = ({ status }) => (
 );
 
 const StatCard = ({ icon: Icon, label, value }) => (
-  <div className="premium-surface rounded-3xl p-6 flex items-center gap-4">
-    <div className="w-12 h-12 rounded-2xl bg-moss-100 flex items-center justify-center shadow-sm">
+  <div className="premium-surface flex items-center gap-4">
+    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-moss-100">
       <Icon className="text-2xl text-moss-800" />
     </div>
-    <div>
+    <div className="min-w-0">
       <p className="text-sm text-ink/55">{label}</p>
-      <p className="font-display text-2xl font-medium text-ink">{value}</p>
+      <p className="mt-1 font-display text-2xl font-bold text-ink">{value}</p>
     </div>
   </div>
 );
@@ -191,20 +191,22 @@ const AdminPanel = () => {
   return (
     <MainLayout>
       <section className="min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 py-10">
+        <div className="page-shell py-8 sm:py-10">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Admin Panel</h1>
-            <p className="text-gray-500 mt-1">
+            <h1 className="font-display text-2xl font-bold text-ink sm:text-3xl">
+              Admin Panel
+            </h1>
+            <p className="mt-2 text-ink/55">
               Manage users, listings, and swap disputes across the platform.
             </p>
           </div>
 
-          <div className="premium-surface flex gap-2 mb-8 rounded-2xl p-2 w-fit flex-wrap">
+          <div className="premium-surface mb-8 flex w-full flex-wrap gap-2 sm:w-fit">
             {TABS.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`px-5 py-2 rounded-xl font-medium transition ${
+                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition sm:px-5 ${
                   activeTab === tab.key
                     ? "bg-moss-800 text-white"
                     : "text-ink/65 hover:bg-white"
@@ -269,8 +271,8 @@ const AdminPanel = () => {
                   </div>
 
                   {analytics.listingsByCategory?.length > 0 && (
-                    <div className="premium-surface rounded-3xl p-6">
-                      <h2 className="text-xl font-bold mb-4">
+                    <div className="premium-surface">
+                      <h2 className="mb-4 text-lg font-bold sm:text-xl">
                         Listings by Category
                       </h2>
                       <div className="space-y-3">
@@ -287,8 +289,8 @@ const AdminPanel = () => {
                     </div>
                   )}
 
-                    <div className="premium-surface rounded-3xl p-6">
-                    <h2 className="text-xl font-bold mb-4">Recent Swaps</h2>
+                    <div className="premium-surface">
+                    <h2 className="mb-4 text-lg font-bold sm:text-xl">Recent Swaps</h2>
                     {recentSwaps.length === 0 ? (
                       <p className="text-gray-500">No recent swaps.</p>
                     ) : (
@@ -330,8 +332,8 @@ const AdminPanel = () => {
               )}
 
               {activeTab === "users" && (
-                <div className="premium-surface rounded-3xl p-6 overflow-x-auto">
-                  <h2 className="text-xl font-bold mb-4">Users</h2>
+                <div className="premium-surface overflow-x-auto">
+                  <h2 className="mb-4 text-lg font-bold sm:text-xl">Users</h2>
                   {users.length === 0 ? (
                     <p className="text-gray-500">No users found.</p>
                   ) : (
@@ -383,8 +385,8 @@ const AdminPanel = () => {
               )}
 
               {activeTab === "listings" && (
-                <div className="premium-surface rounded-3xl p-6 overflow-x-auto">
-                  <h2 className="text-xl font-bold mb-4">Listings</h2>
+                <div className="premium-surface overflow-x-auto">
+                  <h2 className="mb-4 text-lg font-bold sm:text-xl">Listings</h2>
                   {listings.length === 0 ? (
                     <p className="text-gray-500">No listings found.</p>
                   ) : (
@@ -435,8 +437,8 @@ const AdminPanel = () => {
               )}
 
               {activeTab === "swaps" && (
-                <div className="premium-surface rounded-3xl p-6 overflow-x-auto">
-                  <h2 className="text-xl font-bold mb-4">Swaps</h2>
+                <div className="premium-surface overflow-x-auto">
+                  <h2 className="mb-4 text-lg font-bold sm:text-xl">Swaps</h2>
                   {swaps.length === 0 ? (
                     <p className="text-gray-500">No swaps found.</p>
                   ) : (

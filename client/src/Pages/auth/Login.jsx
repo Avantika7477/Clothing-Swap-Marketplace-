@@ -4,7 +4,7 @@ import LoginForm from "../../components/forms/LoginForm";
 const Login = () => {
   return (
     <MainLayout>
-      <section className="mx-auto grid min-h-[78vh] max-w-6xl items-center gap-12 px-6 py-14 lg:grid-cols-2">
+      <section className="page-shell grid min-h-[78vh] max-w-6xl items-center gap-10 py-10 sm:py-14 lg:grid-cols-2 lg:gap-12">
         <div className="hidden lg:block">
           <p className="font-display text-5xl font-bold tracking-tight text-moss-900">
             Fashion Swap
@@ -18,7 +18,7 @@ const Login = () => {
           </p>
         </div>
 
-        <div className="clay mx-auto w-full max-w-md p-7 sm:p-8">
+        <div className="clay mx-auto w-full max-w-md">
           <div className="mb-7 lg:hidden">
             <p className="font-display text-3xl font-bold text-moss-900">Fashion Swap</p>
             <p className="mt-2 text-sm text-ink/60">Login to continue swapping.</p>

@@ -32,34 +32,35 @@ const SwapAction = ({ listing }) => {
   };
 
   return (
-    <div className="bg-white border rounded-2xl shadow-sm p-6">
-      <h2 className="text-xl font-bold mb-4">Ready to Swap?</h2>
+    <div className="clay">
+      <h2 className="font-display text-xl font-bold text-ink">Ready to Swap?</h2>
 
-      <p className="text-gray-600 mb-6">
+      <p className="mt-3 leading-relaxed text-ink/60">
         Send a swap request to the owner and negotiate through chat.
       </p>
 
-      <div className="space-y-3">
+      <div className="mt-6 space-y-3">
         <button
           type="button"
           onClick={handleRequestSwap}
           disabled={isOwnItem || !available}
-          className="btn-premium btn-premium-primary w-full py-3 disabled:cursor-not-allowed disabled:opacity-50"
+          className="btn-premium btn-premium-primary min-h-12 w-full disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isOwnItem ? "Your Listing" : "Request Swap"}
         </button>
 
         <Link
           to="/marketplace"
-          className="btn-premium btn-premium-secondary w-full py-3 text-center"
+          className="btn-premium btn-premium-secondary min-h-12 w-full text-center"
         >
           Back to Marketplace
         </Link>
       </div>
 
-      <div className="mt-6 p-4 rounded-xl bg-moss-50 border border-moss-800/20">
-        <p className="text-sm text-moss-800">
-          Every successful swap helps reduce textile waste and supports sustainable fashion.
+      <div className="clay-inset mt-6">
+        <p className="text-sm leading-relaxed text-moss-800">
+          Every successful swap helps reduce textile waste and supports
+          sustainable fashion.
         </p>
       </div>
     </div>

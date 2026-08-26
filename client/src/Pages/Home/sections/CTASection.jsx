@@ -9,7 +9,7 @@ const CTASection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.5 }}
-        className="clay-accent px-5 py-10 sm:px-8 md:px-12 md:py-14"
+        className="clay-accent px-6 py-10 sm:px-8 sm:py-12 md:px-12 md:py-14"
       >
         <div className="grid gap-8 md:grid-cols-[1.35fr_0.8fr] md:items-end">
           <div className="max-w-2xl min-w-0">
