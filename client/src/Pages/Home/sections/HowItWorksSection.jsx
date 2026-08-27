@@ -20,7 +20,7 @@ const steps = [
 
 const HowItWorksSection = () => {
   return (
-    <section className="page-shell section-space">
+    <section className="page-shell home-section">
       <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-end md:justify-between">
         <div className="max-w-xl min-w-0">
           <p className="section-kicker">How it works</p>
@@ -31,7 +31,7 @@ const HowItWorksSection = () => {
         </p>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:gap-5 md:mt-12 md:grid-cols-3 md:gap-6">
+      <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
         {steps.map((item, index) => (
           <motion.div
             key={item.step}

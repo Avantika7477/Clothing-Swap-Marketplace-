@@ -6,7 +6,7 @@ const HERO_IMAGE =
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-[88vh] overflow-hidden px-4 pt-4 text-white md:px-6">
+    <section className="page-shell relative min-h-[88vh] overflow-hidden pt-4 text-white">
       <div className="relative min-h-[calc(88vh-1rem)] overflow-hidden rounded-[1.5rem] shadow-[8px_8px_24px_rgba(140,150,155,0.28)] md:rounded-[2rem]">
         <motion.div
           className="absolute inset-0"
@@ -24,7 +24,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-moss-950/80 via-moss-900/45 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-moss-950/50 via-transparent to-transparent" />
 
-        <div className="relative z-10 mx-auto flex min-h-[calc(88vh-1rem)] max-w-7xl flex-col justify-end px-5 pb-14 pt-28 sm:px-6 md:justify-center md:px-10 md:pb-24">
+        <div className="relative z-10 mx-auto flex min-h-[calc(88vh-1rem)] max-w-7xl flex-col justify-end px-5 pb-14 pt-28 sm:px-8 md:justify-center md:px-12 md:pb-24">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}

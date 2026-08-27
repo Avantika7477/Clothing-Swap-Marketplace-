@@ -20,8 +20,8 @@ const FeaturedItemsSection = () => {
   }, []);
 
   return (
-    <section className="page-shell section-space">
-      <div className="mb-9 flex items-end justify-between gap-4">
+    <section className="page-shell home-section">
+      <div className="mb-8 flex items-end justify-between gap-4">
         <div className="max-w-lg">
           <p className="section-kicker">New arrivals</p>
           <h2 className="section-title mt-3">Fresh on the rack</h2>
@@ -46,7 +46,7 @@ const FeaturedItemsSection = () => {
           .
         </p>
       ) : (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {listings.map((item, index) => (
             <motion.div
               key={item._id}

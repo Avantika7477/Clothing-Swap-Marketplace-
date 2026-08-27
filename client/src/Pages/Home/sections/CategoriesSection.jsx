@@ -22,8 +22,8 @@ const categories = [
 
 const CategoriesSection = () => {
   return (
-    <section className="page-shell section-space">
-      <div className="mb-9 max-w-lg">
+    <section className="page-shell home-section">
+      <div className="mb-8 max-w-lg">
         <p className="section-kicker">Browse</p>
         <h2 className="section-title mt-3">Browse by wardrobe</h2>
         <p className="section-copy mt-3">
@@ -31,7 +31,7 @@ const CategoriesSection = () => {
         </p>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {categories.map((category, index) => (
           <motion.div
             key={category.title}

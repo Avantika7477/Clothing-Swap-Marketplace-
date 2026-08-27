@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const CTASection = () => {
   return (
-    <section className="page-shell section-space pt-2 md:pt-4">
+    <section className="page-shell home-section">
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}

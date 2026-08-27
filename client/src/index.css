@@ -86,14 +86,27 @@ h3,
 }
 
 .section-space {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 @media (min-width: 768px) {
   .section-space {
-    padding-top: 4.5rem;
-    padding-bottom: 4.5rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+/* Shared homepage rhythm: every section uses the same vertical spacing. */
+.home-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .home-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 }
 
@@ -177,6 +190,7 @@ h3,
   box-shadow: var(--shadow-clay-sm);
   min-width: 0;
   max-width: 100%;
+  padding: 0.85rem 1rem;
 }
 
 .clay-inset {
