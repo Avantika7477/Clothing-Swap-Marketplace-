@@ -1,30 +1,29 @@
 import { useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenu, HiX, HiOutlineSearch, HiOutlineUser, HiOutlineSwitchHorizontal } from "react-icons/hi";
 import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, isAdmin, user, logout } = useAuth();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const { isAuthenticated, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Marketplace", path: "/marketplace" },
+    { name: "Shop", path: "/marketplace" },
     ...(isAuthenticated
       ? [
-          { name: "Dashboard", path: "/dashboard" },
+          { name: "My Account", path: "/dashboard" },
           { name: "Swaps", path: "/swaps" },
-          { name: "Chat", path: "/chat" },
         ]
       : []),
     ...(isAdmin ? [{ name: "Admin", path: "/admin" }] : []),
   ];
 
   const linkClasses = ({ isActive }) =>
-    isActive
-      ? "text-moss-800 font-bold"
-      : "text-ink/55 hover:text-moss-800 transition";
+    `store-nav-link ${isActive ? "active" : ""}`;
 
   const handleLogout = () => {
     logout();
@@ -32,78 +31,116 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/marketplace?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchOpen(false);
+      setSearchQuery("");
+      setIsOpen(false);
+    }
+  };
+
   return (
-    <header className="sticky top-0 z-50 px-4 pt-3">
-      <nav className="clay-sm mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-6">
-        <Link
-          to="/"
-          className="font-display text-[1.35rem] font-bold tracking-tight text-moss-900 md:text-[1.55rem]"
-        >
-          Fashion Swap
-        </Link>
+    <header className="store-header sticky top-0 z-50">
+      <div className="announcement-bar">
+        Free local swaps · Sustainable fashion exchange
+      </div>
 
-        <div className="hidden items-center gap-7 md:flex">
-          {navLinks.map((link) => (
-            <NavLink key={link.name} to={link.path} className={linkClasses}>
-              {link.name}
-            </NavLink>
-          ))}
-        </div>
+      <div className="page-shell">
+        <nav className="flex items-center justify-between gap-4 py-4">
+          <button
+            type="button"
+            className="flex h-10 w-10 items-center justify-center text-xl text-moss-800 lg:hidden"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <HiX /> : <HiMenu />}
+          </button>
 
-        <div className="hidden items-center gap-2.5 md:flex">
-          {isAuthenticated ? (
-            <>
-              <Link
-                to="/add-item"
-                className="btn-premium btn-premium-primary min-h-11 px-5 py-2.5 text-sm"
-              >
-                List item
-              </Link>
-              <Link
-                to="/profile"
-                className="max-w-[8rem] truncate px-2 text-sm font-semibold text-ink/65 hover:text-moss-800"
-              >
-                {user?.fullName?.split(" ")[0] || "Profile"}
-              </Link>
-              <button
-                type="button"
-                onClick={handleLogout}
-                className="btn-premium btn-premium-secondary min-h-11 px-5 py-2.5 text-sm"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
+          <div className="hidden items-center gap-8 lg:flex">
+            {navLinks.slice(0, 3).map((link) => (
+              <NavLink key={link.name} to={link.path} className={linkClasses}>
+                {link.name}
+              </NavLink>
+            ))}
+          </div>
+
+          <Link
+            to="/"
+            className="font-display text-xl font-bold tracking-tight text-moss-900 sm:text-2xl"
+          >
+            Fashion Swap
+          </Link>
+
+          <div className="flex items-center gap-1 sm:gap-2">
+            <button
+              type="button"
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="flex h-10 w-10 items-center justify-center text-xl text-moss-800"
+              aria-label="Search"
+            >
+              <HiOutlineSearch />
+            </button>
+
+            {isAuthenticated ? (
+              <>
+                <Link
+                  to="/chat"
+                  className="hidden h-10 w-10 items-center justify-center text-xl text-moss-800 sm:flex"
+                  aria-label="Messages"
+                >
+                  <HiOutlineSwitchHorizontal />
+                </Link>
+                <Link
+                  to="/profile"
+                  className="flex h-10 w-10 items-center justify-center text-xl text-moss-800"
+                  aria-label="Account"
+                >
+                  <HiOutlineUser />
+                </Link>
+              </>
+            ) : (
               <Link
                 to="/login"
-                className="btn-premium btn-premium-secondary min-h-11 px-5 py-2.5 text-sm"
+                className="flex h-10 w-10 items-center justify-center text-xl text-moss-800"
+                aria-label="Login"
               >
-                Login
+                <HiOutlineUser />
               </Link>
-              <Link
-                to="/register"
-                className="btn-premium btn-premium-primary min-h-11 px-5 py-2.5 text-sm"
-              >
-                Register
-              </Link>
-            </>
-          )}
-        </div>
+            )}
 
-        <button
-          type="button"
-          className="clay-sm flex h-10 w-10 items-center justify-center text-xl text-moss-800 md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <HiX /> : <HiMenu />}
-        </button>
-      </nav>
+            <Link
+              to={isAuthenticated ? "/add-item" : "/register"}
+              className="btn-premium btn-premium-primary hidden min-h-10 px-4 py-2 text-xs sm:inline-flex"
+            >
+              {isAuthenticated ? "Sell item" : "Join"}
+            </Link>
+          </div>
+        </nav>
+
+        {searchOpen && (
+          <form onSubmit={handleSearch} className="border-t border-moss-800/10 py-3">
+            <div className="flex gap-2">
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search products, brands, categories..."
+                className="field-input flex-1 rounded-none"
+                autoFocus
+              />
+              <button type="submit" className="btn-premium btn-premium-primary px-5">
+                Search
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
 
       {isOpen && (
-        <div className="clay mx-4 mt-2 max-w-7xl px-6 py-5 md:hidden xl:mx-auto">
-          <div className="flex flex-col gap-3.5">
+        <div className="border-t border-moss-800/10 bg-white px-4 py-5 lg:hidden">
+          <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <NavLink
                 key={link.name}
@@ -114,29 +151,27 @@ const Navbar = () => {
                 {link.name}
               </NavLink>
             ))}
+            {isAuthenticated && (
+              <NavLink to="/chat" className={linkClasses} onClick={() => setIsOpen(false)}>
+                Messages
+              </NavLink>
+            )}
           </div>
 
-          <div className="mt-5 flex flex-col gap-2.5">
+          <div className="mt-5 flex flex-col gap-2 border-t border-moss-800/10 pt-5">
             {isAuthenticated ? (
               <>
                 <Link
                   to="/add-item"
                   onClick={() => setIsOpen(false)}
-                  className="btn-premium btn-premium-primary min-h-12 py-3 text-center text-base"
+                  className="btn-premium btn-premium-primary w-full text-center"
                 >
-                  List item
-                </Link>
-                <Link
-                  to="/profile"
-                  onClick={() => setIsOpen(false)}
-                  className="btn-premium btn-premium-secondary min-h-12 py-3 text-center text-base"
-                >
-                  Profile
+                  Sell item
                 </Link>
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="rounded-[1.25rem] border-2 border-red-200/80 bg-red-50 py-2.5 text-sm font-semibold text-red-600"
+                  className="btn-premium btn-premium-secondary w-full"
                 >
                   Logout
                 </button>
@@ -146,16 +181,16 @@ const Navbar = () => {
                 <Link
                   to="/login"
                   onClick={() => setIsOpen(false)}
-                  className="btn-premium btn-premium-secondary min-h-12 py-3 text-center text-base"
+                  className="btn-premium btn-premium-secondary w-full text-center"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
                   onClick={() => setIsOpen(false)}
-                  className="btn-premium btn-premium-primary min-h-12 py-3 text-center text-base"
+                  className="btn-premium btn-premium-primary w-full text-center"
                 >
-                  Register
+                  Create account
                 </Link>
               </>
             )}

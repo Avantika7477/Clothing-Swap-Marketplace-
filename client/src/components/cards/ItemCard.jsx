@@ -5,44 +5,36 @@ const ItemCard = ({ item }) => {
   const id = item._id || item.id;
   const image = getImageUrl(item.images?.[0] || item.image);
   const value = item.estimatedValue ?? item.value ?? 0;
+  const available = item.status ? item.status === "available" : true;
 
   return (
-    <article className="clay clay-media group overflow-hidden transition duration-300 hover:-translate-y-1">
-      <Link to={`/item/${id}`} className="block overflow-hidden">
+    <article className="store-card group">
+      <Link to={`/item/${id}`} className="relative block overflow-hidden bg-moss-50">
         <img
           src={image}
           alt={item.title}
-          className="h-56 w-full object-cover transition duration-500 group-hover:scale-[1.03] sm:h-64"
+          className="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.03]"
         />
+        {!available && (
+          <span className="absolute left-3 top-3 bg-moss-900 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+            Sold out
+          </span>
+        )}
       </Link>
 
-      <div className="p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <h3 className="truncate font-display text-lg font-bold text-ink sm:text-[1.2rem]">
-              {item.title}
-            </h3>
-            <p className="mt-1 truncate text-sm text-ink/50">{item.brand}</p>
-          </div>
-          <p className="shrink-0 rounded-2xl bg-moss-50 px-2.5 py-1 text-sm font-bold text-moss-800">
-            {value} pts
-          </p>
-        </div>
-
-        <div className="mt-4 flex flex-wrap gap-x-3 gap-y-1 text-[0.8rem] text-ink/55">
-          <span>{item.size}</span>
-          <span className="text-moss-800/25">·</span>
-          <span>{item.condition}</span>
-          <span className="text-moss-800/25">·</span>
-          <span className="truncate">{item.location}</span>
-        </div>
-
-        <Link
-          to={`/item/${id}`}
-          className="btn-premium btn-premium-primary mt-5 inline-flex min-h-11 w-full text-sm"
-        >
-          View details
+      <div className="p-4">
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-ink/45">
+          {item.brand || "Fashion Swap"}
+        </p>
+        <Link to={`/item/${id}`}>
+          <h3 className="mt-1 line-clamp-2 font-display text-sm font-bold leading-snug text-ink hover:text-moss-800 sm:text-base">
+            {item.title}
+          </h3>
         </Link>
+        <p className="mt-2 text-sm font-bold text-moss-800">{value} swap pts</p>
+        <p className="mt-1 text-xs text-ink/45">
+          {item.size} · {item.condition}
+        </p>
       </div>
     </article>
   );

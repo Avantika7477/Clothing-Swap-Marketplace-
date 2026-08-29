@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import MainLayout from "../../layouts/MainLayout";
+import MarketplaceHeader from "./MarketplaceHeader";
 import SearchBar from "./SearchBar";
 import FilterSidebar from "./FilterSidebar";
 import CategoryGrid from "./CategoryGrid";
@@ -162,23 +163,15 @@ const Marketplace = () => {
 
   return (
     <MainLayout>
-      <div className="mx-auto max-w-7xl px-6 py-10">
-        <div className="mb-8 max-w-2xl">
-          <p className="section-kicker">Marketplace</p>
-          <h1 className="section-title mt-3 text-4xl md:text-[2.6rem]">
-            Find your next piece
-          </h1>
-          <p className="section-copy mt-3">
-            Browse wearable clothes and send swap requests that feel fair.
-          </p>
-        </div>
+      <MarketplaceHeader />
 
+      <div className="page-shell py-8 sm:py-10">
         <div className="mb-8">
           <SearchBar value={search} onChange={setSearch} />
         </div>
 
         {nearbyOnly && nearbyLabel && (
-          <div className="clay-inset mb-6 px-4 py-3 text-sm text-moss-800">
+          <div className="mb-6 border border-moss-800/10 bg-moss-50 px-4 py-3 text-sm text-moss-800">
             Showing nearby swap opportunities around{" "}
             <span className="font-semibold">{nearbyLabel}</span>.
             {!isAuthenticated && (

@@ -15,20 +15,22 @@ const FilterSidebar = ({
   resetFilters,
 }) => {
   return (
-    <aside className="clay lg:sticky lg:top-24">
-      <div className="mb-5 flex items-center justify-between gap-3">
-        <h2 className="font-display text-xl font-bold text-ink">Filters</h2>
+    <aside className="border border-moss-800/10 bg-white p-5 lg:sticky lg:top-36">
+      <div className="mb-5 flex items-center justify-between gap-3 border-b border-moss-800/10 pb-4">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-ink">
+          Filter
+        </h2>
         <button
           type="button"
           onClick={resetFilters}
-          className="shrink-0 text-sm font-semibold text-moss-800 hover:underline"
+          className="shrink-0 text-xs font-bold uppercase tracking-wider text-moss-800 hover:underline"
         >
-          Reset
+          Clear all
         </button>
       </div>
 
-      <div className="space-y-4">
-        <div className="clay-inset">
+      <div className="space-y-5">
+        <div className="border border-moss-800/10 bg-moss-50 p-4">
           <label className="flex cursor-pointer items-start gap-3">
             <input
               type="checkbox"
@@ -39,7 +41,7 @@ const FilterSidebar = ({
             />
             <span>
               <span className="block text-sm font-semibold text-ink">
-                Nearby swaps only
+                Nearby only
               </span>
               <span className="mt-1 block text-xs leading-relaxed text-ink/55">
                 {nearbyDisabled
@@ -101,7 +103,7 @@ const FilterSidebar = ({
           },
         ].map((field) => (
           <div key={field.label}>
-            <label className="mb-1.5 block text-sm font-medium text-ink/65">
+            <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-ink/55">
               {field.label}
             </label>
             <select

@@ -1,6 +1,7 @@
 import MainLayout from "../../layouts/MainLayout";
 
 import HeroSection from "./sections/HeroSection";
+import TrustStrip from "./sections/TrustStrip";
 import CategoriesSection from "./sections/CategoriesSection";
 import FeaturedItemsSection from "./sections/FeaturedItemsSection";
 import HowItWorksSection from "./sections/HowItWorksSection";
@@ -10,12 +11,11 @@ const Home = () => {
   return (
     <MainLayout>
       <HeroSection />
-      <div className="pb-4 sm:pb-8">
-        <CategoriesSection />
-        <FeaturedItemsSection />
-        <HowItWorksSection />
-        <CTASection />
-      </div>
+      <TrustStrip />
+      <CategoriesSection />
+      <FeaturedItemsSection />
+      <HowItWorksSection />
+      <CTASection />
     </MainLayout>
   );
 };

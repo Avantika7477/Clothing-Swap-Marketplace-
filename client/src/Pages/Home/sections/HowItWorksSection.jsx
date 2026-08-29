@@ -1,56 +1,46 @@
-import { motion } from "framer-motion";
-
 const steps = [
   {
     step: "01",
-    title: "List your item",
-    description: "Add clear photos, size, brand, and condition.",
+    title: "Browse the shop",
+    description: "Explore listings by category, size, and location.",
   },
   {
     step: "02",
-    title: "Find a match",
-    description: "Browse nearby pieces and send a swap request.",
+    title: "Request a swap",
+    description: "Send an offer on items you want to exchange.",
   },
   {
     step: "03",
-    title: "Swap easily",
-    description: "Chat, agree, and exchange locally or by courier.",
+    title: "Complete locally",
+    description: "Chat, agree, and swap in person or by courier.",
   },
 ];
 
 const HowItWorksSection = () => {
   return (
     <section className="page-shell home-section">
-      <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-end md:justify-between">
-        <div className="max-w-xl min-w-0">
-          <p className="section-kicker">How it works</p>
-          <h2 className="section-title mt-3">Three calm steps to swap.</h2>
-        </div>
-        <p className="section-copy max-w-md md:text-right">
-          Built for clothing exchange — not complicated resale.
+      <div className="mb-8 text-center">
+        <p className="section-kicker">How it works</p>
+        <h2 className="section-title mt-3">Simple as online shopping</h2>
+        <p className="section-copy mx-auto mt-3 max-w-lg">
+          A familiar store experience — browse, select, and checkout with a swap
+          instead of a payment.
         </p>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
-        {steps.map((item, index) => (
-          <motion.div
-            key={item.step}
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: index * 0.08, duration: 0.4 }}
-            className="clay flex min-w-0 flex-col"
-          >
-            <p className="font-display text-3xl font-bold text-moss-800/25 sm:text-4xl md:text-5xl">
+      <div className="grid gap-8 md:grid-cols-3">
+        {steps.map((item) => (
+          <div key={item.step} className="border border-moss-800/10 bg-white p-6 text-center">
+            <p className="font-display text-3xl font-bold text-moss-800/20">
               {item.step}
             </p>
-            <h3 className="mt-3 font-display text-lg font-bold text-ink sm:text-xl md:text-[1.35rem]">
+            <h3 className="mt-3 font-display text-lg font-bold text-ink">
               {item.title}
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-ink/65">
+            <p className="mt-3 text-sm leading-relaxed text-ink/60">
               {item.description}
             </p>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>
