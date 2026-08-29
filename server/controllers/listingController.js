@@ -11,6 +11,7 @@ export const createListing = async (req, res, next) => {
       description,
       brand,
       category,
+      customCategory,
       size,
       condition,
       location,
@@ -23,6 +24,15 @@ export const createListing = async (req, res, next) => {
       return res.status(400).json({
         message:
           "Title, brand, category, size, condition, and location are required.",
+      });
+    }
+
+    const trimmedCustomCategory =
+      typeof customCategory === "string" ? customCategory.trim() : "";
+
+    if (category === "Other" && !trimmedCustomCategory) {
+      return res.status(400).json({
+        message: "Please describe your category when selecting Other.",
       });
     }
 
@@ -46,7 +56,12 @@ export const createListing = async (req, res, next) => {
         .json({ message: "At least one image is required." });
     }
 
-    const autoValue = calculateSwapValue({ brand, condition, category });
+    const autoValue = calculateSwapValue({
+      brand,
+      condition,
+      category,
+      customCategory: trimmedCustomCategory,
+    });
     const value = estimatedValue ? Number(estimatedValue) : autoValue;
 
     const listing = await Listing.create({
@@ -54,6 +69,7 @@ export const createListing = async (req, res, next) => {
       description: description || "",
       brand,
       category,
+      customCategory: category === "Other" ? trimmedCustomCategory : "",
       size,
       condition,
       estimatedValue: value,
@@ -221,6 +237,7 @@ export const updateListing = async (req, res, next) => {
       "description",
       "brand",
       "category",
+      "customCategory",
       "size",
       "condition",
       "location",
@@ -245,6 +262,15 @@ export const updateListing = async (req, res, next) => {
         brand: listing.brand,
         condition: listing.condition,
         category: listing.category,
+        customCategory: listing.customCategory,
+      });
+    }
+
+    if (listing.category !== "Other") {
+      listing.customCategory = "";
+    } else if (!listing.customCategory?.trim()) {
+      return res.status(400).json({
+        message: "Please describe your category when selecting Other.",
       });
     }
 
@@ -282,7 +308,7 @@ export const deleteListing = async (req, res, next) => {
 };
 
 export const estimateValue = async (req, res) => {
-  const { brand, condition, category, compareValue } = req.body;
+  const { brand, condition, category, customCategory, compareValue } = req.body;
 
   if (!brand || !condition || !category) {
     return res
@@ -290,7 +316,21 @@ export const estimateValue = async (req, res) => {
       .json({ message: "Brand, condition, and category are required." });
   }
 
-  const estimatedValue = calculateSwapValue({ brand, condition, category });
+  const trimmedCustomCategory =
+    typeof customCategory === "string" ? customCategory.trim() : "";
+
+  if (category === "Other" && !trimmedCustomCategory) {
+    return res.status(400).json({
+      message: "Please describe your category when selecting Other.",
+    });
+  }
+
+  const estimatedValue = calculateSwapValue({
+    brand,
+    condition,
+    category,
+    customCategory: trimmedCustomCategory,
+  });
   const result = { estimatedValue };
 
   if (compareValue !== undefined) {

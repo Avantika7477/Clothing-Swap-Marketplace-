@@ -34,14 +34,57 @@ const BRAND_BONUS = {
   Forever21: 8,
 };
 
+const CUSTOM_CATEGORY_KEYWORDS = [
+  { keywords: ["jacket", "coat", "blazer", "vest", "parka"], base: "Jackets" },
+  { keywords: ["hoodie", "sweatshirt", "sweat"], base: "Hoodies" },
+  { keywords: ["shirt", "blouse", "top"], base: "Shirts" },
+  { keywords: ["t-shirt", "tee", "tshirt"], base: "T-Shirts" },
+  { keywords: ["dress", "gown", "skirt"], base: "Dresses" },
+  { keywords: ["shoe", "sneaker", "boot", "sandal", "heel"], base: "Shoes" },
+  { keywords: ["jean", "denim"], base: "Jeans" },
+  { keywords: ["pant", "trouser", "chino"], base: "Pants" },
+  { keywords: ["sweater", "cardigan", "knit"], base: "Sweaters" },
+  {
+    keywords: ["bag", "belt", "hat", "scarf", "watch", "jewelry", "accessory"],
+    base: "Accessories",
+  },
+];
+
 /**
- * Estimate swap value from brand, condition, and category.
+ * Map a free-text custom category to the closest known base category for scoring.
  */
-export function calculateSwapValue({ brand, condition, category }) {
-  const base = CATEGORY_BASE[category] ?? CATEGORY_BASE.Other;
+export function resolveCategoryForValue(category, customCategory = "") {
+  if (category !== "Other") return category;
+
+  const text = customCategory.trim().toLowerCase();
+  if (!text) return "Other";
+
+  for (const entry of CUSTOM_CATEGORY_KEYWORDS) {
+    if (entry.keywords.some((keyword) => text.includes(keyword))) {
+      return entry.base;
+    }
+  }
+
+  return "Other";
+}
+
+/**
+ * Estimate swap value from brand, condition, category, and optional custom category.
+ */
+export function calculateSwapValue({ brand, condition, category, customCategory }) {
+  const resolvedCategory = resolveCategoryForValue(category, customCategory);
+  const base = CATEGORY_BASE[resolvedCategory] ?? CATEGORY_BASE.Other;
   const multiplier = CONDITION_MULTIPLIER[condition] ?? 1.0;
   const brandBonus = BRAND_BONUS[brand] ?? 10;
-  const value = Math.round(base * multiplier + brandBonus);
+
+  let value = Math.round(base * multiplier + brandBonus);
+
+  // Small bonus for descriptive custom categories that don't match keywords
+  if (category === "Other" && customCategory?.trim() && resolvedCategory === "Other") {
+    const lengthBonus = Math.min(15, Math.floor(customCategory.trim().length / 4));
+    value += lengthBonus;
+  }
+
   return Math.max(20, value);
 }
 

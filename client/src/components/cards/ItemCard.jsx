@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { getImageUrl } from "../../services/api";
+import { getDisplayCategory } from "../../utils/category";
 
 const ItemCard = ({ item }) => {
   const id = item._id || item.id;
@@ -33,7 +33,7 @@ const ItemCard = ({ item }) => {
         </Link>
         <p className="mt-2 text-sm font-bold text-moss-800">{value} swap pts</p>
         <p className="mt-1 text-xs text-ink/45">
-          {item.size} · {item.condition}
+          {getDisplayCategory(item)} · {item.size} · {item.condition}
         </p>
       </div>
     </article>

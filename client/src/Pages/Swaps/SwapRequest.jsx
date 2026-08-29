@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { HiCheckCircle, HiExclamation } from "react-icons/hi";
+import { HiCheckCircle, HiExclamation, HiSparkles } from "react-icons/hi";
 import MainLayout from "../../layouts/MainLayout";
 import Loader from "../../components/common/Loader";
 import { useAuth } from "../../context/AuthContext";
@@ -10,7 +10,14 @@ import {
   getListingById,
   getMyListings,
   createSwap,
+  createListing,
+  estimateValue,
 } from "../../services/clothingApi";
+import {
+  LISTING_CATEGORIES,
+  LISTING_CONDITIONS,
+  getDisplayCategory,
+} from "../../utils/category";
 
 const EXCHANGE_METHODS = [
   { value: "undecided", label: "Undecided" },
@@ -26,10 +33,21 @@ const compareValues = (valueA, valueB) => {
   return { difference, percentDiff, isFair: percentDiff <= 20 };
 };
 
+const quickItemInitial = {
+  title: "",
+  brand: "",
+  category: "",
+  customCategory: "",
+  size: "",
+  condition: "",
+  location: "",
+};
+
 const SwapRequest = () => {
   const { itemId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const quickImageRef = useRef(null);
 
   const [targetItem, setTargetItem] = useState(null);
   const [myListings, setMyListings] = useState([]);
@@ -40,32 +58,83 @@ const SwapRequest = () => {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+  const [showQuickList, setShowQuickList] = useState(false);
+  const [quickItem, setQuickItem] = useState({
+    ...quickItemInitial,
+    location: user?.location || "",
+  });
+  const [quickImage, setQuickImage] = useState(null);
+  const [quickPreview, setQuickPreview] = useState("");
+  const [quickEstimatedValue, setQuickEstimatedValue] = useState(null);
+  const [quickEstimating, setQuickEstimating] = useState(false);
+  const [creatingQuickItem, setCreatingQuickItem] = useState(false);
+
+  const loadData = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const [itemRes, myListingsRes] = await Promise.all([
+        getListingById(itemId),
+        getMyListings(),
+      ]);
+      setTargetItem(itemRes.data.listing);
+      setMyListings(
+        (myListingsRes.data.listings || []).filter(
+          (listing) => listing.status === "available"
+        )
+      );
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
+          "Failed to load swap request details. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const load = async () => {
-      try {
-        setLoading(true);
-        setError("");
-        const [itemRes, myListingsRes] = await Promise.all([
-          getListingById(itemId),
-          getMyListings(),
-        ]);
-        setTargetItem(itemRes.data.listing);
-        setMyListings(
-          (myListingsRes.data.listings || []).filter(
-            (listing) => listing.status === "available"
-          )
-        );
-      } catch (err) {
-        setError(
-          err.response?.data?.message ||
-            "Failed to load swap request details. Please try again."
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
+    loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemId]);
+
+  useEffect(() => {
+    setQuickItem((prev) => ({
+      ...prev,
+      location: prev.location || user?.location || "",
+    }));
+  }, [user]);
+
+  useEffect(() => {
+    const { brand, condition, category, customCategory } = quickItem;
+    if (!showQuickList || !brand || !condition || !category) {
+      setQuickEstimatedValue(null);
+      return;
+    }
+    if (category === "Other" && !customCategory.trim()) {
+      setQuickEstimatedValue(null);
+      return;
+    }
+
+    const timeout = setTimeout(async () => {
+      try {
+        setQuickEstimating(true);
+        const { data } = await estimateValue({
+          brand,
+          condition,
+          category,
+          customCategory: category === "Other" ? customCategory.trim() : "",
+        });
+        setQuickEstimatedValue(data.estimatedValue);
+      } catch {
+        setQuickEstimatedValue(null);
+      } finally {
+        setQuickEstimating(false);
+      }
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [quickItem, showQuickList]);
 
   const offeredItem = useMemo(
     () => myListings.find((listing) => listing._id === offeredItemId) || null,
@@ -78,6 +147,84 @@ const SwapRequest = () => {
   }, [targetItem, offeredItem]);
 
   const isOwnItem = targetItem && targetItem.owner?._id === user?._id;
+
+  const handleQuickChange = (e) => {
+    const { name, value } = e.target;
+    setQuickItem((prev) => {
+      const next = { ...prev, [name]: value };
+      if (name === "category" && value !== "Other") {
+        next.customCategory = "";
+      }
+      return next;
+    });
+  };
+
+  const handleQuickImage = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setQuickImage(file);
+    setQuickPreview((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return URL.createObjectURL(file);
+    });
+    e.target.value = "";
+  };
+
+  const handleCreateQuickItem = async () => {
+    if (!quickItem.title.trim()) {
+      toast.error("Title is required.");
+      return;
+    }
+    if (!quickItem.brand.trim()) {
+      toast.error("Brand is required.");
+      return;
+    }
+    if (!quickItem.category) {
+      toast.error("Please select a category.");
+      return;
+    }
+    if (quickItem.category === "Other" && !quickItem.customCategory.trim()) {
+      toast.error("Please describe your category when selecting Other.");
+      return;
+    }
+    if (!quickItem.size.trim()) {
+      toast.error("Size is required.");
+      return;
+    }
+    if (!quickItem.condition) {
+      toast.error("Please select a condition.");
+      return;
+    }
+    if (!quickItem.location.trim()) {
+      toast.error("Location is required.");
+      return;
+    }
+    if (!quickImage) {
+      toast.error("Please upload one photo of your item.");
+      return;
+    }
+
+    try {
+      setCreatingQuickItem(true);
+      const formData = new FormData();
+      Object.entries(quickItem).forEach(([key, value]) => {
+        if (key === "customCategory" && quickItem.category !== "Other") return;
+        formData.append(key, value);
+      });
+      formData.append("images", quickImage);
+
+      const { data } = await createListing(formData);
+      const newListing = data.listing;
+      setMyListings((prev) => [newListing, ...prev]);
+      setOfferedItemId(newListing._id);
+      setShowQuickList(false);
+      toast.success("Item listed and selected for swap.");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to list item.");
+    } finally {
+      setCreatingQuickItem(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -179,6 +326,9 @@ const SwapRequest = () => {
                   {targetItem.title}
                 </h3>
                 <p className="text-gray-500">{targetItem.brand}</p>
+                <p className="text-sm text-gray-400">
+                  {getDisplayCategory(targetItem)}
+                </p>
                 <p className="text-moss-800 font-semibold">
                   {targetItem.estimatedValue} pts
                 </p>
@@ -188,14 +338,157 @@ const SwapRequest = () => {
 
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="bg-white rounded-2xl shadow-md p-6">
-              <h2 className="text-xl font-bold mb-4">Select Your Item to Offer</h2>
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <h2 className="text-xl font-bold">Select Your Item to Offer</h2>
+                <button
+                  type="button"
+                  onClick={() => setShowQuickList((prev) => !prev)}
+                  className="text-sm font-semibold text-moss-800 hover:underline"
+                >
+                  {showQuickList ? "Cancel new item" : "List new item"}
+                </button>
+              </div>
+
+              {showQuickList && (
+                <div className="mb-6 border border-moss-800/15 bg-moss-50 p-5 space-y-4">
+                  <p className="text-sm text-gray-600">
+                    List a new item to offer in this swap. Choose a category, or
+                    select Other and describe it to get points.
+                  </p>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      name="title"
+                      value={quickItem.title}
+                      onChange={handleQuickChange}
+                      placeholder="Item title"
+                      className="w-full border rounded-lg px-4 py-3"
+                    />
+                    <input
+                      type="text"
+                      name="brand"
+                      value={quickItem.brand}
+                      onChange={handleQuickChange}
+                      placeholder="Brand"
+                      className="w-full border rounded-lg px-4 py-3"
+                    />
+                    <select
+                      name="category"
+                      value={quickItem.category}
+                      onChange={handleQuickChange}
+                      className="w-full border rounded-lg px-4 py-3 bg-white"
+                    >
+                      <option value="">Select category</option>
+                      {LISTING_CATEGORIES.map((cat) => (
+                        <option key={cat} value={cat}>
+                          {cat}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="text"
+                      name="size"
+                      value={quickItem.size}
+                      onChange={handleQuickChange}
+                      placeholder="Size"
+                      className="w-full border rounded-lg px-4 py-3"
+                    />
+                    <select
+                      name="condition"
+                      value={quickItem.condition}
+                      onChange={handleQuickChange}
+                      className="w-full border rounded-lg px-4 py-3 bg-white"
+                    >
+                      <option value="">Select condition</option>
+                      {LISTING_CONDITIONS.map((cond) => (
+                        <option key={cond} value={cond}>
+                          {cond}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="text"
+                      name="location"
+                      value={quickItem.location}
+                      onChange={handleQuickChange}
+                      placeholder="Location"
+                      className="w-full border rounded-lg px-4 py-3"
+                    />
+                  </div>
+
+                  {quickItem.category === "Other" && (
+                    <input
+                      type="text"
+                      name="customCategory"
+                      value={quickItem.customCategory}
+                      onChange={handleQuickChange}
+                      placeholder="Describe your category (e.g. Winter coat)"
+                      className="w-full border rounded-lg px-4 py-3"
+                    />
+                  )}
+
+                  <div className="flex flex-wrap items-center gap-4">
+                    <button
+                      type="button"
+                      onClick={() => quickImageRef.current?.click()}
+                      className="btn-premium btn-premium-secondary px-4 py-2 text-sm"
+                    >
+                      Upload photo
+                    </button>
+                    {quickPreview && (
+                      <img
+                        src={quickPreview}
+                        alt="Preview"
+                        className="h-16 w-16 rounded-lg object-cover border"
+                      />
+                    )}
+                    <input
+                      ref={quickImageRef}
+                      type="file"
+                      accept="image/*"
+                      hidden
+                      onChange={handleQuickImage}
+                    />
+                  </div>
+
+                  <div className="flex items-center gap-2 text-moss-800">
+                    <HiSparkles />
+                    {quickEstimating ? (
+                      <span className="text-sm">Calculating points...</span>
+                    ) : quickEstimatedValue !== null ? (
+                      <span className="text-sm font-semibold">
+                        Estimated value: {quickEstimatedValue} pts
+                      </span>
+                    ) : (
+                      <span className="text-sm text-gray-500">
+                        Fill details to see estimated points.
+                      </span>
+                    )}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleCreateQuickItem}
+                    disabled={creatingQuickItem}
+                    className="btn-premium btn-premium-primary px-5 py-2.5 text-sm disabled:opacity-60"
+                  >
+                    {creatingQuickItem ? "Listing..." : "List & select item"}
+                  </button>
+                </div>
+              )}
 
               {myListings.length === 0 ? (
                 <div className="text-center py-8 text-gray-500">
-                  You have no available listings to offer.{" "}
-                  <Link to="/add-item" className="text-moss-800 hover:underline">
-                    List an item first.
-                  </Link>
+                  You have no available listings to offer. Use{" "}
+                  <button
+                    type="button"
+                    onClick={() => setShowQuickList(true)}
+                    className="text-moss-800 hover:underline font-semibold"
+                  >
+                    List new item
+                  </button>{" "}
+                  above.
                 </div>
               ) : (
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -221,9 +514,12 @@ const SwapRequest = () => {
                         alt={listing.title}
                         className="w-14 h-14 rounded-lg object-cover border"
                       />
-                      <div>
-                        <p className="font-semibold text-gray-900">
+                      <div className="min-w-0">
+                        <p className="font-semibold text-gray-900 truncate">
                           {listing.title}
+                        </p>
+                        <p className="text-xs text-gray-500 truncate">
+                          {getDisplayCategory(listing)}
                         </p>
                         <p className="text-sm text-moss-800 font-medium">
                           {listing.estimatedValue} pts

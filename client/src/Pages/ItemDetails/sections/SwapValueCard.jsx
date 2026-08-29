@@ -1,3 +1,5 @@
+import { getDisplayCategory } from "../../../utils/category";
+
 const SwapValueCard = ({ listing }) => {
   const value = listing?.estimatedValue ?? listing?.value ?? 0;
 
@@ -21,7 +23,7 @@ const SwapValueCard = ({ listing }) => {
         </div>
         <div className="detail-row">
           <span className="detail-label">Category</span>
-          <span className="detail-value">{listing.category}</span>
+          <span className="detail-value">{getDisplayCategory(listing)}</span>
         </div>
         <div className="detail-row">
           <span className="detail-label">Brand</span>

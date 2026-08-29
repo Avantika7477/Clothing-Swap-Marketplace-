@@ -35,6 +35,12 @@ const listingSchema = new mongoose.Schema(
         "Other",
       ],
     },
+    customCategory: {
+      type: String,
+      trim: true,
+      maxlength: 80,
+      default: "",
+    },
     size: {
       type: String,
       required: [true, "Size is required"],

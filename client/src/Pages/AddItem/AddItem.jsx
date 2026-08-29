@@ -5,28 +5,14 @@ import { HiOutlinePhotograph, HiX, HiSparkles } from "react-icons/hi";
 import MainLayout from "../../layouts/MainLayout";
 import { createListing, estimateValue } from "../../services/clothingApi";
 import { useAuth } from "../../context/AuthContext";
-
-const CATEGORIES = [
-  "Jackets",
-  "Hoodies",
-  "Shirts",
-  "T-Shirts",
-  "Dresses",
-  "Shoes",
-  "Pants",
-  "Jeans",
-  "Sweaters",
-  "Accessories",
-  "Other",
-];
-
-const CONDITIONS = ["Like New", "Excellent", "Good", "Fair", "Worn"];
+import { LISTING_CATEGORIES, LISTING_CONDITIONS } from "../../utils/category";
 
 const initialForm = {
   title: "",
   description: "",
   brand: "",
   category: "",
+  customCategory: "",
   size: "",
   condition: "",
   location: "",
@@ -63,8 +49,13 @@ const AddItem = () => {
   }, []);
 
   useEffect(() => {
-    const { brand, condition, category } = form;
+    const { brand, condition, category, customCategory } = form;
     if (!brand || !condition || !category) {
+      setEstimatedValue(null);
+      return;
+    }
+
+    if (category === "Other" && !customCategory.trim()) {
       setEstimatedValue(null);
       return;
     }
@@ -72,7 +63,12 @@ const AddItem = () => {
     const timeout = setTimeout(async () => {
       try {
         setEstimating(true);
-        const { data } = await estimateValue({ brand, condition, category });
+        const { data } = await estimateValue({
+          brand,
+          condition,
+          category,
+          customCategory: category === "Other" ? customCategory.trim() : "",
+        });
         setEstimatedValue(data.estimatedValue);
       } catch {
         setEstimatedValue(null);
@@ -82,11 +78,17 @@ const AddItem = () => {
     }, 500);
 
     return () => clearTimeout(timeout);
-  }, [form.brand, form.condition, form.category]);
+  }, [form.brand, form.condition, form.category, form.customCategory]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm((prev) => {
+      const next = { ...prev, [name]: value };
+      if (name === "category" && value !== "Other") {
+        next.customCategory = "";
+      }
+      return next;
+    });
   };
 
   const handleImageSelect = (e) => {
@@ -115,6 +117,9 @@ const AddItem = () => {
     if (!form.title.trim()) return "Title is required.";
     if (!form.brand.trim()) return "Brand is required.";
     if (!form.category) return "Please select a category.";
+    if (form.category === "Other" && !form.customCategory.trim()) {
+      return "Please describe your category when selecting Other.";
+    }
     if (!form.size.trim()) return "Size is required.";
     if (!form.condition) return "Please select a condition.";
     if (!form.location.trim()) return "Location is required.";
@@ -137,6 +142,7 @@ const AddItem = () => {
 
       const formData = new FormData();
       Object.entries(form).forEach(([key, value]) => {
+        if (key === "customCategory" && form.category !== "Other") return;
         formData.append(key, value);
       });
       images.forEach((file) => formData.append("images", file));
@@ -178,7 +184,6 @@ const AddItem = () => {
               </div>
             )}
 
-            {/* Images */}
             <div className="bg-white rounded-2xl shadow-md p-6">
               <h2 className="text-xl font-bold mb-4">Photos</h2>
 
@@ -229,7 +234,6 @@ const AddItem = () => {
               </p>
             </div>
 
-            {/* Basic Info */}
             <div className="bg-white rounded-2xl shadow-md p-6 space-y-5">
               <h2 className="text-xl font-bold">Item Details</h2>
 
@@ -279,7 +283,7 @@ const AddItem = () => {
                     className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700 bg-white"
                   >
                     <option value="">Select category</option>
-                    {CATEGORIES.map((cat) => (
+                    {LISTING_CATEGORIES.map((cat) => (
                       <option key={cat} value={cat}>
                         {cat}
                       </option>
@@ -287,6 +291,25 @@ const AddItem = () => {
                   </select>
                 </div>
               </div>
+
+              {form.category === "Other" && (
+                <div>
+                  <label className="block mb-2 font-medium">
+                    Describe your category
+                  </label>
+                  <input
+                    type="text"
+                    name="customCategory"
+                    value={form.customCategory}
+                    onChange={handleChange}
+                    placeholder="e.g. Winter coat, Sports bra, Sunglasses"
+                    className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700"
+                  />
+                  <p className="mt-2 text-sm text-gray-500">
+                    We use this to estimate swap points for your item.
+                  </p>
+                </div>
+              )}
 
               <div className="grid md:grid-cols-2 gap-5">
                 <div>
@@ -310,7 +333,7 @@ const AddItem = () => {
                     className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700 bg-white"
                   >
                     <option value="">Select condition</option>
-                    {CONDITIONS.map((cond) => (
+                    {LISTING_CONDITIONS.map((cond) => (
                       <option key={cond} value={cond}>
                         {cond}
                       </option>
@@ -346,7 +369,6 @@ const AddItem = () => {
               </div>
             </div>
 
-            {/* Estimated Value */}
             <div className="bg-moss-50 border border-moss-800/20 rounded-2xl p-6">
               <div className="flex items-center gap-2 mb-2">
                 <HiSparkles className="text-moss-800 text-xl" />
@@ -359,11 +381,14 @@ const AddItem = () => {
                 <p className="text-gray-500">Calculating...</p>
               ) : estimatedValue !== null ? (
                 <p className="text-4xl font-bold text-moss-800">
-                  {estimatedValue} <span className="text-lg font-medium">points</span>
+                  {estimatedValue}{" "}
+                  <span className="text-lg font-medium">points</span>
                 </p>
               ) : (
                 <p className="text-gray-500">
-                  Fill in brand, category, and condition to see an estimated value.
+                  {form.category === "Other" && !form.customCategory.trim()
+                    ? "Enter your custom category, brand, and condition to see points."
+                    : "Fill in brand, category, and condition to see an estimated value."}
                 </p>
               )}
             </div>

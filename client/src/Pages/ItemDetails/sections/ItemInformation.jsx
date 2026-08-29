@@ -1,3 +1,5 @@
+import { getDisplayCategory } from "../../../utils/category";
+
 const ItemInformation = ({ listing }) => {
   const available = listing?.status
     ? listing.status === "available"
@@ -6,7 +8,7 @@ const ItemInformation = ({ listing }) => {
   return (
     <div className="clay">
       <span className="inline-block rounded-lg bg-moss-100 px-3 py-1.5 text-sm font-medium text-moss-800">
-        {listing.category}
+        {getDisplayCategory(listing)}
       </span>
 
       <h1 className="mt-4 font-display text-2xl font-bold leading-tight text-ink sm:text-3xl">
