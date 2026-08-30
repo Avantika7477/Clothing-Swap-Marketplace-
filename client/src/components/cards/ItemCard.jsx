@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { getImageUrl } from "../../services/api";
 import { getDisplayCategory } from "../../utils/category";
 
 const ItemCard = ({ item }) => {
