@@ -23,17 +23,19 @@ const ItemCard = ({ item }) => {
         )}
       </Link>
 
-      <div className="p-4">
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-ink/45">
+      <div className="p-3 sm:p-4">
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-ink/45 sm:text-[11px]">
           {item.brand || "Fashion Swap"}
         </p>
         <Link to={`/item/${id}`}>
-          <h3 className="mt-1 line-clamp-2 font-display text-sm font-bold leading-snug text-ink hover:text-moss-800 sm:text-base">
+          <h3 className="mt-1 line-clamp-2 font-display text-xs font-bold leading-snug text-ink hover:text-moss-800 sm:text-sm md:text-base">
             {item.title}
           </h3>
         </Link>
-        <p className="mt-2 text-sm font-bold text-moss-800">{value} swap pts</p>
-        <p className="mt-1 text-xs text-ink/45">
+        <p className="mt-1.5 text-xs font-bold text-moss-800 sm:mt-2 sm:text-sm">
+          {value} swap pts
+        </p>
+        <p className="mt-1 line-clamp-1 text-[11px] text-ink/45 sm:text-xs">
           {getDisplayCategory(item)} · {item.size} · {item.condition}
         </p>
       </div>

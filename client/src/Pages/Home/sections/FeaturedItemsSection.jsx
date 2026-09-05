@@ -41,7 +41,7 @@ const FeaturedItemsSection = () => {
           </Link>
         </p>
       ) : (
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
           {listings.map((item) => (
             <ItemCard key={item._id} item={item} />
           ))}

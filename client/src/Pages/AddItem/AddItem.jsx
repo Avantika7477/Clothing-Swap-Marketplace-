@@ -168,11 +168,13 @@ const AddItem = () => {
 
   return (
     <MainLayout>
-      <section className="bg-gray-50 min-h-screen">
-        <div className="max-w-4xl mx-auto px-6 py-10">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">List a New Item</h1>
-            <p className="text-gray-500 mt-1">
+      <section className="min-h-screen bg-gray-50">
+        <div className="page-shell max-w-4xl py-8 sm:py-10">
+          <div className="mb-6 sm:mb-8">
+            <h1 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl">
+              List a New Item
+            </h1>
+            <p className="mt-1 text-sm text-gray-500 sm:text-base">
               Add details about the clothing item you want to swap.
             </p>
           </div>
@@ -184,8 +186,8 @@ const AddItem = () => {
               </div>
             )}
 
-            <div className="bg-white rounded-2xl shadow-md p-6">
-              <h2 className="text-xl font-bold mb-4">Photos</h2>
+            <div className="rounded-2xl bg-white p-4 shadow-md sm:p-6">
+              <h2 className="mb-4 text-lg font-bold sm:text-xl">Photos</h2>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {previews.map((src, index) => (
@@ -234,8 +236,8 @@ const AddItem = () => {
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-md p-6 space-y-5">
-              <h2 className="text-xl font-bold">Item Details</h2>
+            <div className="space-y-5 rounded-2xl bg-white p-4 shadow-md sm:p-6">
+              <h2 className="text-lg font-bold sm:text-xl">Item Details</h2>
 
               <div>
                 <label className="block mb-2 font-medium">Title</label>
@@ -245,7 +247,7 @@ const AddItem = () => {
                   value={form.title}
                   onChange={handleChange}
                   placeholder="e.g. Blue Denim Jacket"
-                  className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700"
+                  className="field-input"
                 />
               </div>
 
@@ -257,11 +259,11 @@ const AddItem = () => {
                   value={form.description}
                   onChange={handleChange}
                   placeholder="Describe the item, its fit, and any flaws..."
-                  className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700 resize-none"
+                  className="field-input resize-none"
                 />
               </div>
 
-              <div className="grid md:grid-cols-2 gap-5">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label className="block mb-2 font-medium">Brand</label>
                   <input
@@ -270,7 +272,7 @@ const AddItem = () => {
                     value={form.brand}
                     onChange={handleChange}
                     placeholder="e.g. Nike, Zara, Levi's"
-                    className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700"
+                    className="field-input"
                   />
                 </div>
 
@@ -280,7 +282,7 @@ const AddItem = () => {
                     name="category"
                     value={form.category}
                     onChange={handleChange}
-                    className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700 bg-white"
+                    className="field-input bg-white"
                   >
                     <option value="">Select category</option>
                     {LISTING_CATEGORIES.map((cat) => (
@@ -303,7 +305,7 @@ const AddItem = () => {
                     value={form.customCategory}
                     onChange={handleChange}
                     placeholder="e.g. Winter coat, Sports bra, Sunglasses"
-                    className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700"
+                    className="field-input"
                   />
                   <p className="mt-2 text-sm text-gray-500">
                     We use this to estimate swap points for your item.
@@ -311,7 +313,7 @@ const AddItem = () => {
                 </div>
               )}
 
-              <div className="grid md:grid-cols-2 gap-5">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label className="block mb-2 font-medium">Size</label>
                   <input
@@ -320,7 +322,7 @@ const AddItem = () => {
                     value={form.size}
                     onChange={handleChange}
                     placeholder="e.g. M, L, 32, 8 UK"
-                    className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700"
+                    className="field-input"
                   />
                 </div>
 
@@ -330,7 +332,7 @@ const AddItem = () => {
                     name="condition"
                     value={form.condition}
                     onChange={handleChange}
-                    className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700 bg-white"
+                    className="field-input bg-white"
                   >
                     <option value="">Select condition</option>
                     {LISTING_CONDITIONS.map((cond) => (
@@ -342,7 +344,7 @@ const AddItem = () => {
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-5">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label className="block mb-2 font-medium">Location</label>
                   <input
@@ -351,7 +353,7 @@ const AddItem = () => {
                     value={form.location}
                     onChange={handleChange}
                     placeholder="e.g. Mohali, Punjab"
-                    className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700"
+                    className="field-input"
                   />
                 </div>
 
@@ -363,16 +365,16 @@ const AddItem = () => {
                     value={form.city}
                     onChange={handleChange}
                     placeholder="e.g. Mohali"
-                    className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-moss-700"
+                    className="field-input"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="bg-moss-50 border border-moss-800/20 rounded-2xl p-6">
-              <div className="flex items-center gap-2 mb-2">
-                <HiSparkles className="text-moss-800 text-xl" />
-                <h2 className="text-xl font-bold text-moss-800">
+            <div className="rounded-2xl border border-moss-800/20 bg-moss-50 p-4 sm:p-6">
+              <div className="mb-2 flex items-center gap-2">
+                <HiSparkles className="text-xl text-moss-800" />
+                <h2 className="text-lg font-bold text-moss-800 sm:text-xl">
                   Estimated Swap Value
                 </h2>
               </div>
@@ -380,12 +382,12 @@ const AddItem = () => {
               {estimating ? (
                 <p className="text-gray-500">Calculating...</p>
               ) : estimatedValue !== null ? (
-                <p className="text-4xl font-bold text-moss-800">
+                <p className="text-3xl font-bold text-moss-800 sm:text-4xl">
                   {estimatedValue}{" "}
-                  <span className="text-lg font-medium">points</span>
+                  <span className="text-base font-medium sm:text-lg">points</span>
                 </p>
               ) : (
-                <p className="text-gray-500">
+                <p className="text-sm text-gray-500 sm:text-base">
                   {form.category === "Other" && !form.customCategory.trim()
                     ? "Enter your custom category, brand, and condition to see points."
                     : "Fill in brand, category, and condition to see an estimated value."}
@@ -393,21 +395,20 @@ const AddItem = () => {
               )}
             </div>
 
-            <div className="flex gap-4">
-              <button
-                type="submit"
-                disabled={submitting}
-                className="btn-premium btn-premium-primary flex-1 py-3 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                {submitting ? "Publishing..." : "Publish Listing"}
-              </button>
-
+            <div className="form-actions">
               <button
                 type="button"
                 onClick={() => navigate("/marketplace")}
-                className="btn-premium btn-premium-secondary px-6 py-3"
+                className="btn-premium btn-premium-secondary"
               >
                 Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={submitting}
+                className="btn-premium btn-premium-primary flex-1 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {submitting ? "Publishing..." : "Publish Listing"}
               </button>
             </div>
           </form>

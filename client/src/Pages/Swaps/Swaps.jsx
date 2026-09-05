@@ -119,21 +119,23 @@ const Swaps = () => {
 
   return (
     <MainLayout>
-      <section className="bg-gray-50 min-h-screen">
-        <div className="max-w-5xl mx-auto px-6 py-10">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">My Swaps</h1>
-            <p className="text-gray-500 mt-1">
+      <section className="min-h-screen bg-gray-50">
+        <div className="page-shell max-w-5xl py-8 sm:py-10">
+          <div className="mb-6 sm:mb-8">
+            <h1 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl">
+              My Swaps
+            </h1>
+            <p className="mt-1 text-sm text-gray-500 sm:text-base">
               Track and manage your incoming and outgoing swap requests.
             </p>
           </div>
 
-          <div className="flex gap-2 mb-8 bg-white rounded-2xl shadow-sm p-2 w-fit">
+          <div className="mb-6 flex w-full gap-2 overflow-x-auto rounded-2xl bg-white p-2 shadow-sm sm:mb-8 sm:w-fit">
             {TABS.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`px-5 py-2 rounded-xl font-medium transition ${
+                className={`shrink-0 flex-1 rounded-xl px-4 py-2.5 text-sm font-medium transition sm:flex-none sm:px-5 ${
                   activeTab === tab.key
                     ? "bg-moss-800 text-white"
                     : "text-gray-600 hover:bg-gray-100"
@@ -147,15 +149,23 @@ const Swaps = () => {
           {loading ? (
             <Loader />
           ) : error ? (
-            <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl px-4 py-3">
+            <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-red-600">
               {error}
             </div>
           ) : swaps.length === 0 ? (
-            <div className="bg-white rounded-2xl shadow-md p-10 text-center text-gray-500">
+            <div className="rounded-2xl bg-white p-8 text-center text-gray-500 shadow-md sm:p-10">
               No {activeTab} swaps yet.
+              <div className="mt-4">
+                <Link
+                  to="/marketplace"
+                  className="font-semibold text-moss-800 hover:underline"
+                >
+                  Browse marketplace
+                </Link>
+              </div>
             </div>
           ) : (
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-5">
               {swaps.map((swap) => {
                 const isOwner = swap.owner?._id === user?._id;
                 const isRequester = swap.requester?._id === user?._id;
@@ -166,10 +176,10 @@ const Swaps = () => {
                 return (
                   <div
                     key={swap._id}
-                    className="bg-white rounded-2xl shadow-md p-6"
+                    className="rounded-2xl bg-white p-4 shadow-md sm:p-6"
                   >
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                      <div className="flex flex-col sm:flex-row gap-6">
+                    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                      <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:gap-6">
                         <ItemThumb
                           item={swap.requestedItem}
                           label={isOwner ? "Your item" : "Requested"}
@@ -180,35 +190,38 @@ const Swaps = () => {
                         />
                       </div>
 
-                      <div className="flex flex-col items-start md:items-end gap-2">
+                      <div className="flex flex-col items-start gap-2 md:items-end">
                         <StatusBadge status={swap.status} />
                         <p className="text-sm text-gray-500">
-                          With <span className="font-medium">{counterparty?.fullName || "Unknown"}</span>
+                          With{" "}
+                          <span className="font-medium">
+                            {counterparty?.fullName || "Unknown"}
+                          </span>
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-3 mt-5">
+                    <div className="mt-4 flex flex-wrap items-center gap-2 sm:mt-5 sm:gap-3">
                       {isOwner && swap.status === "pending" && (
                         <>
                           <button
                             disabled={isBusy}
                             onClick={() => runAction("accept", swap._id)}
-                            className="px-4 py-2 rounded-lg bg-moss-800 text-white hover:bg-moss-700 disabled:opacity-50 transition text-sm font-medium"
+                            className="rounded-lg bg-moss-800 px-4 py-2 text-sm font-medium text-white transition hover:bg-moss-700 disabled:opacity-50"
                           >
                             Accept
                           </button>
                           <button
                             disabled={isBusy}
                             onClick={() => runAction("reject", swap._id)}
-                            className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 disabled:opacity-50 transition text-sm font-medium"
+                            className="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-600 disabled:opacity-50"
                           >
                             Reject
                           </button>
                           <button
                             disabled={isBusy}
                             onClick={() => runAction("negotiate", swap._id)}
-                            className="px-4 py-2 rounded-lg border border-purple-500 text-purple-600 hover:bg-purple-50 disabled:opacity-50 transition text-sm font-medium"
+                            className="rounded-lg border border-purple-500 px-4 py-2 text-sm font-medium text-purple-600 transition hover:bg-purple-50 disabled:opacity-50"
                           >
                             Negotiate
                           </button>
@@ -220,7 +233,7 @@ const Swaps = () => {
                           <button
                             disabled={isBusy}
                             onClick={() => runAction("cancel", swap._id)}
-                            className="px-4 py-2 rounded-lg border border-red-400 text-red-500 hover:bg-red-50 disabled:opacity-50 transition text-sm font-medium"
+                            className="rounded-lg border border-red-400 px-4 py-2 text-sm font-medium text-red-500 transition hover:bg-red-50 disabled:opacity-50"
                           >
                             Cancel Request
                           </button>
@@ -230,7 +243,7 @@ const Swaps = () => {
                         <button
                           disabled={isBusy}
                           onClick={() => runAction("complete", swap._id)}
-                          className="px-4 py-2 rounded-lg bg-moss-800 text-white hover:bg-moss-700 disabled:opacity-50 transition text-sm font-medium"
+                          className="rounded-lg bg-moss-800 px-4 py-2 text-sm font-medium text-white transition hover:bg-moss-700 disabled:opacity-50"
                         >
                           Mark Completed
                         </button>
@@ -241,7 +254,7 @@ const Swaps = () => {
                       ) && (
                         <Link
                           to={`/chat/${swap._id}`}
-                          className="flex items-center gap-1 px-4 py-2 rounded-lg border border-moss-800 text-moss-800 hover:bg-moss-50 transition text-sm font-medium"
+                          className="flex items-center gap-1 rounded-lg border border-moss-800 px-4 py-2 text-sm font-medium text-moss-800 transition hover:bg-moss-50"
                         >
                           <HiChatAlt2 />
                           Chat
@@ -252,18 +265,18 @@ const Swaps = () => {
                         onClick={() =>
                           setExpandedId(isExpanded ? null : swap._id)
                         }
-                        className="flex items-center gap-1 px-4 py-2 rounded-lg text-gray-500 hover:bg-gray-100 transition text-sm font-medium ml-auto"
+                        className="ml-auto flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-gray-500 transition hover:bg-gray-100 sm:px-4"
                       >
-                        Swap Details
+                        Details
                         {isExpanded ? <HiChevronUp /> : <HiChevronDown />}
                       </button>
                     </div>
 
                     {isExpanded && (
-                      <div className="mt-5 pt-5 border-t space-y-3 text-sm">
+                      <div className="mt-5 space-y-3 border-t pt-5 text-sm">
                         {swap.valueComparison && (
-                          <div className="bg-gray-50 rounded-xl p-4">
-                            <div className="flex items-center gap-2 mb-2">
+                          <div className="rounded-xl bg-gray-50 p-4">
+                            <div className="mb-2 flex items-center gap-2">
                               {swap.valueComparison.isFair ? (
                                 <HiCheckCircle className="text-moss-800" />
                               ) : (
@@ -278,14 +291,14 @@ const Swaps = () => {
                             <p className="text-gray-600">
                               {swap.valueComparison.suggestion}
                             </p>
-                            <p className="text-gray-500 mt-1">
+                            <p className="mt-1 text-gray-500">
                               Difference: {swap.valueComparison.difference} pts (
                               {swap.valueComparison.percentDiff}%)
                             </p>
                           </div>
                         )}
 
-                        <div className="flex justify-between text-gray-600">
+                        <div className="flex justify-between gap-3 text-gray-600">
                           <span>Exchange Method</span>
                           <span className="font-medium capitalize text-gray-800">
                             {swap.exchangeMethod}
@@ -294,16 +307,16 @@ const Swaps = () => {
 
                         {swap.message && (
                           <div>
-                            <p className="text-gray-500 mb-1">Message</p>
-                            <p className="bg-gray-50 rounded-xl p-3 text-gray-700">
+                            <p className="mb-1 text-gray-500">Message</p>
+                            <p className="rounded-xl bg-gray-50 p-3 break-words text-gray-700">
                               {swap.message}
                             </p>
                           </div>
                         )}
 
-                        <div className="flex justify-between text-gray-500">
+                        <div className="flex justify-between gap-3 text-gray-500">
                           <span>Requested</span>
-                          <span>
+                          <span className="text-right">
                             {new Date(swap.createdAt).toLocaleString()}
                           </span>
                         </div>
@@ -311,7 +324,7 @@ const Swaps = () => {
                     )}
 
                     {swap.status === "rejected" && (
-                      <p className="flex items-center gap-1 text-red-500 text-sm mt-3">
+                      <p className="mt-3 flex items-center gap-1 text-sm text-red-500">
                         <HiXCircle /> This swap request was rejected.
                       </p>
                     )}

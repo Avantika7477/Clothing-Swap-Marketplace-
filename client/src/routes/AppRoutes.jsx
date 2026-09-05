@@ -1,5 +1,4 @@
-import { Routes, Route } from "react-router-dom";
-
+import { Routes, Route, Link } from "react-router-dom";
 import Home from "../Pages/Home/Home";
 import Marketplace from "../Pages/Marketplace/Marketplace";
 import ItemDetails from "../Pages/ItemDetails/ItemDetails";
@@ -97,9 +96,14 @@ function AppRoutes() {
       <Route
         path="*"
         element={
-          <div className="flex flex-col items-center justify-center min-h-screen">
-            <h1 className="text-6xl font-bold text-moss-800">404</h1>
-            <p className="mt-4 text-xl text-gray-600">Page Not Found</p>
+          <div className="page-shell flex min-h-screen flex-col items-center justify-center px-4 text-center">
+            <h1 className="font-display text-5xl font-bold text-moss-800 sm:text-6xl">
+              404
+            </h1>
+            <p className="mt-4 text-lg text-gray-600 sm:text-xl">Page Not Found</p>
+            <Link to="/" className="btn-premium btn-premium-primary mt-8">
+              Back to Home
+            </Link>
           </div>
         }
       />

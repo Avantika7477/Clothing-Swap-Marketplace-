@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { HiOutlineFilter } from "react-icons/hi";
 import MainLayout from "../../layouts/MainLayout";
 import MarketplaceHeader from "./MarketplaceHeader";
 import SearchBar from "./SearchBar";
@@ -23,6 +24,7 @@ const Marketplace = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [nearbyOnly, setNearbyOnly] = useState(false);
   const [nearbyLabel, setNearbyLabel] = useState("");
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const canUseNearby =
     isAuthenticated && Boolean(user?.location || user?.city);
@@ -165,13 +167,24 @@ const Marketplace = () => {
     <MainLayout>
       <MarketplaceHeader />
 
-      <div className="page-shell py-8 sm:py-10">
-        <div className="mb-8">
-          <SearchBar value={search} onChange={setSearch} />
+      <div className="page-shell py-6 sm:py-10">
+        <div className="mb-5 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-center">
+          <div className="min-w-0 flex-1">
+            <SearchBar value={search} onChange={setSearch} />
+          </div>
+          <button
+            type="button"
+            onClick={() => setFiltersOpen((prev) => !prev)}
+            className="btn-premium btn-premium-secondary inline-flex items-center justify-center gap-2 px-4 py-3 text-xs lg:hidden"
+            aria-expanded={filtersOpen}
+          >
+            <HiOutlineFilter className="text-base" />
+            {filtersOpen ? "Hide filters" : "Show filters"}
+          </button>
         </div>
 
         {nearbyOnly && nearbyLabel && (
-          <div className="mb-6 border border-moss-800/10 bg-moss-50 px-4 py-3 text-sm text-moss-800">
+          <div className="mb-5 border border-moss-800/10 bg-moss-50 px-4 py-3 text-sm text-moss-800 sm:mb-6">
             Showing nearby swap opportunities around{" "}
             <span className="font-semibold">{nearbyLabel}</span>.
             {!isAuthenticated && (
@@ -190,8 +203,8 @@ const Marketplace = () => {
           }}
         />
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-4">
-          <aside>
+        <div className="mt-8 grid gap-6 lg:mt-10 lg:grid-cols-4 lg:gap-8">
+          <aside className={`${filtersOpen ? "block" : "hidden"} lg:block`}>
             <FilterSidebar
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
@@ -210,7 +223,7 @@ const Marketplace = () => {
             />
           </aside>
 
-          <div className="lg:col-span-3">
+          <div className="min-w-0 lg:col-span-3">
             {loading ? (
               <Loader />
             ) : error ? (

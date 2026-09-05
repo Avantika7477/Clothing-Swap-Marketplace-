@@ -15,10 +15,10 @@ const FilterSidebar = ({
   resetFilters,
 }) => {
   return (
-    <aside className="border border-moss-800/10 bg-white p-5 lg:sticky lg:top-36">
+    <aside className="border border-moss-800/10 bg-white p-4 sm:p-5 lg:sticky lg:top-36">
       <div className="mb-5 flex items-center justify-between gap-3 border-b border-moss-800/10 pb-4">
         <h2 className="text-sm font-bold uppercase tracking-wider text-ink">
-          Filter
+          Filters
         </h2>
         <button
           type="button"
@@ -29,8 +29,8 @@ const FilterSidebar = ({
         </button>
       </div>
 
-      <div className="space-y-5">
-        <div className="border border-moss-800/10 bg-moss-50 p-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 lg:space-y-0 lg:gap-5">
+        <div className="border border-moss-800/10 bg-moss-50 p-4 sm:col-span-2 lg:col-span-1">
           <label className="flex cursor-pointer items-start gap-3">
             <input
               type="checkbox"

@@ -305,10 +305,12 @@ const SwapRequest = () => {
   return (
     <MainLayout>
       <section className="bg-gray-50 min-h-screen">
-        <div className="max-w-4xl mx-auto px-6 py-10">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Request a Swap</h1>
-            <p className="text-gray-500 mt-1">
+        <div className="page-shell max-w-4xl py-8 sm:py-10">
+          <div className="mb-6 sm:mb-8">
+            <h1 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl">
+              Request a Swap
+            </h1>
+            <p className="mt-1 text-sm text-gray-500 sm:text-base">
               Choose an item from your closet to offer in exchange.
             </p>
           </div>
@@ -600,21 +602,20 @@ const SwapRequest = () => {
               </div>
             </div>
 
-            <div className="flex gap-4">
-              <button
-                type="submit"
-                disabled={submitting || !offeredItemId}
-                className="btn-premium btn-premium-primary flex-1 py-3 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                {submitting ? "Sending Request..." : "Send Swap Request"}
-              </button>
-
+            <div className="form-actions">
               <button
                 type="button"
                 onClick={() => navigate(-1)}
-                className="btn-premium btn-premium-secondary px-6 py-3"
+                className="btn-premium btn-premium-secondary"
               >
                 Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={submitting || !offeredItemId}
+                className="btn-premium btn-premium-primary flex-1 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {submitting ? "Sending Request..." : "Send Swap Request"}
               </button>
             </div>
           </form>

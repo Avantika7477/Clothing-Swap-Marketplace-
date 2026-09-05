@@ -27,7 +27,7 @@ const CategoriesSection = () => {
         <h2 className="section-title mt-3">Shop by category</h2>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
+      <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4 md:gap-8">
         {categories.map((category) => (
           <Link
             key={category.title}
