@@ -82,8 +82,5 @@ VITE_API_URL=http://localhost:5000/api
 - Update server `CLIENT_URL` to the Vercel domain
 - Submit the live frontend URL for evaluation
 
-## Docs
 
-- [PROJECT_REPORT.md](./PROJECT_REPORT.md) — professional project report
-- [PRD.md](./PRD.md) — full product requirements
-- [DEPLOY.md](./DEPLOY.md) — live deployment steps (Render + Vercel + Atlas)
+
