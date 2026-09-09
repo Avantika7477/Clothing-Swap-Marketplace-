@@ -19,34 +19,36 @@ const FeaturedItemsSection = () => {
   }, []);
 
   return (
-    <section className="page-shell home-section bg-moss-50/50">
-      <div className="mb-8 flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-        <div>
-          <p className="section-kicker">Featured</p>
-          <h2 className="section-title mt-3">Best sellers</h2>
-        </div>
-        <Link
-          to="/marketplace"
-          className="text-sm font-bold uppercase tracking-wider text-moss-800 hover:underline"
-        >
-          View all products
-        </Link>
-      </div>
-
-      {listings.length === 0 ? (
-        <p className="section-copy text-center">
-          No listings yet.{" "}
-          <Link to="/add-item" className="font-semibold text-moss-800 hover:underline">
-            List your first item
+    <section className="bg-moss-50/50">
+      <div className="page-shell home-section">
+        <div className="mb-8 flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
+          <div>
+            <p className="section-kicker">Featured</p>
+            <h2 className="section-title mt-3">Best sellers</h2>
+          </div>
+          <Link
+            to="/marketplace"
+            className="text-sm font-bold uppercase tracking-wider text-moss-800 hover:underline"
+          >
+            View all products
           </Link>
-        </p>
-      ) : (
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
-          {listings.map((item) => (
-            <ItemCard key={item._id} item={item} />
-          ))}
         </div>
-      )}
+
+        {listings.length === 0 ? (
+          <p className="section-copy text-center">
+            No listings yet.{" "}
+            <Link to="/add-item" className="font-semibold text-moss-800 hover:underline">
+              List your first item
+            </Link>
+          </p>
+        ) : (
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
+            {listings.map((item) => (
+              <ItemCard key={item._id} item={item} />
+            ))}
+          </div>
+        )}
+      </div>
     </section>
   );
 };

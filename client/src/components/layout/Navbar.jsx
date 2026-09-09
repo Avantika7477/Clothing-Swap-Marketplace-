@@ -48,10 +48,10 @@ const Navbar = () => {
       </div>
 
       <div className="page-shell">
-        <nav className="grid grid-cols-[auto_1fr_auto] items-center gap-2 py-3 sm:gap-3 sm:py-4 lg:grid-cols-[1fr_auto_1fr]">
+        <nav className="grid grid-cols-[auto_1fr_auto] items-center gap-1.5 py-3.5 sm:gap-3 sm:py-4 lg:grid-cols-[1fr_auto_1fr]">
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center text-xl text-moss-800 lg:hidden"
+            className="flex h-10 w-10 shrink-0 items-center justify-center text-xl text-moss-800 sm:h-11 sm:w-11 lg:hidden"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
             aria-expanded={isOpen}
@@ -69,16 +69,16 @@ const Navbar = () => {
 
           <Link
             to="/"
-            className="justify-self-center text-center font-display text-lg font-bold tracking-tight text-moss-900 sm:text-2xl"
+            className="min-w-0 justify-self-center px-1 text-center font-display text-[1.05rem] font-bold tracking-tight text-moss-900 sm:text-2xl"
           >
             Fashion Swap
           </Link>
 
-          <div className="flex items-center justify-end gap-0.5 sm:gap-1">
+          <div className="flex items-center justify-end gap-0 sm:gap-1">
             <button
               type="button"
               onClick={() => setSearchOpen(!searchOpen)}
-              className="flex h-11 w-11 items-center justify-center text-xl text-moss-800"
+              className="flex h-10 w-10 shrink-0 items-center justify-center text-xl text-moss-800 sm:h-11 sm:w-11"
               aria-label="Search"
               aria-expanded={searchOpen}
             >
@@ -96,7 +96,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                   to="/profile"
-                  className="flex h-11 w-11 items-center justify-center text-xl text-moss-800"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center text-xl text-moss-800 sm:h-11 sm:w-11"
                   aria-label="Account"
                 >
                   <HiOutlineUser />
@@ -105,7 +105,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/login"
-                className="flex h-11 w-11 items-center justify-center text-xl text-moss-800"
+                className="flex h-10 w-10 shrink-0 items-center justify-center text-xl text-moss-800 sm:h-11 sm:w-11"
                 aria-label="Login"
               >
                 <HiOutlineUser />
@@ -114,7 +114,7 @@ const Navbar = () => {
 
             <Link
               to={isAuthenticated ? "/add-item" : "/register"}
-              className="btn-premium btn-premium-primary ml-1 hidden min-h-10 px-3 py-2 text-[10px] sm:inline-flex sm:px-4 sm:text-xs"
+              className="btn-premium btn-premium-primary ml-1 hidden min-h-10 px-3 py-2 text-[10px] md:inline-flex md:px-4 md:text-xs"
             >
               {isAuthenticated ? "Sell item" : "Join"}
             </Link>
@@ -144,61 +144,63 @@ const Navbar = () => {
       </div>
 
       {isOpen && (
-        <div className="border-t border-moss-800/10 bg-white px-4 py-5 lg:hidden">
-          <div className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.name}
-                to={link.path}
-                className={linkClasses}
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </NavLink>
-            ))}
-            {isAuthenticated && (
-              <NavLink to="/chat" className={linkClasses} onClick={() => setIsOpen(false)}>
-                Messages
-              </NavLink>
-            )}
-          </div>
+        <div className="border-t border-moss-800/10 bg-white lg:hidden">
+          <div className="page-shell py-5">
+            <div className="flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.name}
+                  to={link.path}
+                  className={linkClasses}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+              {isAuthenticated && (
+                <NavLink to="/chat" className={linkClasses} onClick={() => setIsOpen(false)}>
+                  Messages
+                </NavLink>
+              )}
+            </div>
 
-          <div className="mt-5 flex flex-col gap-2 border-t border-moss-800/10 pt-5">
-            {isAuthenticated ? (
-              <>
-                <Link
-                  to="/add-item"
-                  onClick={() => setIsOpen(false)}
-                  className="btn-premium btn-premium-primary w-full text-center"
-                >
-                  Sell item
-                </Link>
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  className="btn-premium btn-premium-secondary w-full"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  onClick={() => setIsOpen(false)}
-                  className="btn-premium btn-premium-secondary w-full text-center"
-                >
-                  Login
-                </Link>
-                <Link
-                  to="/register"
-                  onClick={() => setIsOpen(false)}
-                  className="btn-premium btn-premium-primary w-full text-center"
-                >
-                  Create account
-                </Link>
-              </>
-            )}
+            <div className="mt-5 flex flex-col gap-2 border-t border-moss-800/10 pt-5">
+              {isAuthenticated ? (
+                <>
+                  <Link
+                    to="/add-item"
+                    onClick={() => setIsOpen(false)}
+                    className="btn-premium btn-premium-primary w-full text-center"
+                  >
+                    Sell item
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="btn-premium btn-premium-secondary w-full"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    onClick={() => setIsOpen(false)}
+                    className="btn-premium btn-premium-secondary w-full text-center"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    onClick={() => setIsOpen(false)}
+                    className="btn-premium btn-premium-primary w-full text-center"
+                  >
+                    Create account
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}

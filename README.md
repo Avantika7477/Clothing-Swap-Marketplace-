@@ -82,5 +82,3 @@ VITE_API_URL=http://localhost:5000/api
 - Update server `CLIENT_URL` to the Vercel domain
 - Submit the live frontend URL for evaluation
 
-
-

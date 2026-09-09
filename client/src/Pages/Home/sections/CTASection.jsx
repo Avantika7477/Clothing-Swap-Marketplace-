@@ -14,14 +14,14 @@ const CTASection = () => {
           Create a free account, list your items, and start swapping with
           shoppers near you.
         </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
           <Link
             to="/register"
-            className="btn-premium min-h-12 border border-white bg-white px-8 text-moss-900 hover:opacity-90"
+            className="btn-premium min-h-12 w-full border border-white bg-white px-8 text-moss-900 hover:opacity-90 sm:w-auto"
           >
             Create account
           </Link>
-          <Link to="/marketplace" className="btn-ghost min-h-12 px-8">
+          <Link to="/marketplace" className="btn-ghost min-h-12 w-full px-8 sm:w-auto">
             Browse shop
           </Link>
         </div>

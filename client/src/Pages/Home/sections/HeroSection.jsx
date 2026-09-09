@@ -6,28 +6,30 @@ const HERO_IMAGE =
 const HeroSection = () => {
   return (
     <section className="grid min-h-[65vh] lg:min-h-[70vh] lg:grid-cols-2">
-      <div className="flex flex-col justify-center bg-moss-50 px-5 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
-        <p className="section-kicker">New season swaps</p>
-        <h1 className="mt-3 font-display text-[1.75rem] font-bold leading-tight text-ink sm:mt-4 sm:text-4xl lg:text-5xl">
-          Shop pre-loved fashion. Swap what you don&apos;t wear.
-        </h1>
-        <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/60 sm:mt-5 sm:text-base">
-          Browse quality clothing from people near you. List items, match by
-          value, and exchange — no purchase required.
-        </p>
-        <div className="mt-7 flex w-full flex-col gap-3 sm:mt-8 sm:w-auto sm:flex-row sm:flex-wrap">
-          <Link
-            to="/marketplace"
-            className="btn-premium btn-premium-primary w-full sm:w-auto"
-          >
-            Shop all
-          </Link>
-          <Link
-            to="/register"
-            className="btn-premium btn-premium-secondary w-full sm:w-auto"
-          >
-            Start selling
-          </Link>
+      <div className="flex flex-col justify-center bg-moss-50 px-5 py-12 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
+        <div className="mx-auto w-full max-w-xl lg:mx-0">
+          <p className="section-kicker">New season swaps</p>
+          <h1 className="mt-3 max-w-[18ch] font-display text-[1.65rem] font-bold leading-[1.15] text-ink sm:mt-4 sm:max-w-none sm:text-4xl lg:text-5xl">
+            Shop pre-loved fashion. Swap what you don&apos;t wear.
+          </h1>
+          <p className="mt-4 max-w-md text-[0.9375rem] leading-relaxed text-ink/60 sm:mt-5 sm:text-base">
+            Browse quality clothing from people near you. List items, match by
+            value, and exchange — no purchase required.
+          </p>
+          <div className="mt-7 flex w-full flex-col gap-3 sm:mt-8 sm:w-auto sm:flex-row sm:flex-wrap">
+            <Link
+              to="/marketplace"
+              className="btn-premium btn-premium-primary w-full sm:w-auto"
+            >
+              Shop all
+            </Link>
+            <Link
+              to="/register"
+              className="btn-premium btn-premium-secondary w-full sm:w-auto"
+            >
+              Start selling
+            </Link>
+          </div>
         </div>
       </div>
 

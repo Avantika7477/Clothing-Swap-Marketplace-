@@ -21,7 +21,7 @@ const TrustStrip = () => {
   return (
     <section className="store-trust-strip">
       <div className="page-shell">
-        <div className="grid grid-cols-2 gap-0 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-3 gap-y-1 sm:gap-x-4 md:grid-cols-4 md:gap-0">
           {items.map((item) => (
             <div key={item.title} className="store-trust-item">
               <h3>{item.title}</h3>
