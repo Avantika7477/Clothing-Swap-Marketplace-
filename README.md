@@ -60,9 +60,6 @@ CLIENT_URL=http://localhost:5173
 VITE_API_URL=http://localhost:5000/api
 ```
 
-## Demo login
-
-- Admin: `admin@swap.com` / `admin123`
 
 ## Deployment (Phase 1 submission)
 
